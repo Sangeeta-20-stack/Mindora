@@ -10,6 +10,7 @@ const Signup = () => {
     e.preventDefault();
     const name = e.target.name.value;
     const email = e.target.email.value;
+    const role = e.target.role.value;
     const password = e.target.password.value;
     const confirm = e.target.confirm.value;
 
@@ -18,8 +19,16 @@ const Signup = () => {
       return;
     }
 
+    if (!role) {
+      alert("Please select a role!");
+      return;
+    }
+
     // Save user in localStorage (demo purpose only)
-    localStorage.setItem("user", JSON.stringify({ name, email, password }));
+    localStorage.setItem(
+      "user",
+      JSON.stringify({ name, email, role, password })
+    );
 
     alert("Account created successfully!");
     navigate("/login"); // redirect to login page after signup
@@ -88,6 +97,18 @@ const Signup = () => {
               className="w-full p-3 rounded-full bg-gray-100 outline-none focus:ring-2 focus:ring-teal-400 transition"
               required
             />
+
+            {/* Role Selector */}
+            <select
+              name="role"
+              required
+              className="w-full p-3 rounded-full bg-gray-100 outline-none focus:ring-2 focus:ring-teal-400 transition"
+            >
+              <option value="">Select Role</option>
+              <option value="student">Student</option>
+              <option value="admin">Admin</option>
+            </select>
+
             <div className="flex gap-4">
               <input
                 name="password"

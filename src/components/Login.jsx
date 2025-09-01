@@ -1,5 +1,5 @@
 import React from "react";
-import loginImg from "../assets/signup.png"; // 👈 replace with your login image if needed
+import loginImg from "../assets/signup.png"; // replace with your login image if needed
 import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -11,6 +11,7 @@ const Login = () => {
 
     const email = e.target.email.value;
     const password = e.target.password.value;
+    const role = e.target.role.value; // get selected role
 
     const storedUser = JSON.parse(localStorage.getItem("user"));
 
@@ -20,11 +21,15 @@ const Login = () => {
       return;
     }
 
-    if (storedUser.email === email && storedUser.password === password) {
-      alert("Login successful!");
-      navigate("/dashboard"); // redirect to home after login
+    if (
+      storedUser.email === email &&
+      storedUser.password === password &&
+      storedUser.role === role // match role
+    ) {
+      alert(`Login successful as ${role}!`);
+      navigate("/dashboard"); // redirect to dashboard
     } else {
-      alert("Invalid email or password!");
+      alert("Invalid credentials or role!");
     }
   };
 
@@ -38,11 +43,9 @@ const Login = () => {
       >
         {/* Left Section */}
         <div className="relative w-1/2 bg-gradient-to-r from-teal-600 to-teal-400 p-10 text-white flex flex-col justify-between items-center">
-          {/* Floating circles */}
           <div className="absolute -top-10 -left-10 w-32 h-32 bg-white/20 rounded-full blur-2xl animate-pulse"></div>
           <div className="absolute bottom-10 right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl animate-bounce"></div>
 
-          {/* Welcome Text */}
           <motion.h2
             initial={{ x: -40, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
@@ -52,7 +55,6 @@ const Login = () => {
             Welcome back to Mindly!
           </motion.h2>
 
-          {/* Image */}
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -91,6 +93,17 @@ const Login = () => {
               className="w-full p-3 rounded-full bg-gray-100 outline-none focus:ring-2 focus:ring-teal-400 transition"
               required
             />
+
+            {/* Role Selection */}
+            <select
+              name="role"
+              className="w-full p-3 rounded-full bg-gray-100 outline-none focus:ring-2 focus:ring-teal-400 transition"
+              required
+            >
+              <option value="">Select Role</option>
+              <option value="student">Student</option>
+              <option value="admin">Admin</option>
+            </select>
 
             <motion.button
               whileHover={{ scale: 1.05 }}
