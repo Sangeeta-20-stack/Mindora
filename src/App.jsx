@@ -7,7 +7,16 @@ import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
-import Dashboard from "./pages/Dashboard"; // 👈 Dashboard page
+import Dashboard from "./pages/Dashboard"; 
+import Account from "./pages/Account";     
+import Settings from "./pages/Settings";   
+import CalendarPage from "./pages/CalendarPage";
+import Analytics from "./pages/Analytics";
+import Journal from "./pages/Journal";   // ✅ import Journal page
+import CreateJournal from "./pages/CreateJournal";
+import Feedback from "./pages/Feedback";
+import Doctor from "./pages/Doctor"; 
+
 
 function App() {
   return (
@@ -53,6 +62,27 @@ function App() {
 
       {/* Dashboard Page */}
       <Route path="/dashboard" element={<Dashboard />} />
+
+      {/* Account Page */}
+      <Route path="/account" element={<Account />} />
+
+      {/* Settings Page */}
+      <Route path="/settings" element={<Settings />} />
+
+      {/* Calendar Page */}
+      <Route path="/calendar" element={<CalendarPage />} />
+
+      {/* Analytics Page */}
+      <Route path="/analytics" element={<Analytics />} />
+
+      {/* Journal Page  */}
+      <Route path="/journal" element={<Journal />} />
+
+       <Route path="/create-journal" element={<CreateJournal />} />
+
+       <Route path="/feedback" element={<Feedback />} />
+
+       <Route path="/doctor" element={<Doctor />} /> 
     </Routes>
   );
 }
