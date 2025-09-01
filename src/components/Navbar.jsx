@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const links = ["Home", "About", "Features", "Contact"];
   const [activeLink, setActiveLink] = useState("Home");
+  const location = useLocation();
 
-  // Update active link based on scroll
+  // Update active link based on scroll (only on homepage "/")
   useEffect(() => {
+    if (location.pathname !== "/") return;
+
     const handleScroll = () => {
       const scrollPos = window.scrollY + 100; // offset for navbar height
       links.forEach((link) => {
@@ -24,7 +28,7 @@ const Navbar = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [location.pathname]);
 
   return (
     <motion.nav
@@ -53,9 +57,11 @@ const Navbar = () => {
             transition={{ delay: 0.4 + index * 0.2, duration: 0.5 }}
           >
             <a
-              href={`#${link.toLowerCase()}`} // scrolls to section with id
+              href={`/#${link.toLowerCase()}`} // works only on home page
               className={`transition hover:text-gray-200 ${
-                activeLink === link ? "font-bold underline" : ""
+                activeLink === link && location.pathname === "/"
+                  ? "font-bold underline"
+                  : ""
               }`}
             >
               {link}
@@ -71,20 +77,25 @@ const Navbar = () => {
         transition={{ delay: 1, duration: 0.6 }}
         className="flex items-center gap-4"
       >
-        <a
-          href="#"
-          className="font-bold text-white hover:text-gray-200 transition"
-        >
-          Login
-        </a>
-        <motion.a
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-          href="#"
-          className="bg-white text-teal-600 px-5 py-2 rounded-full font-bold hover:bg-gray-100 transition"
-        >
-          Sign up
-        </motion.a>
+        {/* Login button */}
+        <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+          <Link
+            to="/login"
+            className="border-2 border-white text-white px-5 py-2 rounded-full font-bold hover:bg-white hover:text-teal-600 transition"
+          >
+            Login
+          </Link>
+        </motion.div>
+
+        {/* Signup button */}
+        <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+          <Link
+            to="/signup"
+            className="bg-white text-teal-600 px-5 py-2 rounded-full font-bold hover:bg-gray-100 transition"
+          >
+            Sign up
+          </Link>
+        </motion.div>
       </motion.div>
     </motion.nav>
   );
