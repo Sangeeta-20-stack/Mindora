@@ -1,6 +1,7 @@
 import React from "react";
-import VisionCard from "./VisionCard";
+import VisionCard from "../VisionCard";
 import { motion } from "framer-motion";
+import { Globe, Target, Sparkles } from "lucide-react";
 
 const AboutSection = () => {
   return (
@@ -40,19 +41,19 @@ const AboutSection = () => {
         <VisionCard
           title="Our Vision"
           description="A world where mental health is prioritized as much as physical health, enabling every individual to thrive."
-          icon="🌍"
+          icon={<Globe className="w-10 h-10 text-teal-600" />}
           delay={0.1}
         />
         <VisionCard
           title="Our Mission"
           description="To provide students and individuals with tools, community, and knowledge to build resilience and emotional balance."
-          icon="🎯"
+          icon={<Target className="w-10 h-10 text-cyan-600" />}
           delay={0.2}
         />
         <VisionCard
           title="Our Values"
           description="Compassion, inclusivity, and innovation guide everything we do at Mindly."
-          icon="✨"
+          icon={<Sparkles className="w-10 h-10 text-yellow-500" />}
           delay={0.3}
         />
       </div>

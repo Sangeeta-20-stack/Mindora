@@ -30,6 +30,20 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [location.pathname]);
 
+  // Smooth scroll handler
+  const handleSmoothScroll = (e, id) => {
+    if (location.pathname === "/") {
+      e.preventDefault();
+      const section = document.getElementById(id);
+      if (section) {
+        window.scrollTo({
+          top: section.offsetTop - 80, // adjust for navbar height
+          behavior: "smooth",
+        });
+      }
+    }
+  };
+
   return (
     <motion.nav
       initial={{ y: -80, opacity: 0 }}
@@ -42,7 +56,8 @@ const Navbar = () => {
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ delay: 0.3, duration: 0.5, type: "spring" }}
-        className="text-2xl font-bold text-white"
+        className="text-2xl font-bold text-white cursor-pointer"
+        onClick={(e) => handleSmoothScroll(e, "home")}
       >
         Mindly
       </motion.div>
@@ -57,7 +72,8 @@ const Navbar = () => {
             transition={{ delay: 0.4 + index * 0.2, duration: 0.5 }}
           >
             <a
-              href={`/#${link.toLowerCase()}`} // works only on home page
+              href={`/#${link.toLowerCase()}`}
+              onClick={(e) => handleSmoothScroll(e, link.toLowerCase())}
               className={`transition hover:text-gray-200 ${
                 activeLink === link && location.pathname === "/"
                   ? "font-bold underline"
