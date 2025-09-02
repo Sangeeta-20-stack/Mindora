@@ -10,7 +10,8 @@ import {
   HelpCircle,
   PhoneCall,
   Users,
-  BookOpen,   // 👈 Added for Journal
+  BookOpen,
+  Bot
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -37,14 +38,17 @@ const Sidebar = () => {
   // menu items with path
   const menuItems = [
     { icon: <LayoutDashboard />, label: "Dashboard", path: "/dashboard" },
-    { icon: <BookOpen />, label: "Journal", path: "/journal" },   // 👈 Added Journal
+    { icon: <BookOpen />, label: "Journal", path: "/journal" },
     { icon: <BarChart3 />, label: "Analytics", path: "/analytics" },
     { icon: <Calendar />, label: "Calendar", path: "/calendar" },
+    { icon: <Bot />, label: "Chatbot", path: "/chatbot" },
     { icon: <MessageSquare />, label: "Feedback", path: "/feedback" },
-    { icon: <Settings />, label: "Settings", path: "/settings" },
     { icon: <Users />, label: "Psychologist Connect", path: "/doctor" },
     { icon: <PhoneCall />, label: "Emergency Helpline", path: "/helpline" },
+    { icon: <Settings />, label: "Settings", path: "/settings" },
+
   ];
+
 
   const bottomMenu = [
     { icon: <User />, label: "My Account", path: "/account" },
@@ -105,9 +109,8 @@ const SidebarItem = ({ icon, label, active, onClick }) => {
         hidden: { opacity: 0, x: -20 },
         visible: { opacity: 1, x: 0 },
       }}
-      className={`flex items-center gap-3 px-3 py-2 rounded-lg cursor-pointer ${
-        active ? "bg-teal-600 text-white" : "text-gray-700 hover:bg-teal-100"
-      }`}
+      className={`flex items-center gap-3 px-3 py-2 rounded-lg cursor-pointer ${active ? "bg-teal-600 text-white" : "text-gray-700 hover:bg-teal-100"
+        }`}
       onClick={onClick}
     >
       {icon}

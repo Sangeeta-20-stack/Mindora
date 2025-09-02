@@ -1,14 +1,17 @@
 import React from "react";
 import { motion } from "framer-motion";
-import FeatureCard from "./FeatureCard";
+import FeatureCard from "../FeatureCard.jsx";
+
+// ✅ Importing icons from lucide-react
+import { BookOpen, MessageCircle, UserCheck, CalendarCheck, Music } from "lucide-react";
 
 const FeatureSection = () => {
   const features = [
-    { icon: "📚", title: "Resource Hub", description: "Access a variety of mental wellness resources anytime." },
-    { icon: "💬", title: "Anonymous Chat Support", description: "Talk freely with trained supporters without revealing your identity." },
-    { icon: "👩‍⚕️", title: "Certified Psychologists", description: "Get guidance from certified mental health professionals." },
-    { icon: "📅", title: "Daily Check-Ins", description: "Monitor your mood and mental wellness daily." },
-    { icon: "🎵", title: "Music Therapy", description: "Relax and improve your mood with curated music therapy sessions." },
+    { icon: <BookOpen className="w-10 h-10 text-teal-600" />, title: "Resource Hub", description: "Access a variety of mental wellness resources anytime." },
+    { icon: <MessageCircle className="w-10 h-10 text-teal-600" />, title: "Anonymous Chat Support", description: "Talk freely with trained supporters without revealing your identity." },
+    { icon: <UserCheck className="w-10 h-10 text-teal-600" />, title: "Certified Psychologists", description: "Get guidance from certified mental health professionals." },
+    { icon: <CalendarCheck className="w-10 h-10 text-teal-600" />, title: "Daily Check-Ins", description: "Monitor your mood and mental wellness daily." },
+    { icon: <Music className="w-10 h-10 text-teal-600" />, title: "Music Therapy", description: "Relax and improve your mood with curated music therapy sessions." },
   ];
 
   const bullets = [
