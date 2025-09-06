@@ -1,122 +1,94 @@
+// src/components/MoodTracker.jsx
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import Sidebar from "../components/Sidebar";
-import Topbar from "../components/Topbar";
-import MoodTracker from "../components/MoodTracker";
-import StreakTracker from "../components/StreakTracker";
-import DailyTasks from "../components/DailyTasks";
-import QuotesCard from "../components/QuotesCard";
-import BadgeCard from "../components/BadgeCard";
-import CalendarWidget from "../components/CalendarWidget";
+import {
+  FaSmile,
+  FaSadTear,
+  FaMeh,
+  FaAngry,
+  FaHeart,
+  FaFrown,
+} from "react-icons/fa";
 
-const CalendarPage = () => {
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const [moodTracker, setMoodTracker] = useState(
-    () => JSON.parse(localStorage.getItem("moodTracker")) || Array(35).fill("none")
-  );
-  const [completionRate, setCompletionRate] = useState(0);
-  const [badge, setBadge] = useState({
-    emoji: "❓",
-    title: "Keep Going",
-    desc: "Stay consistent to earn a badge!",
+const MoodTracker = ({ moodTracker, setMoodTracker }) => {
+  const moods = [
+    { id: "happy", icon: <FaSmile />, label: "Happy" },
+    { id: "sad", icon: <FaSadTear />, label: "Sad" },
+    { id: "neutral", icon: <FaMeh />, label: "Neutral" },
+    { id: "angry", icon: <FaAngry />, label: "Angry" },
+    { id: "love", icon: <FaHeart />, label: "Love" },
+    { id: "upset", icon: <FaFrown />, label: "Upset" },
+  ];
+
+  // Load last selected mood (today's mood if already chosen)
+  const [selectedMood, setSelectedMood] = useState(() => {
+    const saved = localStorage.getItem("selectedMood");
+    return saved || null;
   });
 
+  // Sync localStorage whenever mood changes
   useEffect(() => {
-    localStorage.setItem("moodTracker", JSON.stringify(moodTracker));
-  }, [moodTracker]);
+    if (selectedMood) {
+      localStorage.setItem("selectedMood", selectedMood);
 
-  useEffect(() => {
-    const moodCount = moodTracker.reduce(
-      (acc, mood) => {
-        acc[mood] = (acc[mood] || 0) + 1;
-        return acc;
-      },
-      { none: 0, happy: 0, neutral: 0, sad: 0 }
-    );
-
-    const bestStreak = Number(localStorage.getItem("bestStreak")) || 0;
-
-    if (completionRate >= 0.8) {
-      setBadge({
-        emoji: "🏅",
-        title: "Consistency Champ",
-        desc: "You’ve completed most of your tasks!",
-      });
-    } else if (
-      moodCount.happy > moodCount.neutral &&
-      moodCount.happy > moodCount.sad
-    ) {
-      setBadge({
-        emoji: "🌟",
-        title: "Positivity Star",
-        desc: "Your mood has been mostly happy!",
-      });
-    } else if (bestStreak >= 7) {
-      setBadge({
-        emoji: "🔥",
-        title: "Streak Master",
-        desc: "7+ day mood streak achieved!",
-      });
-    } else if (completionRate >= 0.5 && moodCount.happy > moodCount.sad) {
-      setBadge({
-        emoji: "💪",
-        title: "Wellness Warrior",
-        desc: "Balanced progress across tasks & mood!",
-      });
-    } else {
-      setBadge({
-        emoji: "❓",
-        title: "Keep Going",
-        desc: "Stay consistent to earn a badge!",
-      });
+      // Update today's mood in the moodTracker array
+      const updated = [...moodTracker];
+      updated[updated.length - 1] = selectedMood; // mark today
+      setMoodTracker(updated);
     }
-  }, [completionRate, moodTracker]);
+  }, [selectedMood]);
 
   return (
-    <div className="flex min-h-screen bg-[#f7f6d5]">
-      <Sidebar />
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="bg-green-900 p-6 rounded-xl shadow-md h-full flex flex-col"
+    >
+      {/* Heading */}
+      <h1 className="text-lg font-bold text-white mb-1">Mood-o-Meter 💭</h1>
+      <h2 className="text-gray-200 mb-4 text-sm">Describe your day:</h2>
 
-      <div className="flex-1 flex flex-col overflow-hidden ml-64">
-        <Topbar title="Dashboard" />
-
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="flex-1 w-full px-6 md:px-12 py-8 overflow-y-auto"
-        >
-          <div className="max-w-7xl mx-auto space-y-8">
-            <h2 className="text-3xl font-bold text-green-900 mb-4">
-              Wellness Dashboard
-            </h2>
-
-            {/* Uniform card grid */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
-              <MoodTracker moodTracker={moodTracker} setMoodTracker={setMoodTracker} />
-              <StreakTracker moodTracker={moodTracker} />
-              <QuotesCard />
-              <BadgeCard badge={badge} />
-              <DailyTasks onCompletionChange={setCompletionRate} />
-              <CalendarWidget
-                currentDate={currentDate}
-                handlePrevMonth={() =>
-                  setCurrentDate(
-                    new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1)
-                  )
-                }
-                handleNextMonth={() =>
-                  setCurrentDate(
-                    new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1)
-                  )
-                }
-                handleToday={() => setCurrentDate(new Date())}
-              />
-            </div>
-          </div>
-        </motion.div>
+      {/* Mood Icons */}
+      <div className="flex justify-between md:justify-start md:gap-4 gap-3 flex-wrap">
+        {moods.map((m) => (
+          <motion.div
+            key={m.id}
+            onClick={() => setSelectedMood(m.id)}
+            whileHover={{
+              scale: 1.1,
+              y: -4,
+              boxShadow: "0px 4px 10px rgba(0,0,0,0.2)",
+            }}
+            whileTap={{ scale: 0.9 }}
+            className={`
+              w-12 h-12 flex items-center justify-center
+              text-xl rounded-full cursor-pointer border-2 transition-all duration-300
+              ${
+                selectedMood === m.id
+                  ? "bg-yellow-300 border-yellow-500 text-green-900 shadow-lg"
+                  : "bg-[#f7f6d5] border-green-900 text-green-900"
+              }
+            `}
+            title={m.label}
+          >
+            {m.icon}
+          </motion.div>
+        ))}
       </div>
-    </div>
+
+      {/* Spacer to keep height consistent */}
+      <div className="flex-grow" />
+
+      {/* Selected mood text */}
+      {selectedMood && (
+        <p className="text-gray-100 text-sm mt-2">
+          You’re feeling:{" "}
+          <span className="font-semibold capitalize">{selectedMood}</span>
+        </p>
+      )}
+    </motion.div>
   );
 };
 
-export default CalendarPage;
+export default MoodTracker;

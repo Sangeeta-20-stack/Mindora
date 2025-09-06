@@ -1,9 +1,9 @@
+// src/pages/Dashboard.jsx
 import React from "react";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
 import WelcomeCard from "../components/WelcomeCard";
 import FeatureGrid from "../components/FeatureGrid";
-import MoodTracker from "../components/MoodTracker";
 
 
 const Dashboard = () => {
@@ -23,11 +23,13 @@ const Dashboard = () => {
 
         {/* Scrollable main area */}
         <main className="p-6 space-y-6">
+          {/* Welcome Section */}
           <WelcomeCard />
+
+          {/* Features grid */}
           <FeatureGrid />
-          <MoodTracker />
-         
-          {/* Add more stacked cards here if needed */}
+
+          
         </main>
       </div>
     </div>

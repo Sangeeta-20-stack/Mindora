@@ -42,22 +42,24 @@ const Feedback = () => {
   };
 
   return (
-    <div className="flex h-screen bg-[#f7f6d5]">
+    <div className="flex min-h-screen bg-[#fdf6e3]"> {/* ✅ cream bg */}
       {/* Sidebar */}
-      <Sidebar />
+      <aside className="fixed left-0 top-0 h-full w-64 bg-green-900">
+        <Sidebar />
+      </aside>
 
       {/* Main Content */}
-      <div className="flex flex-col flex-1 overflow-hidden ml-64">
+      <div className="flex flex-col flex-1 ml-64">
         {/* Topbar */}
-        <Topbar />
+        <Topbar title="Feedback" />
 
         {/* Page Content */}
-        <div className="flex-1 p-10 overflow-y-auto">
+        <div className="flex-1 p-10 overflow-y-auto flex flex-col items-center">
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-4xl font-extrabold text-green-900 mb-10 flex items-center gap-3"
+            className="text-4xl font-extrabold text-green-900 mb-10 text-center"
           >
             💬 Share Your Feedback
           </motion.h1>
@@ -66,7 +68,7 @@ const Feedback = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="bg-white shadow-lg rounded-2xl p-10 border border-green-200 w-full max-w-3xl mx-auto"
+            className="bg-[#fdf6e3] shadow-lg rounded-2xl p-10 border border-green-200 w-full max-w-3xl"
           >
             {submitted ? (
               <motion.p
@@ -80,11 +82,11 @@ const Feedback = () => {
               <div className="space-y-8">
                 {/* Rating */}
                 <div>
-                  <label className="flex items-center text-lg font-semibold mb-2 text-gray-700 gap-2">
+                  <label className="flex items-center justify-center text-lg font-semibold mb-2 text-green-900 gap-2">
                     <Star className="text-yellow-500" size={22} />
                     Rate Your Experience
                   </label>
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 justify-center">
                     {[1, 2, 3, 4, 5].map((star) => (
                       <motion.button
                         whileHover={{ scale: 1.2 }}
@@ -102,7 +104,7 @@ const Feedback = () => {
 
                 {/* Comment */}
                 <div>
-                  <label className="flex items-center text-lg font-semibold mb-2 text-gray-700 gap-2">
+                  <label className="flex items-center text-lg font-semibold mb-2 text-green-900 gap-2">
                     <MessageSquare className="text-green-900" size={22} />
                     Your Feedback
                   </label>
@@ -111,12 +113,12 @@ const Feedback = () => {
                     onChange={(e) => setComment(e.target.value)}
                     placeholder="Write your thoughts, suggestions, or issues here..."
                     rows={6}
-                    className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-700 outline-none bg-gray-50"
+                    className="w-full p-4 border border-green-300 rounded-xl focus:ring-2 focus:ring-green-700 outline-none bg-white"
                   />
                 </div>
 
                 {/* Submit */}
-                <div>
+                <div className="flex justify-center">
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}

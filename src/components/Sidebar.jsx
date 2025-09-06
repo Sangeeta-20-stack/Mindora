@@ -26,7 +26,9 @@ const Sidebar = () => {
     { icon: <MessageSquare size={20} />, label: "Feedback", path: "/feedback" },
     { icon: <Settings size={20} />, label: "Settings", path: "/settings" },
     { icon: <Users size={20} />, label: "Psychologist Connect", path: "/doctor" },
-    { icon: <PhoneCall size={20} />, label: "Emergency Helpline", path: "/helpline" },
+
+    // ✅ Fix: match App.jsx route
+    { icon: <PhoneCall size={20} />, label: "Emergency Helpline", path: "/emergency-helpline" },
   ];
 
   const bottomMenu = [

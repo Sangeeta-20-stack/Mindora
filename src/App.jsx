@@ -11,6 +11,7 @@ import Journal from "../src/pages/Journal";
 import CreateJournal from "../src/pages/CreateJournal";
 import Feedback from "../src/pages/Feedback";
 import Doctor from "../src/pages/Doctor";
+import EmergencyHelpline from "../src/pages/EmergencyHelpline"; // ✅ Import new page
 
 function App() {
   return (
@@ -29,6 +30,8 @@ function App() {
       <Route path="/create-journal" element={<CreateJournal />} />
       <Route path="/feedback" element={<Feedback />} />
       <Route path="/doctor" element={<Doctor />} />
+      <Route path="/emergency-helpline" element={<EmergencyHelpline />} /> 
+      {/* ✅ Added route */}
     </Routes>
   );
 }

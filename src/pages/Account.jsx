@@ -1,9 +1,10 @@
+// src/pages/Account.jsx
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
-import { User, Mail, Shield } from "lucide-react";
+import { User, Shield } from "lucide-react";
 
 const Account = () => {
   const [user, setUser] = useState(null);
@@ -26,24 +27,26 @@ const Account = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-gradient-to-br from-teal-50 via-white to-teal-100">
+    <div className="flex min-h-screen bg-[#fdf6e3]"> {/* ✅ full page cream */}
       {/* Sidebar */}
-      <Sidebar />
+      <aside className="fixed left-0 top-0 h-full w-64 bg-green-900">
+        <Sidebar />
+      </aside>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col ml-64">
         {/* Topbar */}
         <Topbar title="My Account" />
 
-        {/* Account Details */}
+        {/* Account Section */}
         <div className="flex-1 p-8 overflow-y-auto">
           <motion.div
             initial={{ opacity: 0, y: 50, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
-            className="bg-white w-full rounded-2xl shadow-xl p-10 border border-teal-100"
+            className="bg-[#fdf6e3] w-full rounded-2xl shadow-xl p-10 border border-green-200"
           >
-            <h2 className="text-3xl font-extrabold text-teal-800 mb-8 text-center">
+            <h2 className="text-3xl font-extrabold text-green-900 mb-8 text-center">
               Account Details
             </h2>
 
@@ -57,27 +60,13 @@ const Account = () => {
                 {/* Name */}
                 <motion.div
                   whileHover={{ scale: 1.02 }}
-                  className="flex items-center gap-4 p-5 rounded-xl border border-gray-200 shadow-sm bg-gradient-to-r from-teal-50 to-teal-100"
+                  className="flex items-center gap-4 p-5 rounded-xl shadow-md bg-green-900 text-white"
                 >
-                  <User className="text-teal-600 w-7 h-7" />
+                  <User className="text-yellow-300 w-7 h-7" />
                   <div>
-                    <h3 className="text-sm text-gray-500">Name</h3>
-                    <p className="text-lg font-semibold text-gray-800">
+                    <h3 className="text-sm text-gray-200">Name</h3>
+                    <p className="text-lg font-semibold">
                       {user.name || "Not provided"}
-                    </p>
-                  </div>
-                </motion.div>
-
-                {/* Email */}
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  className="flex items-center gap-4 p-5 rounded-xl border border-gray-200 shadow-sm bg-gradient-to-r from-purple-50 to-purple-100"
-                >
-                  <Mail className="text-purple-600 w-7 h-7" />
-                  <div>
-                    <h3 className="text-sm text-gray-500">Email</h3>
-                    <p className="text-lg font-semibold text-gray-800">
-                      {user.email}
                     </p>
                   </div>
                 </motion.div>
@@ -85,12 +74,12 @@ const Account = () => {
                 {/* Role */}
                 <motion.div
                   whileHover={{ scale: 1.02 }}
-                  className="flex items-center gap-4 p-5 rounded-xl border border-gray-200 shadow-sm bg-gradient-to-r from-pink-50 to-pink-100"
+                  className="flex items-center gap-4 p-5 rounded-xl shadow-md bg-green-900 text-white"
                 >
-                  <Shield className="text-pink-600 w-7 h-7" />
+                  <Shield className="text-yellow-300 w-7 h-7" />
                   <div>
-                    <h3 className="text-sm text-gray-500">Role</h3>
-                    <p className="text-lg font-semibold text-gray-800">
+                    <h3 className="text-sm text-gray-200">Role</h3>
+                    <p className="text-lg font-semibold">
                       {user.role || "User"}
                     </p>
                   </div>
@@ -110,10 +99,10 @@ const Account = () => {
               </motion.button>
 
               <motion.button
-                whileHover={{ scale: 1.05, backgroundColor: "#0f766e" }}
+                whileHover={{ scale: 1.05, backgroundColor: "#14532d" }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => navigate("/dashboard")}
-                className="w-full bg-teal-600 text-white py-3 rounded-xl font-semibold shadow-md transition"
+                className="w-full bg-green-900 text-white py-3 rounded-xl font-semibold shadow-md transition"
               >
                 Go to Dashboard
               </motion.button>

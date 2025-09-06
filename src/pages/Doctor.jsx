@@ -20,21 +20,24 @@ const Doctor = () => {
   const doctors = [
     {
       id: 1,
-      name: "Dr. Neha Singh",
-      specialization: "Clinical Psychologist",
-      experience: "10+ years",
+      name: "Mr. Psychologist",
+      specialization: "Stress management, Student Counseling",
+      qualification: "MSc, M.Phil",
+      availability: "Online now / Next Slot: 5 PM",
     },
     {
       id: 2,
-      name: "Dr. Arjun Mehta",
-      specialization: "Counseling Psychologist",
-      experience: "8 years",
+      name: "Dr. Psychologist X",
+      specialization: "Dean of Student Affairs, TMSL",
+      qualification: "PhD",
+      availability: "Next Slot: Friday at 5 PM",
     },
     {
       id: 3,
-      name: "Dr. Priya Sharma",
-      specialization: "Child Psychologist",
-      experience: "6 years",
+      name: "Mr. Psychologist X",
+      specialization: "Counseling Expert",
+      qualification: "MSc (CAL)",
+      availability: "Online now",
     },
   ];
 
@@ -66,105 +69,102 @@ const Doctor = () => {
   };
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex min-h-screen bg-[#fdf6e3]">
       {/* Sidebar */}
-      <Sidebar />
+      <aside className="fixed top-0 left-0 h-full w-64 bg-green-900">
+        <Sidebar />
+      </aside>
 
       {/* Main Content */}
-      <div className="flex flex-col flex-1">
-        {/* Topbar */}
-        <Topbar />
+      <div className="flex-1 flex flex-col ml-64">
+        <Topbar title="Appointment" />
 
-        {/* Page Content */}
-        <div className="flex-1 p-8 overflow-y-auto">
-          <h1 className="text-4xl font-bold text-teal-700 mb-8">
-            🧠 Find Your Psychologist
-          </h1>
+        <div className="flex flex-1 p-8 gap-8 overflow-y-auto">
+          {/* Left: Doctor list */}
+          <div className="flex-1">
+            <h1 className="text-4xl font-bold text-green-900 mb-8">
+              Hello, User
+            </h1>
 
-          {/* Doctor List */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            {doctors.map((doc) => (
-              <motion.div
-                key={doc.id}
-                whileHover={{ scale: 1.02 }}
-                className="bg-white p-6 rounded-2xl shadow-lg border hover:shadow-xl transition"
-              >
-                <div className="flex items-center gap-4 mb-5">
-                  <div className="bg-teal-100 p-4 rounded-full">
-                    <User className="text-teal-600" size={32} />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+              {doctors.map((doc) => (
+                <motion.div
+                  key={doc.id}
+                  whileHover={{ scale: 1.02 }}
+                  className="bg-green-900 text-white p-6 rounded-2xl shadow-lg flex flex-col justify-between"
+                >
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="bg-white p-3 rounded-full">
+                      <User className="text-green-900" size={32} />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold">{doc.name}</h3>
+                      <p className="text-sm opacity-90">{doc.qualification}</p>
+                      <p className="text-sm italic">{doc.specialization}</p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-teal-700">
-                      {doc.name}
-                    </h3>
-                    <p className="text-gray-600">{doc.specialization}</p>
-                    <p className="text-sm text-gray-500">
-                      {doc.experience} experience
-                    </p>
-                  </div>
-                </div>
 
-                {/* Actions */}
-                <div className="flex flex-wrap gap-3">
-                  <button className="flex items-center gap-2 px-3 py-2 bg-gray-50 border rounded-lg hover:bg-teal-50 transition">
-                    <MessageSquare size={18} className="text-teal-600" /> Chat
-                  </button>
-                  <button className="flex items-center gap-2 px-3 py-2 bg-gray-50 border rounded-lg hover:bg-teal-50 transition">
-                    <Phone size={18} className="text-teal-600" /> Voice
-                  </button>
-                  <button className="flex items-center gap-2 px-3 py-2 bg-gray-50 border rounded-lg hover:bg-teal-50 transition">
-                    <Video size={18} className="text-teal-600" /> Video
-                  </button>
+                  <p className="text-sm mb-4 opacity-90">
+                    Availability: {doc.availability}
+                  </p>
+
                   <button
                     onClick={() => handleBook(doc)}
-                    className="flex items-center gap-2 px-3 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition"
+                    className="mt-auto bg-red-500 text-white py-2 px-4 rounded-lg font-semibold hover:bg-red-600 transition"
                   >
-                    <Calendar size={18} /> Book
-                  </button>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* My Appointments */}
-          <h2 className="text-3xl font-bold text-teal-700 mb-6 flex items-center gap-2">
-            <Calendar size={28} className="text-teal-600" />
-            My Appointments
-          </h2>
-          <div className="grid gap-5">
-            {appointments.length > 0 ? (
-              appointments.map((appt) => (
-                <motion.div
-                  key={appt.id}
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="bg-white p-6 rounded-2xl shadow-lg border flex justify-between items-center hover:shadow-xl transition"
-                >
-                  <div>
-                    <h3 className="text-lg font-semibold text-teal-700">
-                      {appt.doctor}
-                    </h3>
-                    <p className="text-gray-600">{appt.specialization}</p>
-                    <p className="text-sm text-gray-500 mt-1">
-                      {appt.date} at {appt.time} —{" "}
-                      <span className="font-medium text-teal-600">
-                        {appt.mode}
-                      </span>
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => handleCancel(appt.id)}
-                    className="flex items-center gap-2 px-3 py-2 bg-red-50 text-red-600 border border-red-200 rounded-lg hover:bg-red-100 transition"
-                  >
-                    <XCircle size={18} /> Cancel
+                    Book Session
                   </button>
                 </motion.div>
-              ))
-            ) : (
-              <p className="text-gray-500 text-center italic">
-                No appointments scheduled yet.
-              </p>
-            )}
+              ))}
+            </div>
+          </div>
+
+          {/* Right: My Sessions + Modes of Connect */}
+          <div className="w-80 flex flex-col gap-6">
+            {/* My Sessions */}
+            <div className="bg-green-900 text-white p-6 rounded-2xl shadow-lg">
+              <h2 className="text-xl font-bold mb-4">My Sessions</h2>
+              {appointments.length > 0 ? (
+                appointments.map((appt) => (
+                  <div
+                    key={appt.id}
+                    className="mb-4 p-3 rounded-lg bg-green-800 flex flex-col gap-1"
+                  >
+                    <p className="font-semibold">{appt.date}</p>
+                    <p className="text-sm">
+                      {appt.doctor} — {appt.time}
+                    </p>
+                    <p className="text-xs italic">Mode: {appt.mode}</p>
+                    <button
+                      onClick={() => handleCancel(appt.id)}
+                      className="mt-2 text-sm bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                ))
+              ) : (
+                <p className="text-gray-200 text-sm">
+                  No active sessions scheduled.
+                </p>
+              )}
+            </div>
+
+            {/* Modes of Connect */}
+            <div className="bg-green-900 text-white p-6 rounded-2xl shadow-lg">
+              <h2 className="text-xl font-bold mb-4">Modes of Connect</h2>
+              <ul className="space-y-3">
+                <li className="flex items-center gap-3">
+                  <MessageSquare /> Chat
+                </li>
+                <li className="flex items-center gap-3">
+                  <Video /> Video Call
+                </li>
+                <li className="flex items-center gap-3">
+                  <Phone /> Voice Call
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
