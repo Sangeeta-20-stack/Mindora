@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import welcomeImg from "../assets/welcome-illustration.png";
+import welcomeImg from "../assets/welcome.png";
 
 const quotes = [
   "Believe you can and you're halfway there. – Theodore Roosevelt",
@@ -14,7 +14,6 @@ const WelcomeCard = () => {
   const [userName, setUserName] = useState("User");
 
   useEffect(() => {
-    // Try to fetch username from localStorage
     const savedUser = localStorage.getItem("username");
     if (savedUser) {
       setUserName(savedUser);
@@ -37,7 +36,7 @@ const WelcomeCard = () => {
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, ease: "easeOut" }}
-      className="bg-gradient-to-r from-teal-600 to-teal-400 text-white rounded-3xl p-8 flex justify-between items-center shadow-xl"
+      className="bg-green-900 text-white rounded-3xl p-8 flex justify-between items-center shadow-xl"
     >
       {/* Left Section */}
       <motion.div
@@ -46,8 +45,8 @@ const WelcomeCard = () => {
         transition={{ delay: 0.2, duration: 0.6 }}
       >
         <h2 className="text-3xl font-bold">Welcome, {userName} 👋</h2>
-        <p className="mt-1 text-sm opacity-90">{formattedDate}</p>
-        <blockquote className="mt-4 italic text-base text-teal-50">
+        <p className="mt-1 text-sm opacity-80">{formattedDate}</p>
+        <blockquote className="mt-4 italic text-base text-gray-200">
           “{randomQuote}”
         </blockquote>
 
@@ -56,29 +55,29 @@ const WelcomeCard = () => {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-white text-teal-600 px-5 py-2.5 rounded-lg font-medium shadow hover:shadow-md transition"
+            className="bg-[#f7f6d5] text-green-900 px-6 py-2.5 rounded-full font-medium shadow hover:shadow-md transition"
           >
             Get Started
           </motion.button>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-teal-800 px-5 py-2.5 rounded-lg shadow hover:shadow-lg transition"
+            className="border border-[#f7f6d5] text-[#f7f6d5] px-6 py-2.5 rounded-full font-medium shadow hover:shadow-md transition"
           >
             Learn More
           </motion.button>
         </div>
       </motion.div>
 
-      {/* Right Illustration */}
-      <motion.img
-        src={welcomeImg}
-        alt="Welcome"
-        className="w-48 drop-shadow-lg"
+      {/* Right Illustration in Arch Frame */}
+      <motion.div
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 0.3, duration: 0.7 }}
-      />
+        className="w-56 h-56 bg-[#f7f6d5] rounded-t-full rounded-b-3xl flex items-center justify-center drop-shadow-lg p-4"
+      >
+        <img src={welcomeImg} alt="Welcome" className="w-full h-full object-contain" />
+      </motion.div>
     </motion.div>
   );
 };

@@ -1,162 +1,85 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react"; // 👈 Modern icons
-import Sidebar from "../components/Sidebar";
-import Topbar from "../components/Topbar";
+import {
+  FaSmile,
+  FaSadTear,
+  FaMeh,
+  FaAngry,
+  FaHeart,
+  FaFrown,
+} from "react-icons/fa";
 
-const daysOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+const MoodTracker = ({ moodTracker, setMoodTracker }) => {
+  const moods = [
+    { id: "happy", icon: <FaSmile />, label: "Happy" },
+    { id: "sad", icon: <FaSadTear />, label: "Sad" },
+    { id: "neutral", icon: <FaMeh />, label: "Neutral" },
+    { id: "angry", icon: <FaAngry />, label: "Angry" },
+    { id: "love", icon: <FaHeart />, label: "Love" },
+    { id: "upset", icon: <FaFrown />, label: "Upset" },
+  ];
 
-const CalendarPage = () => {
-  const [currentDate, setCurrentDate] = useState(new Date());
+  const [selectedMood, setSelectedMood] = useState(() => {
+    return localStorage.getItem("selectedMood") || null;
+  });
 
-  const year = currentDate.getFullYear();
-  const month = currentDate.getMonth();
-
-  const firstDay = new Date(year, month, 1).getDay();
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-  const prevMonthDays = Array.from(
-    { length: firstDay },
-    (_, i) => new Date(year, month, -i).getDate()
-  ).reverse();
-
-  const monthDays = Array.from({ length: daysInMonth }, (_, i) => i + 1);
-
-  const nextMonthDays = Array.from(
-    { length: (7 - ((firstDay + daysInMonth) % 7)) % 7 },
-    (_, i) => i + 1
-  );
-
-  const handlePrevMonth = () => {
-    setCurrentDate(new Date(year, month - 1, 1));
-  };
-
-  const handleNextMonth = () => {
-    setCurrentDate(new Date(year, month + 1, 1));
-  };
-
-  const handleToday = () => {
-    setCurrentDate(new Date());
-  };
+  useEffect(() => {
+    if (selectedMood) {
+      localStorage.setItem("selectedMood", selectedMood);
+    }
+  }, [selectedMood]);
 
   return (
-    <div className="flex min-h-screen bg-gradient-to-br from-teal-50 via-white to-teal-100">
-      {/* Sidebar */}
-      <Sidebar />
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="bg-green-900 p-6 rounded-xl shadow-md h-full flex flex-col"
+    >
+      {/* Heading */}
+      <h1 className="text-lg font-bold text-white mb-1">Mood-o-Meter 💭</h1>
+      <h2 className="text-gray-200 mb-4 text-sm">Describe your day:</h2>
 
-      {/* Main Content */}
-      <div className="flex-1 flex flex-col">
-        <Topbar title="Calendar" />
-
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="flex-1 w-full p-8"
-        >
-          {/* Header */}
-          <div className="bg-white rounded-2xl shadow-lg p-6 mb-6 flex items-center justify-between">
-            <div>
-              <h2 className="text-3xl font-bold text-teal-700">Calendar</h2>
-              <p className="text-gray-600">
-                Track your journaling journey and view entries by date
-              </p>
-            </div>
-
-            {/* Controls */}
-            <div className="flex items-center gap-3">
-              <button
-                onClick={handlePrevMonth}
-                className="p-2 rounded-full bg-gray-100 hover:bg-teal-100 shadow-sm transition"
-              >
-                <ChevronLeft className="w-5 h-5 text-gray-700" />
-              </button>
-
-              <h3 className="text-lg font-semibold text-gray-800">
-                {currentDate.toLocaleString("default", { month: "long" })}{" "}
-                {year}
-              </h3>
-
-              <button
-                onClick={handleNextMonth}
-                className="p-2 rounded-full bg-gray-100 hover:bg-teal-100 shadow-sm transition"
-              >
-                <ChevronRight className="w-5 h-5 text-gray-700" />
-              </button>
-
-              <button
-                onClick={handleToday}
-                className="ml-3 px-4 py-2 bg-teal-500 text-white rounded-xl shadow hover:bg-teal-600 transition"
-              >
-                Today
-              </button>
-            </div>
-          </div>
-
-          {/* Calendar Grid */}
+      {/* Mood Icons */}
+      <div className="flex justify-between md:justify-start md:gap-4 gap-3 flex-wrap">
+        {moods.map((m, i) => (
           <motion.div
-            className="bg-white rounded-3xl shadow-xl p-6"
-            whileHover={{ scale: 1.005 }}
+            key={m.id}
+            onClick={() => setSelectedMood(m.id)}
+            whileHover={{
+              scale: 1.1,
+              y: -4,
+              boxShadow: "0px 4px 10px rgba(0,0,0,0.2)",
+            }}
+            whileTap={{ scale: 0.9 }}
+            className={`
+              w-12 h-12 flex items-center justify-center
+              text-xl rounded-full cursor-pointer border-2 transition-all duration-300
+              ${
+                selectedMood === m.id
+                  ? "bg-yellow-300 border-yellow-500 text-green-900 shadow-lg"
+                  : "bg-[#f7f6d5] border-green-900 text-green-900"
+              }
+            `}
+            title={m.label}
           >
-            {/* Days of week */}
-            <div className="grid grid-cols-7 text-center font-semibold text-gray-600 mb-4">
-              {daysOfWeek.map((day) => (
-                <div key={day} className="tracking-wide">
-                  {day}
-                </div>
-              ))}
-            </div>
-
-            {/* Days */}
-            <div className="grid grid-cols-7 gap-2">
-              {/* Previous month */}
-              {prevMonthDays.map((day, i) => (
-                <div
-                  key={`prev-${i}`}
-                  className="p-4 rounded-xl text-gray-400 text-center bg-gray-50"
-                >
-                  {day}
-                </div>
-              ))}
-
-              {/* Current month */}
-              {monthDays.map((day) => {
-                const isToday =
-                  day === new Date().getDate() &&
-                  month === new Date().getMonth() &&
-                  year === new Date().getFullYear();
-
-                return (
-                  <motion.div
-                    key={day}
-                    whileHover={{ scale: 1.05 }}
-                    className={`p-4 rounded-2xl text-center cursor-pointer transition 
-                      ${
-                        isToday
-                          ? "bg-teal-500 text-white font-bold shadow-lg"
-                          : "bg-gray-50 hover:bg-teal-50 hover:shadow"
-                      }`}
-                  >
-                    {day}
-                  </motion.div>
-                );
-              })}
-
-              {/* Next month */}
-              {nextMonthDays.map((day, i) => (
-                <div
-                  key={`next-${i}`}
-                  className="p-4 rounded-xl text-gray-400 text-center bg-gray-50"
-                >
-                  {day}
-                </div>
-              ))}
-            </div>
+            {m.icon}
           </motion.div>
-        </motion.div>
+        ))}
       </div>
-    </div>
+
+      {/* Spacer to keep height consistent */}
+      <div className="flex-grow" />
+
+      {/* Selected mood text */}
+      {selectedMood && (
+        <p className="text-gray-100 text-sm mt-2">
+          You’re feeling:{" "}
+          <span className="font-semibold capitalize">{selectedMood}</span>
+        </p>
+      )}
+    </motion.div>
   );
 };
 
-export default CalendarPage;
+export default MoodTracker;

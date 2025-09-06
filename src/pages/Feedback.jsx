@@ -4,12 +4,11 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
-import { MessageSquare, Star, Type, Send } from "lucide-react"; // 👈 Icons
+import { MessageSquare, Star, Send } from "lucide-react";
 
 const Feedback = () => {
   const navigate = useNavigate();
 
-  const [feedbackType, setFeedbackType] = useState("General");
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -22,7 +21,6 @@ const Feedback = () => {
 
     const newFeedback = {
       id: Date.now(),
-      type: feedbackType,
       rating,
       comment,
       date: new Date().toLocaleDateString(),
@@ -36,7 +34,6 @@ const Feedback = () => {
     setSubmitted(true);
     setComment("");
     setRating(0);
-    setFeedbackType("General");
 
     setTimeout(() => {
       setSubmitted(false);
@@ -45,12 +42,12 @@ const Feedback = () => {
   };
 
   return (
-    <div className="flex h-screen bg-gradient-to-br from-blue-50 via-white to-teal-50">
+    <div className="flex h-screen bg-[#f7f6d5]">
       {/* Sidebar */}
       <Sidebar />
 
       {/* Main Content */}
-      <div className="flex flex-col flex-1">
+      <div className="flex flex-col flex-1 overflow-hidden ml-64">
         {/* Topbar */}
         <Topbar />
 
@@ -60,7 +57,7 @@ const Feedback = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-4xl font-extrabold text-teal-700 mb-10 flex items-center gap-3"
+            className="text-4xl font-extrabold text-green-900 mb-10 flex items-center gap-3"
           >
             💬 Share Your Feedback
           </motion.h1>
@@ -69,42 +66,25 @@ const Feedback = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="bg-white/95 backdrop-blur-md shadow-lg rounded-2xl p-10 border border-teal-100 w-full"
+            className="bg-white shadow-lg rounded-2xl p-10 border border-green-200 w-full max-w-3xl mx-auto"
           >
             {submitted ? (
               <motion.p
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                className="text-center text-2xl font-semibold text-teal-600"
+                className="text-center text-2xl font-semibold text-green-900"
               >
                 ✅ Thank you for your valuable feedback!
               </motion.p>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {/* Feedback Type */}
-                <div>
-                  <label className="flex items-center text-lg font-semibold mb-2 text-gray-700 gap-2">
-                    <Type className="text-teal-500" size={22} />
-                    Type of Feedback
-                  </label>
-                  <select
-                    value={feedbackType}
-                    onChange={(e) => setFeedbackType(e.target.value)}
-                    className="w-full p-4 border rounded-xl mb-6 focus:ring-2 focus:ring-teal-400 outline-none bg-gray-50"
-                  >
-                    <option value="General">💬 General Feedback</option>
-                    <option value="Feature">✨ Feature Request</option>
-                    <option value="Bug">🐛 Bug Report</option>
-                  </select>
-                </div>
-
+              <div className="space-y-8">
                 {/* Rating */}
                 <div>
                   <label className="flex items-center text-lg font-semibold mb-2 text-gray-700 gap-2">
                     <Star className="text-yellow-500" size={22} />
                     Rate Your Experience
                   </label>
-                  <div className="flex gap-2 mb-6">
+                  <div className="flex gap-2">
                     {[1, 2, 3, 4, 5].map((star) => (
                       <motion.button
                         whileHover={{ scale: 1.2 }}
@@ -121,9 +101,9 @@ const Feedback = () => {
                 </div>
 
                 {/* Comment */}
-                <div className="md:col-span-2">
+                <div>
                   <label className="flex items-center text-lg font-semibold mb-2 text-gray-700 gap-2">
-                    <MessageSquare className="text-teal-500" size={22} />
+                    <MessageSquare className="text-green-900" size={22} />
                     Your Feedback
                   </label>
                   <textarea
@@ -131,17 +111,17 @@ const Feedback = () => {
                     onChange={(e) => setComment(e.target.value)}
                     placeholder="Write your thoughts, suggestions, or issues here..."
                     rows={6}
-                    className="w-full p-4 border rounded-xl mb-6 focus:ring-2 focus:ring-teal-400 outline-none bg-gray-50"
+                    className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-700 outline-none bg-gray-50"
                   />
                 </div>
 
                 {/* Submit */}
-                <div className="md:col-span-2">
+                <div>
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={handleSubmit}
-                    className="w-full bg-gradient-to-r from-teal-500 to-teal-700 text-white py-4 rounded-xl font-semibold hover:shadow-lg transition flex items-center justify-center gap-2 text-lg"
+                    className="w-full bg-green-900 text-white py-4 rounded-xl font-semibold hover:shadow-lg transition flex items-center justify-center gap-2 text-lg"
                   >
                     <Send size={22} /> Submit Feedback
                   </motion.button>

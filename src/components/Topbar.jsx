@@ -1,5 +1,5 @@
 import React from "react";
-import { Bell, Settings } from "lucide-react";
+import { Bell } from "lucide-react";
 import { motion } from "framer-motion";
 
 const Topbar = () => {
@@ -8,40 +8,23 @@ const Topbar = () => {
       initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ type: "spring", stiffness: 70, damping: 15 }}
-      className="flex items-center justify-between p-4 bg-white shadow rounded-tr-2xl rounded-tl-2xl ml-[1px]"
+      className="flex items-center justify-end p-4 bg-[#f7f6d5] shadow rounded-tr-2xl rounded-tl-2xl ml-[1px] gap-4"
     >
-      {/* Search */}
-      <motion.input
-        whileFocus={{ scale: 1.02, boxShadow: "0px 0px 8px rgba(13,148,136,0.4)" }}
-        type="text"
-        placeholder="Search here"
-        className="px-4 py-2 border rounded-lg w-1/2 outline-none"
-      />
+      {/* Bell Icon */}
+      <motion.div
+        whileHover={{ scale: 1.2, boxShadow: "0 0 15px rgba(0,0,0,0.3)" }}
+        whileTap={{ scale: 0.95 }}
+        className="cursor-pointer w-10 h-10 flex items-center justify-center bg-green-900 text-white rounded-full shadow transition-all"
+      >
+        <Bell color="white" />
+      </motion.div>
 
-      {/* Right Icons */}
-      <div className="flex items-center gap-4">
+      {/* Toggle Switch (unchanged) */}
+      <div className="w-12 h-6 rounded-full p-1 cursor-pointer flex items-center bg-gray-200">
         <motion.div
-          whileHover={{ scale: 1.2 }}
           whileTap={{ scale: 0.9 }}
-          className="cursor-pointer"
-        >
-          <Settings color="#0d9488" />
-        </motion.div>
-        <motion.div
-          whileHover={{ scale: 1.2 }}
-          whileTap={{ scale: 0.9 }}
-          className="cursor-pointer"
-        >
-          <Bell color="#f59e0b" />
-        </motion.div>
-
-        {/* Toggle Switch */}
-        <div className="w-12 h-6 rounded-full p-1 cursor-pointer flex items-center bg-gray-200">
-          <motion.div
-            whileTap={{ scale: 0.9 }}
-            className="w-4 h-4 bg-teal-600 rounded-full shadow"
-          />
-        </div>
+          className="w-4 h-4 bg-green-900 rounded-full shadow"
+        />
       </div>
     </motion.div>
   );

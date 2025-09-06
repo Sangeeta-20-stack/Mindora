@@ -1,60 +1,64 @@
 import { motion } from "framer-motion";
-import hero from "../../assets/hero.jpg";
+import hero from "../../assets/hero.jpg"; // replace with your Canva illustration
 
 export default function HeroSection() {
   return (
-    <section className="bg-teal-400 flex flex-col items-center justify-center text-center px-6 py-16 min-h-screen text-white pt-32 md:pt-40 overflow-hidden">
-      {/* Headings */}
-      <motion.h1
-        initial={{ opacity: 0, y: -30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="text-2xl md:text-4xl font-extrabold mb-2 bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent"
-      >
-        “Asking for help isn’t a sign of weakness,
-        <br /> it’s a sign of strength.”
-      </motion.h1>
+    <section className="bg-[#f7f6d5] flex flex-col md:flex-row items-center justify-between 
+                        px-6 md:px-16 lg:px-24 py-16 min-h-screen overflow-hidden 
+                        md:gap-x-16 lg:gap-x-24">
 
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3, duration: 0.8 }}
-        className="text-lg md:text-2xl max-w-2xl leading-relaxed opacity-90 italic"
+      {/* Left Side - Illustration */}
+      <motion.div
+        initial={{ opacity: 0, x: -80, scale: 0.9 }}
+        animate={{ opacity: 1, x: 0, scale: 1 }}
+        transition={{ duration: 1, type: "spring", stiffness: 100 }}
+        whileHover={{ scale: 1.05, rotate: 1 }}
+        className="flex-1 flex justify-center mb-10 md:mb-0 cursor-pointer"
       >
-        — Barack Obama
-      </motion.p>
-
-      {/* Hero Image with 3D animation */}
-      <div className="mt-10 flex justify-center">
         <motion.img
           src={hero}
-          alt="Hero"
-          className="w-full max-w-lg md:max-w-xl lg:max-w-2xl rounded-2xl shadow-2xl object-cover"
+          alt="Hero Illustration"
+          className="w-full max-w-sm md:max-w-md lg:max-w-lg object-contain"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5, duration: 1 }}
         />
-      </div>
+      </motion.div>
 
-      {/* Buttons */}
+      {/* Right Side - Text */}
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1, duration: 0.8 }}
-        className="mt-12 flex gap-6"
+        initial={{ opacity: 0, x: 80 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1 }}
+        className="flex-1 text-center md:text-left"
       >
-        <motion.button
-          whileHover={{ scale: 1.08, boxShadow: "0px 6px 20px rgba(255,255,255,0.3)" }}
-          whileTap={{ scale: 0.95 }}
-          className="bg-white text-teal-500 px-8 py-3 rounded-full shadow-md font-extrabold transition"
+        {/* Heading */}
+        <motion.h1
+          className="text-4xl md:text-5xl font-extrabold mb-6"
+          style={{
+            color: "#144d25", // Canva dark green
+            lineHeight: "1.1", // tight line spacing
+          }}
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 1, delay: 0.3 }}
+          whileHover={{ scale: 1.02, color: "#0f3a1b" }}
         >
-          Get Started →
-        </motion.button>
+          Nurturing Minds,<br /> Building Future
+        </motion.h1>
 
-        <motion.button
-          whileHover={{ scale: 1.08, backgroundColor: "#ffffff", color: "#14b8a6" }}
-          whileTap={{ scale: 0.95 }}
-          className="border-2 border-white px-8 py-3 rounded-full font-extrabold transition"
+        {/* Subtext */}
+        <motion.h2
+          className="text-lg text-[#144d25] mb-12 leading-relaxed max-w-md mx-auto md:mx-0"
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 1, delay: 0.5 }}
+          whileHover={{ scale: 1.01 }}
         >
-          Learn More
-        </motion.button>
+          A safe, stigma-free space <br />
+          where institutions and individuals unite <br />
+          for holistic mental well-being.
+        </motion.h2>
       </motion.div>
     </section>
   );

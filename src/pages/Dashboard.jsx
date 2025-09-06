@@ -4,22 +4,30 @@ import Topbar from "../components/Topbar";
 import WelcomeCard from "../components/WelcomeCard";
 import FeatureGrid from "../components/FeatureGrid";
 import MoodTracker from "../components/MoodTracker";
-import MentalHealthSurvey from "../components/MentalHealthSurvey";
+
 
 const Dashboard = () => {
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div className="flex min-h-screen bg-[#f7f6d5]">
       {/* Sidebar */}
-      <Sidebar />
+      <aside className="w-64 bg-green-900 flex-shrink-0 h-screen fixed">
+        <Sidebar />
+      </aside>
 
-      {/* Main */}
-      <div className="flex-1 flex flex-col">
-        <Topbar />
+      {/* Main content */}
+      <div className="flex-1 flex flex-col ml-64 overflow-y-auto h-screen">
+        {/* Topbar (sticky) */}
+        <div className="sticky top-0 z-10">
+          <Topbar />
+        </div>
+
+        {/* Scrollable main area */}
         <main className="p-6 space-y-6">
           <WelcomeCard />
           <FeatureGrid />
           <MoodTracker />
-          {/* Stacked cards appear here */}
+         
+          {/* Add more stacked cards here if needed */}
         </main>
       </div>
     </div>

@@ -17,12 +17,12 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-teal-600 text-white py-16 px-6">
+    <footer className="bg-green-900 text-white py-16 px-6">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
 
         {/* Brand & Contact Info */}
         <div>
-          <h2 className="text-2xl font-bold mb-4">Mindly</h2>
+          <h2 className="text-2xl font-bold mb-4 font-serif">Vritti</h2>
           <p className="mb-2 flex items-center gap-2">
             <FaEnvelope /> info@mindly.com
           </p>
@@ -36,7 +36,7 @@ const Footer = () => {
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-teal-200 transition-colors duration-300"
+                className="hover:text-green-400 transition-colors duration-300"
               >
                 {social.icon}
               </a>
@@ -46,11 +46,14 @@ const Footer = () => {
 
         {/* Navigation Links */}
         <div>
-          <h3 className="text-xl font-semibold mb-4">Navigation</h3>
+          <h3 className="text-xl font-semibold mb-4 font-serif">Navigation</h3>
           <ul className="space-y-2">
             {navLinks.map((link, index) => (
               <li key={index}>
-                <a href={link.href} className="hover:text-teal-200 transition-colors duration-300">
+                <a
+                  href={link.href}
+                  className="hover:text-green-400 transition-colors duration-300"
+                >
                   {link.name}
                 </a>
               </li>
@@ -60,8 +63,8 @@ const Footer = () => {
 
         {/* Newsletter / Subscription */}
         <div>
-          <h3 className="text-xl font-semibold mb-4">Subscribe</h3>
-          <p className="mb-4">Get our latest updates and news.</p>
+          <h3 className="text-xl font-semibold mb-4 font-serif">Subscribe</h3>
+          <p className="mb-4 opacity-80">Get our latest updates and news.</p>
           <form className="flex flex-col sm:flex-row gap-2">
             <input
               type="email"
@@ -70,7 +73,7 @@ const Footer = () => {
             />
             <button
               type="submit"
-              className="bg-teal-800 text-white px-4 py-3 rounded-lg hover:bg-teal-700 transition duration-300"
+              className="bg-white text-green-900 px-4 py-3 rounded-lg hover:bg-green-100 hover:scale-105 transition duration-300"
             >
               Subscribe
             </button>
@@ -79,7 +82,7 @@ const Footer = () => {
 
       </div>
 
-      <div className="mt-12 text-center text-teal-200">
+      <div className="mt-12 text-center text-green-200">
         &copy; {new Date().getFullYear()} Mindly. All rights reserved.
       </div>
     </footer>

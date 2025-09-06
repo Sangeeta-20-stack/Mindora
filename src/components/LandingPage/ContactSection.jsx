@@ -1,96 +1,104 @@
 import React from "react";
-import { FaUser, FaEnvelope, FaRegComment, FaDiscord, FaClock } from "react-icons/fa";
+import { motion } from "framer-motion";
+import { FaUser, FaEnvelope } from "react-icons/fa";
 
 const ContactSection = () => {
-  const contactMethods = [
-    { icon: <FaEnvelope className="text-teal-600" />, title: "Email", value: "support@smriti.live" },
-    { icon: <FaDiscord className="text-teal-600" />, title: "Discord", value: "discord.gg/xyz" },
-    { icon: <FaClock className="text-teal-600" />, title: "Response Time", value: "Within 24 hours" },
-  ];
-
   const handleSubmit = (e) => {
     e.preventDefault();
     alert("Form submitted! (Integrate backend here)");
   };
 
   return (
-    <section className="bg-teal-100 py-20 px-6">
-      <div className="max-w-4xl mx-auto">
+    <motion.section
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      viewport={{ once: true, amount: 0.2 }}
+      className="bg-[#f7f6d5] py-16 px-6"
+    >
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.7 }}
+        className="w-full border-2 border-[#144d25] rounded-2xl p-6 md:p-12 bg-[#f7f6d5] shadow-md relative overflow-hidden"
+      >
+        {/* Reflection / glow */}
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-white/10 to-transparent rounded-2xl pointer-events-none"></div>
+
         {/* Heading */}
-        <h2 className="text-4xl font-extrabold text-teal-600 mb-4 text-center">Contact Us</h2>
-        <p className="text-teal-700 mb-12 text-center opacity-80">
-          Have questions or feedback? We'd love to hear from you.
-        </p>
+        <motion.h2
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-3xl md:text-4xl font-bold text-[#144d25] mb-10 text-center font-serif"
+        >
+          Contact Us
+        </motion.h2>
 
         {/* Contact Form */}
-        <form
+        <motion.form
           onSubmit={handleSubmit}
-          className="bg-white p-8 rounded-2xl shadow-lg mb-12 space-y-4"
+          className="space-y-6"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
         >
           {/* Name */}
-          <div className="flex items-center border border-teal-300 rounded-lg p-3 hover:border-teal-500 hover:shadow-md transition duration-300">
-            <FaUser className="text-teal-600 mr-3 text-xl" />
+          <motion.div
+            whileHover={{ scale: 1.02, boxShadow: "0 8px 20px rgba(20,77,37,0.3)" }}
+            className="flex items-center border-2 border-[#144d25] rounded-xl px-4 py-3 transition-all duration-300"
+          >
+            <FaUser className="text-[#144d25] mr-4 text-3xl" />
             <input
               type="text"
               name="name"
-              placeholder="Your Name"
+              placeholder="YOUR NAME"
               required
-              className="flex-1 outline-none"
+              className="flex-1 outline-none bg-transparent text-center tracking-[0.3em] uppercase"
             />
-          </div>
+          </motion.div>
 
           {/* Email */}
-          <div className="flex items-center border border-teal-300 rounded-lg p-3 hover:border-teal-500 hover:shadow-md transition duration-300">
-            <FaEnvelope className="text-teal-600 mr-3 text-xl" />
+          <motion.div
+            whileHover={{ scale: 1.02, boxShadow: "0 8px 20px rgba(20,77,37,0.3)" }}
+            className="flex items-center border-2 border-[#144d25] rounded-xl px-4 py-3 transition-all duration-300"
+          >
+            <FaEnvelope className="text-[#144d25] mr-4 text-3xl" />
             <input
               type="email"
               name="email"
-              placeholder="Your Email"
+              placeholder="YOUR EMAIL"
               required
-              className="flex-1 outline-none"
+              className="flex-1 outline-none bg-transparent text-center tracking-[0.3em] uppercase"
             />
-          </div>
+          </motion.div>
 
           {/* Message */}
-          <div className="flex items-start border border-teal-300 rounded-lg p-3 hover:border-teal-500 hover:shadow-md transition duration-300">
-            <FaRegComment className="text-teal-600 mr-3 mt-2 text-xl" />
+          <motion.div
+            whileHover={{ scale: 1.02, boxShadow: "0 8px 20px rgba(20,77,37,0.3)" }}
+            className="flex items-start border-2 border-[#144d25] rounded-xl px-4 py-3 transition-all duration-300"
+          >
             <textarea
               name="message"
               rows="4"
-              placeholder="Your Message"
+              placeholder="YOUR MESSAGE"
               required
-              className="flex-1 outline-none resize-none"
+              className="flex-1 outline-none bg-transparent text-center tracking-[0.3em] resize-none uppercase"
             ></textarea>
-          </div>
+          </motion.div>
 
-          <button
-            type="submit"
-            className="w-full py-3 bg-teal-600 text-white rounded-lg hover:bg-teal-700 hover:scale-105 transition duration-300"
-          >
-            Send Message
-          </button>
-        </form>
-
-       {/* Other Ways to Reach Us */}
-<div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
-  {contactMethods.map((method, index) => (
-    <div
-      key={index}
-      className="bg-white p-6 rounded-2xl shadow-md flex flex-col items-center justify-center space-y-2
-                 transition-all duration-500 transform hover:-translate-y-3 hover:scale-105 
-                 hover:shadow-2xl hover:shadow-teal-400/50 hover:border-teal-400 border border-transparent"
-    >
-      <div className="text-3xl mb-2 transition-transform duration-500 group-hover:rotate-6">
-        {method.icon}
-      </div>
-      <h4 className="text-teal-600 font-bold">{method.title}</h4>
-      <p className="text-teal-700">{method.value}</p>
-    </div>
-  ))}
-</div>
-
-      </div>
-    </section>
+          {/* Button */}
+          <motion.div whileHover={{ scale: 1.05 }} className="flex justify-center">
+            <button
+              type="submit"
+              className="px-12 py-2 bg-[#144d25] text-white rounded-full font-semibold hover:bg-[#0f3a1b] transition-all duration-300"
+            >
+              SEND
+            </button>
+          </motion.div>
+        </motion.form>
+      </motion.div>
+    </motion.section>
   );
 };
 

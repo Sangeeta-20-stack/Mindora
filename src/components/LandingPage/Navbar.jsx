@@ -7,14 +7,13 @@ const Navbar = () => {
   const [activeLink, setActiveLink] = useState("Home");
   const location = useLocation();
 
-  // Update active link based on scroll (only on homepage "/")
+  // Update active link on scroll
   useEffect(() => {
     if (location.pathname !== "/") return;
-
     const handleScroll = () => {
-      const scrollPos = window.scrollY + 100; // offset for navbar height
+      const scrollPos = window.scrollY + 100;
       links.forEach((link) => {
-        const section = document.getElementById(link.toLowerCase());
+        const section = document.getElementById(link.toLowerCase().replace(" ", ""));
         if (section) {
           if (
             scrollPos >= section.offsetTop &&
@@ -25,19 +24,18 @@ const Navbar = () => {
         }
       });
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [location.pathname]);
 
-  // Smooth scroll handler
+  // Smooth scroll
   const handleSmoothScroll = (e, id) => {
     if (location.pathname === "/") {
       e.preventDefault();
-      const section = document.getElementById(id);
+      const section = document.getElementById(id.replace(" ", ""));
       if (section) {
         window.scrollTo({
-          top: section.offsetTop - 80, // adjust for navbar height
+          top: section.offsetTop - 80,
           behavior: "smooth",
         });
       }
@@ -49,17 +47,17 @@ const Navbar = () => {
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.7, ease: "easeOut" }}
-      className="flex justify-between items-center bg-teal-500 px-12 py-4 shadow-md fixed w-full top-0 z-50"
+      className="flex justify-between items-center bg-green-900 px-12 py-4 fixed w-full top-0 z-50 shadow-md"
     >
       {/* Logo */}
       <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ delay: 0.3, duration: 0.5, type: "spring" }}
-        className="text-2xl font-bold text-white cursor-pointer"
+        className="text-2xl font-extrabold text-white cursor-pointer"
         onClick={(e) => handleSmoothScroll(e, "home")}
       >
-        Mindly
+        Vritti
       </motion.div>
 
       {/* Nav Links */}
@@ -70,14 +68,15 @@ const Navbar = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 + index * 0.2, duration: 0.5 }}
+            className="relative group"
           >
             <a
-              href={`/#${link.toLowerCase()}`}
-              onClick={(e) => handleSmoothScroll(e, link.toLowerCase())}
-              className={`transition hover:text-gray-200 ${
+              href={`/#${link.toLowerCase().replace(" ", "")}`}
+              onClick={(e) => handleSmoothScroll(e, link.toLowerCase().replace(" ", ""))}
+              className={`transition ${
                 activeLink === link && location.pathname === "/"
-                  ? "font-bold underline"
-                  : ""
+                  ? "font-semibold underline"
+                  : "hover:underline"
               }`}
             >
               {link}
@@ -86,28 +85,30 @@ const Navbar = () => {
         ))}
       </ul>
 
-      {/* Login & Sign up */}
+      {/* Login & Signup */}
       <motion.div
         initial={{ opacity: 0, x: 40 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 1, duration: 0.6 }}
         className="flex items-center gap-4"
       >
-        {/* Login button */}
-        <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+        {/* Login */}
+        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
           <Link
             to="/login"
-            className="border-2 border-white text-white px-5 py-2 rounded-full font-bold hover:bg-white hover:text-teal-600 transition"
+            className="px-5 py-2 rounded-full font-medium bg-[#f3f0df] text-green-900 
+            hover:bg-[#e6e2d0] transition-all duration-300"
           >
             Login
           </Link>
         </motion.div>
 
-        {/* Signup button */}
-        <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+        {/* Signup */}
+        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
           <Link
             to="/signup"
-            className="bg-white text-teal-600 px-5 py-2 rounded-full font-bold hover:bg-gray-100 transition"
+            className="px-5 py-2 rounded-full font-medium bg-[#f3f0df] text-green-900 
+            hover:bg-[#e6e2d0] transition-all duration-300"
           >
             Sign up
           </Link>

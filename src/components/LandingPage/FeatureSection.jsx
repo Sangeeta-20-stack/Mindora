@@ -1,23 +1,34 @@
 import React from "react";
 import { motion } from "framer-motion";
-import FeatureCard from "../FeatureCard.jsx";
-
-// ✅ Importing icons from lucide-react
-import { BookOpen, MessageCircle, UserCheck, CalendarCheck, Music } from "lucide-react";
+import { Bot, ClipboardCheck, User, BookOpen, Handshake } from "lucide-react";
 
 const FeatureSection = () => {
   const features = [
-    { icon: <BookOpen className="w-10 h-10 text-teal-600" />, title: "Resource Hub", description: "Access a variety of mental wellness resources anytime." },
-    { icon: <MessageCircle className="w-10 h-10 text-teal-600" />, title: "Anonymous Chat Support", description: "Talk freely with trained supporters without revealing your identity." },
-    { icon: <UserCheck className="w-10 h-10 text-teal-600" />, title: "Certified Psychologists", description: "Get guidance from certified mental health professionals." },
-    { icon: <CalendarCheck className="w-10 h-10 text-teal-600" />, title: "Daily Check-Ins", description: "Monitor your mood and mental wellness daily." },
-    { icon: <Music className="w-10 h-10 text-teal-600" />, title: "Music Therapy", description: "Relax and improve your mood with curated music therapy sessions." },
-  ];
-
-  const bullets = [
-    "Progress Tracking",
-    "24/7 Support",
-    "Personalized Resources",
+    {
+      icon: <Bot className="w-10 h-10 mb-3" />,
+      title: "AI Chatbot",
+      description: "Get instant mental health support through our smart, confidential chatbot.",
+    },
+    {
+      icon: <ClipboardCheck className="w-10 h-10 mb-3" />,
+      title: "Screening Test",
+      description: "Assess your well-being with quick, science-based mental health screenings.",
+    },
+    {
+      icon: <User className="w-10 h-10 mb-3" />,
+      title: "Book Counsellor",
+      description: "Easily schedule sessions with certified mental health professionals.",
+    },
+    {
+      icon: <BookOpen className="w-10 h-10 mb-3" />,
+      title: "Resources Hub",
+      description: "Explore curated articles, videos, and self-help guides for wellness.",
+    },
+    {
+      icon: <Handshake className="w-10 h-10 mb-3" />,
+      title: "Peer Support Forum",
+      description: "Connect with peers, share experiences, and find encouragement together.",
+    },
   ];
 
   return (
@@ -26,47 +37,29 @@ const FeatureSection = () => {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
       viewport={{ once: true, amount: 0.2 }}
-      className="bg-teal-300 py-20 px-6 text-center relative overflow-hidden"
+      className="bg-[#f7f6d5] py-16 px-6 text-center"
     >
       {/* Heading */}
-      <motion.h2
+      <motion.h1
         initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="text-4xl font-extrabold mb-6 text-white"
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+        className="text-4xl font-extrabold mb-4 text-[#144d25] font-serif"
       >
         Our Features
-      </motion.h2>
+      </motion.h1>
 
-      <motion.p
+      {/* Subtext */}
+      <motion.h2
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
         viewport={{ once: true }}
-        className="text-lg max-w-3xl mx-auto mb-6 text-white opacity-80"
+        className="text-lg text-[#144d25] mb-12 max-w-2xl mx-auto"
       >
-        Explore the tools and services we provide to support your mental wellness journey.
-      </motion.p>
-
-      {/* Horizontal Bullet Points with hover glow */}
-      <motion.div
-        initial={{ opacity: 0, y: -10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.4 }}
-        viewport={{ once: true }}
-        className="flex justify-center gap-6 mb-12 flex-wrap"
-      >
-        {bullets.map((bullet, index) => (
-          <span
-            key={index}
-            className="bg-teal-200 text-teal-800 font-semibold text-lg px-4 py-2 rounded-full shadow-sm 
-                       hover:bg-teal-100 hover:shadow-md hover:-translate-y-1 
-                       transition-all duration-300 cursor-pointer"
-          >
-            {bullet}
-          </span>
-        ))}
-      </motion.div>
+        Explore the features we provide to support your mental health and well-being.
+      </motion.h2>
 
       {/* Feature Cards */}
       <motion.div
@@ -76,23 +69,32 @@ const FeatureSection = () => {
         variants={{
           hidden: {},
           visible: {
-            transition: {
-              staggerChildren: 0.15,
-            },
+            transition: { staggerChildren: 0.15 },
           },
         }}
-        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 max-w-7xl mx-auto"
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 max-w-6xl mx-auto"
       >
         {features.map((feature, index) => (
-          <FeatureCard
+          <motion.div
             key={feature.title}
-            icon={feature.icon}
-            title={feature.title}
-            description={feature.description}
-            delay={0.1 * index}
-            bgColor="bg-teal-50"
-            textColor="text-teal-600"
-          />
+            initial={{ opacity: 0, y: 30, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.1 * index }}
+            viewport={{ once: true }}
+            whileHover={{
+              scale: 1.05,
+              y: -5,
+              boxShadow: "0 15px 25px rgba(20,77,37,0.4)",
+            }}
+            className="bg-[#144d25] text-white rounded-2xl p-6 shadow-md flex flex-col items-center justify-center relative overflow-hidden cursor-pointer"
+          >
+            {feature.icon}
+            <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
+            <p className="text-sm text-center">{feature.description}</p>
+
+            {/* Reflection / glow overlay */}
+            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-white/10 to-transparent rounded-2xl pointer-events-none"></div>
+          </motion.div>
         ))}
       </motion.div>
     </motion.section>
