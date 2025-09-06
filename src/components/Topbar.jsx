@@ -1,8 +1,19 @@
+// src/components/Topbar.jsx
 import React from "react";
 import { Bell } from "lucide-react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 const Topbar = () => {
+  const { i18n } = useTranslation();
+
+  // ✅ handle language change
+  const changeLanguage = (e) => {
+    const selectedLang = e.target.value;
+    i18n.changeLanguage(selectedLang);
+    localStorage.setItem("language", selectedLang); // persist choice
+  };
+
   return (
     <motion.div
       initial={{ y: -50, opacity: 0 }}
@@ -19,13 +30,28 @@ const Topbar = () => {
         <Bell color="white" />
       </motion.div>
 
-      {/* Toggle Switch (unchanged) */}
+      {/* Toggle Switch (keep it) */}
       <div className="w-12 h-6 rounded-full p-1 cursor-pointer flex items-center bg-gray-200">
         <motion.div
           whileTap={{ scale: 0.9 }}
           className="w-4 h-4 bg-green-900 rounded-full shadow"
         />
       </div>
+
+      {/* ✅ Language Switcher (added separately) */}
+      <select
+        onChange={changeLanguage}
+        defaultValue={localStorage.getItem("language") || "en"}
+        className="px-3 py-1 border border-green-900 rounded-lg bg-white text-green-900 font-medium shadow hover:bg-green-50"
+      >
+        <option value="en">English</option>
+        <option value="hi">हिंदी</option>
+        <option value="bn">বাংলা</option>
+        <option value="ta">தமிழ்</option>
+        <option value="te">తెలుగు</option>
+        <option value="ml">മലയാളം</option>
+        <option value="mr">मराठी</option>
+      </select>
     </motion.div>
   );
 };

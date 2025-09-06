@@ -1,5 +1,7 @@
+// src/components/FeatureGrid.jsx
 import React from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom"; // ✅ import navigate hook
 import DashboardCard from "./DashboardCard";
 import moodImg from "../assets/mood.png";
 import wellnessImg from "../assets/wellness.png";
@@ -9,13 +11,15 @@ import reflectionImg from "../assets/reflection.png";
 import communityImg from "../assets/community.png";
 
 const FeatureGrid = () => {
+  const navigate = useNavigate(); // ✅ initialize navigate
+
   const features = [
-    { title: "Daily Mood Tracker", image: moodImg, color: "from-teal-500 to-teal-300" },
-    { title: "Wellness Buddy", image: wellnessImg, color: "from-indigo-500 to-indigo-300" },
-    { title: "Stress Level Check", image: stressImg, color: "from-rose-500 to-rose-300" },
-    { title: "Relaxation Tools", image: relaxImg, color: "from-emerald-500 to-emerald-300" },
-    { title: "Reflection Box", image: reflectionImg, color: "from-orange-500 to-orange-300" },
-    { title: "Community Wall", image: communityImg, color: "from-purple-500 to-purple-300" },
+    { title: "Daily Mood Tracker", image: moodImg, color: "from-teal-500 to-teal-300", path: "/daily-mood-tracker" },
+    { title: "Wellness Buddy", image: wellnessImg, color: "from-indigo-500 to-indigo-300", path: "/wellness-buddy" }, // ✅ navigate here
+    { title: "Stress Level Check", image: stressImg, color: "from-rose-500 to-rose-300", path: "/stress-check" },
+    { title: "Relaxation Tools", image: relaxImg, color: "from-emerald-500 to-emerald-300", path: "/relaxation" },
+    { title: "Reflection Box", image: reflectionImg, color: "from-orange-500 to-orange-300", path: "/reflection" },
+    { title: "Community Wall", image: communityImg, color: "from-purple-500 to-purple-300", path: "/community-wall" },
   ];
 
   // Animation variants
@@ -51,7 +55,8 @@ const FeatureGrid = () => {
             boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
           }}
           transition={{ type: "spring", stiffness: 200, damping: 14 }}
-          className={`rounded-2xl p-[2px] bg-gradient-to-r ${f.color}`}
+          className={`rounded-2xl p-[2px] bg-gradient-to-r ${f.color} cursor-pointer`}
+          onClick={() => f.path && navigate(f.path)} // ✅ navigate on click
         >
           <div className="bg-white rounded-2xl h-full">
             <DashboardCard title={f.title} image={f.image} />

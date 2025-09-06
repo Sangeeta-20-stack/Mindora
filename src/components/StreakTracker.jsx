@@ -1,6 +1,9 @@
+// src/components/StreakTracker.jsx
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next"; // ✅ import translator
 
 const StreakTracker = ({ moodTracker = [] }) => {
+  const { t } = useTranslation(); // ✅ hook
   const [currentStreak, setCurrentStreak] = useState(0);
   const [bestStreak, setBestStreak] = useState(0);
 
@@ -33,16 +36,18 @@ const StreakTracker = ({ moodTracker = [] }) => {
 
   return (
     <div className="bg-green-900 rounded-2xl shadow-lg p-6 text-white">
-      <h3 className="font-bold text-lg mb-3">🔥 Streak Tracker</h3>
+      <h3 className="font-bold text-lg mb-3">🔥 {t("streak.title")}</h3>
       <p className="text-sm">
-        <span className="font-bold">Current Streak:</span> {currentStreak} days
+        <span className="font-bold">{t("streak.current")}: </span>
+        {currentStreak} {t("streak.days")}
       </p>
       <p className="text-sm">
-        <span className="font-bold">Best Streak:</span> {bestStreak} days
+        <span className="font-bold">{t("streak.best")}: </span>
+        {bestStreak} {t("streak.days")}
       </p>
       {currentStreak >= 7 && (
         <p className="mt-2 text-yellow-300 font-semibold">
-          🏆 Amazing! 7+ day streak!
+          🏆 {t("streak.congrats")}
         </p>
       )}
     </div>

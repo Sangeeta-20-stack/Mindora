@@ -15,60 +15,75 @@ import { motion } from "framer-motion";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
 
-// consistent mood colors
+// consistent sentiment colors
 const COLORS = {
-  happy: "#22c55e",   // green
-  neutral: "#facc15", // yellow
-  sad: "#f97316",     // orange
-  angry: "#ef4444",   // red
-  love: "#9333ea",    // purple
-  upset: "#64748b",   // gray
+  Positive: "#22c55e", // green
+  Neutral: "#facc15",  // yellow
+  Negative: "#ef4444", // red
 };
 
 const Analytics = () => {
   const [entries, setEntries] = useState([]);
-  const [range, setRange] = useState("all");
-  const [filteredEntries, setFilteredEntries] = useState([]);
 
-  // Load moodTracker from localStorage
-  useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem("moodHistory")) || [];
+  // Load reflections from localStorage
+  const loadEntries = () => {
+    const stored = JSON.parse(localStorage.getItem("journalEntries")) || [];
     setEntries(stored);
+  };
+
+  useEffect(() => {
+    loadEntries();
+
+    // ✅ Listen for changes from ReflectionBox (localStorage updates)
+    const handleStorageChange = () => loadEntries();
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
   }, []);
 
-  // Filter entries by range
-  useEffect(() => {
-    let data = [...entries];
-    const today = new Date();
+  const totalEntries = entries.length;
 
-    if (range === "week") {
-      let weekAgo = new Date();
-      weekAgo.setDate(today.getDate() - 7);
-      data = data.filter((e) => new Date(e.date) >= weekAgo);
-    } else if (range === "month") {
-      let monthAgo = new Date();
-      monthAgo.setMonth(today.getMonth() - 1);
-      data = data.filter((e) => new Date(e.date) >= monthAgo);
+  // Word count per entry
+  const wordCounts = entries.map((e) => ({
+    date: e.date || "Unknown",
+    words: e.content ? e.content.split(" ").length : 0,
+  }));
+
+  // Simple sentiment analysis
+  const analyzeSentiment = (text) => {
+    if (!text) return "Neutral";
+    const lower = text.toLowerCase();
+    if (lower.includes("happy") || lower.includes("grateful") || lower.includes("excited")) {
+      return "Positive";
     }
-    setFilteredEntries(data);
-  }, [range, entries]);
+    if (lower.includes("sad") || lower.includes("tired") || lower.includes("stressed")) {
+      return "Negative";
+    }
+    return "Neutral";
+  };
 
-  const totalEntries = filteredEntries.length;
+  const sentimentCounts = entries.reduce(
+    (acc, e) => {
+      const s = analyzeSentiment(e.content);
+      acc[s] = (acc[s] || 0) + 1;
+      return acc;
+    },
+    { Positive: 0, Neutral: 0, Negative: 0 }
+  );
 
-  // Mood distribution
-  const moodCounts = Object.keys(COLORS).map((mood) => ({
-    name: mood,
-    value: filteredEntries.filter((e) => e.mood === mood).length,
+  const sentimentData = Object.keys(sentimentCounts).map((s) => ({
+    name: s,
+    value: sentimentCounts[s],
   }));
 
-  // Weekly activity
-  const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  const weekData = weekdays.map((day, idx) => ({
-    day,
-    entries: filteredEntries.filter(
-      (e) => new Date(e.date).getDay() === idx
-    ).length,
-  }));
+  const weeklyData = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map(
+    (day, idx) => ({
+      day,
+      entries: entries.filter((e) => {
+        const d = new Date(e.date);
+        return !isNaN(d) && d.getDay() === idx;
+      }).length,
+    })
+  );
 
   return (
     <div className="flex min-h-screen bg-[#fdf6e3]">
@@ -87,68 +102,52 @@ const Analytics = () => {
           animate={{ opacity: 1 }}
         >
           <h2 className="text-3xl font-bold mb-6 text-green-900 text-center">
-            📊 Analytics & Insights
+            Analytics & Insights from Reflections
           </h2>
 
-          {/* Range selector */}
-          <div className="flex gap-4 mb-6 justify-center">
-            {["week", "month", "all"].map((r) => (
-              <button
-                key={r}
-                onClick={() => setRange(r)}
-                className={`px-4 py-2 rounded-lg border transition ${
-                  range === r
-                    ? "bg-green-900 text-white border-green-900"
-                    : "bg-[#fdf6e3] border-green-700 text-green-900 hover:bg-green-100"
-                }`}
-              >
-                {r.charAt(0).toUpperCase() + r.slice(1)}
-              </button>
-            ))}
-          </div>
-
           {totalEntries === 0 ? (
-            // Empty state
             <div className="bg-[#fdf6e3] p-8 rounded-xl shadow-md text-center border border-green-200">
-              <p className="text-green-900 text-lg">
-                No entries available for <strong>{range}</strong> period.
-              </p>
+              <p className="text-green-900 text-lg">No reflections yet.</p>
               <p className="text-gray-600 text-sm mt-2">
-                Track your mood daily to see analytics here.
+                Write in your Reflection Box to see insights here.
               </p>
             </div>
           ) : (
             <>
               {/* Stats */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <StatCard title="Total Reflections" value={totalEntries} color="green" />
                 <StatCard
-                  title="Total Entries"
-                  value={totalEntries}
-                  color="green"
-                />
-                <StatCard
-                  title="Unique Moods"
-                  value={moodCounts.filter((m) => m.value > 0).length}
+                  title="Avg. Words"
+                  value={
+                    wordCounts.length > 0
+                      ? Math.round(
+                          wordCounts.reduce((a, b) => a + b.words, 0) / wordCounts.length
+                        )
+                      : 0
+                  }
                   color="purple"
                 />
                 <StatCard
-                  title="Time Period"
-                  value={range.toUpperCase()}
+                  title="Dominant Sentiment"
+                  value={Object.keys(sentimentCounts).reduce((a, b) =>
+                    sentimentCounts[a] > sentimentCounts[b] ? a : b
+                  )}
                   color="orange"
                 />
               </div>
 
               {/* Charts */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {/* Pie Chart */}
-                <div className="bg-[#fdf6e3] p-6 rounded-xl shadow-md border border-green-200">
+                {/* Sentiment Pie Chart */}
+                <div className="bg-white p-6 rounded-xl shadow-md border border-green-200">
                   <h3 className="text-lg font-semibold mb-3 text-green-900">
-                    Mood Distribution
+                    Sentiment Distribution
                   </h3>
                   <ResponsiveContainer width="100%" height={300}>
                     <PieChart>
                       <Pie
-                        data={moodCounts}
+                        data={sentimentData}
                         dataKey="value"
                         nameKey="name"
                         cx="50%"
@@ -156,32 +155,25 @@ const Analytics = () => {
                         outerRadius={100}
                         label
                       >
-                        {moodCounts.map((entry, index) => (
-                          <Cell
-                            key={`cell-${index}`}
-                            fill={COLORS[entry.name]}
-                          />
+                        {sentimentData.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={COLORS[entry.name]} />
                         ))}
                       </Pie>
                     </PieChart>
                   </ResponsiveContainer>
                 </div>
 
-                {/* Bar Chart */}
-                <div className="bg-[#fdf6e3] p-6 rounded-xl shadow-md border border-green-200">
+                {/* Weekly Activity */}
+                <div className="bg-white p-6 rounded-xl shadow-md border border-green-200">
                   <h3 className="text-lg font-semibold mb-3 text-green-900">
-                    Weekly Activity
+                    Reflections Per Day
                   </h3>
                   <ResponsiveContainer width="100%" height={300}>
-                    <BarChart data={weekData}>
+                    <BarChart data={weeklyData}>
                       <XAxis dataKey="day" />
                       <YAxis />
                       <Tooltip />
-                      <Bar
-                        dataKey="entries"
-                        fill="#14532d"
-                        radius={[6, 6, 0, 0]}
-                      />
+                      <Bar dataKey="entries" fill="#14532d" radius={[6, 6, 0, 0]} />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
@@ -194,7 +186,7 @@ const Analytics = () => {
   );
 };
 
-// Stat card
+// Stat card component
 const StatCard = ({ title, value, color }) => {
   const colors = {
     green: "bg-green-900 text-white",
@@ -202,7 +194,7 @@ const StatCard = ({ title, value, color }) => {
     orange: "bg-orange-500 text-white",
   };
   return (
-    <div className="bg-[#fdf6e3] p-6 rounded-xl text-center shadow-md border border-green-200">
+    <div className="bg-white p-6 rounded-xl text-center shadow-md border border-green-200">
       <h4
         className={`text-sm font-semibold ${colors[color]} px-3 py-1 rounded-full inline-block`}
       >

@@ -14,26 +14,26 @@ import {
 } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next"; // ✅ import hook
 
 const Sidebar = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { t } = useTranslation(); // ✅ translation hook
 
   const menuItems = [
-    { icon: <LayoutDashboard size={20} />, label: "Dashboard", path: "/dashboard" },
-    { icon: <BarChart3 size={20} />, label: "Analytics", path: "/analytics" },
-    { icon: <Calendar size={20} />, label: "Calendar", path: "/calendar" },
-    { icon: <MessageSquare size={20} />, label: "Feedback", path: "/feedback" },
-    { icon: <Settings size={20} />, label: "Settings", path: "/settings" },
-    { icon: <Users size={20} />, label: "Psychologist Connect", path: "/doctor" },
-
-    // ✅ Fix: match App.jsx route
-    { icon: <PhoneCall size={20} />, label: "Emergency Helpline", path: "/emergency-helpline" },
+    { icon: <LayoutDashboard size={20} />, label: t("sidebar.dashboard"), path: "/dashboard" },
+    { icon: <BarChart3 size={20} />, label: t("sidebar.analytics"), path: "/analytics" },
+    { icon: <Calendar size={20} />, label: t("sidebar.calendar"), path: "/calendar" },
+    { icon: <MessageSquare size={20} />, label: t("sidebar.feedback"), path: "/feedback" },
+    { icon: <Settings size={20} />, label: t("sidebar.settings"), path: "/settings" },
+    { icon: <Users size={20} />, label: t("sidebar.psychologist_connect"), path: "/doctor" },
+    { icon: <PhoneCall size={20} />, label: t("sidebar.emergency_helpline"), path: "/emergency-helpline" },
   ];
 
   const bottomMenu = [
-    { icon: <User size={20} />, label: "My Account", path: "/account" },
-    { icon: <LogOut size={20} />, label: "Sign Out", path: "/login" },
+    { icon: <User size={20} />, label: t("sidebar.my_account"), path: "/account" },
+    { icon: <LogOut size={20} />, label: t("sidebar.sign_out"), path: "/login" },
   ];
 
   return (
@@ -73,7 +73,7 @@ const Sidebar = () => {
           className="flex items-center gap-2 px-6 py-3 rounded-full bg-red-600 text-white font-semibold shadow-lg transition"
         >
           <PhoneCall size={20} />
-          SOS
+          {t("sidebar.sos")}
         </motion.button>
       </div>
 
@@ -90,7 +90,7 @@ const Sidebar = () => {
         ))}
         <SidebarItem
           icon={<HelpCircle size={20} />}
-          label="Help"
+          label={t("sidebar.help")}
           active={location.pathname === "/help"}
           onClick={() => navigate("/help")}
         />

@@ -1,7 +1,11 @@
+// src/components/VisionCard.jsx
 import React from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
-const VisionCard = ({ title, description, icon, delay }) => {
+const VisionCard = ({ titleKey, descriptionKey, icon, delay }) => {
+  const { t } = useTranslation();
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
@@ -13,8 +17,12 @@ const VisionCard = ({ title, description, icon, delay }) => {
                  hover:scale-105 hover:shadow-2xl hover:shadow-teal-300"
     >
       <div className="text-5xl mb-4">{icon}</div>
-      <h3 className="text-xl font-bold mb-2 text-teal-600">{title}</h3>
-      <p className="text-gray-700">{description}</p>
+      <h3 className="text-xl font-bold mb-2 text-teal-600">
+        {t(titleKey)}
+      </h3>
+      <p className="text-gray-700">
+        {t(descriptionKey)}
+      </p>
     </motion.div>
   );
 };

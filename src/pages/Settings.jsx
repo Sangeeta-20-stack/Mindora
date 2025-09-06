@@ -1,10 +1,13 @@
-import React from "react";
-import { motion } from "framer-motion";
+// src/pages/Settings.jsx
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
-import { User, Palette, Shield, HelpCircle } from "lucide-react";
+import { User, Palette, Shield, HelpCircle, X, Mail } from "lucide-react";
 
 const Settings = () => {
+  const [showSupport, setShowSupport] = useState(false);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -68,12 +71,76 @@ const Settings = () => {
             <p className="text-green-900 text-sm">
               Get assistance or contact support.
             </p>
-            <button className="mt-3 px-5 py-2 bg-green-900 text-white rounded-lg shadow hover:bg-green-800 transition">
-              Contact Support
+            <button
+              onClick={() => setShowSupport(true)}
+              className="mt-3 px-5 py-2 bg-green-900 text-white rounded-lg shadow hover:bg-green-800 transition flex items-center gap-2"
+            >
+              <Mail size={18} /> Contact Support
             </button>
           </SettingsCard>
         </div>
       </div>
+
+      {/* Support Modal */}
+      <AnimatePresence>
+        {showSupport && (
+          <motion.div
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              initial={{ scale: 0.9 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.9 }}
+              className="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-6 relative"
+            >
+              {/* Close button */}
+              <button
+                onClick={() => setShowSupport(false)}
+                className="absolute top-4 right-4 text-gray-500 hover:text-red-500"
+              >
+                <X size={24} />
+              </button>
+
+              <h3 className="text-2xl font-bold text-green-900 mb-4">
+                Contact Support
+              </h3>
+              <p className="text-sm text-green-700 mb-4">
+                Let us know your issue or feedback. We’ll get back to you soon.
+              </p>
+
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  alert("Message sent! Our support team will reach out.");
+                  setShowSupport(false);
+                }}
+                className="space-y-4"
+              >
+                <input
+                  type="email"
+                  placeholder="Your email (optional)"
+                  className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
+                />
+                <textarea
+                  placeholder="Write your message here..."
+                  rows={5}
+                  required
+                  className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
+                ></textarea>
+                <button
+                  type="submit"
+                  className="w-full bg-green-900 text-white py-3 rounded-lg font-semibold hover:bg-green-800 shadow-lg"
+                >
+                  Send Message
+                </button>
+              </form>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 };
@@ -88,7 +155,9 @@ const SettingsCard = ({ icon, title, children }) => {
       className="relative bg-gradient-to-br from-white to-[#f7f6d5] p-8 rounded-2xl shadow-lg border border-green-900 hover:shadow-2xl transition"
     >
       <div className="flex items-center gap-4 mb-4">
-        <div className="p-3 bg-green-900 text-white rounded-full shadow">{icon}</div>
+        <div className="p-3 bg-green-900 text-white rounded-full shadow">
+          {icon}
+        </div>
         <h3 className="text-2xl font-semibold text-green-900">{title}</h3>
       </div>
       {children}

@@ -1,0 +1,167 @@
+{
+  "welcome": "Welcome, {{name}} 👋",
+  "dashboard": "Dashboard",
+  "journal": "Journal",
+  "settings": "Settings",
+  "help": "Help & Support",
+  "new_reflection": "New Reflection",
+  "save": "Save",
+  "cancel": "Cancel",
+
+  "quotes": {
+    "0": {
+      "text": "Believe you can and you're halfway there.",
+      "author": "Theodore Roosevelt"
+    },
+    "1": {
+      "text": "Happiness is not something ready-made. It comes from your own actions.",
+      "author": "Dalai Lama"
+    },
+    "2": {
+      "text": "Do what you can, with what you have, where you are.",
+      "author": "Theodore Roosevelt"
+    },
+    "3": {
+      "text": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+      "author": "Winston Churchill"
+    },
+    "4": {
+      "text": "Your time is limited, so don’t waste it living someone else’s life.",
+      "author": "Steve Jobs"
+    }
+  },
+
+  "streak": {
+    "title": "Streak Tracker",
+    "current": "Current Streak",
+    "best": "Best Streak",
+    "days": "days",
+    "congrats": "Amazing! 7+ day streak!"
+  },
+
+  "profile": {
+    "title": "Profile",
+    "description": "Set a nickname to stay anonymous.",
+    "placeholder": "Enter your nickname"
+  },
+
+  "appearance": {
+    "title": "Appearance",
+    "description": "Choose light or dark mode.",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System Default"
+  },
+
+  "privacy": {
+    "title": "Privacy & Security",
+    "description": "Manage your privacy and secure your anonymous account.",
+    "delete_account": "Delete Account"
+  },
+
+  "support": {
+    "title": "Help & Support",
+    "description": "Get assistance or contact support.",
+    "contact": "Contact Support",
+    "email_label": "Your Email",
+    "message_label": "Your Message",
+    "submit": "Submit"
+  },
+
+  "analytics": {
+    "title": "Analytics",
+    "mood_chart": "Mood Over Time",
+    "reflections_chart": "Reflections Summary"
+  },
+
+  "social": {
+    "twitter": "Follow us on Twitter",
+    "facebook": "Like us on Facebook",
+    "instagram": "Follow us on Instagram",
+    "linkedin": "Connect with us on LinkedIn",
+    "github": "View our GitHub"
+  },
+
+  "vision": {
+    "mission": "Our Mission",
+    "mission_desc": "We aim to support your mental well-being with simple and effective tools.",
+    "community": "Community",
+    "community_desc": "Join a supportive community where you are never alone in your journey.",
+    "growth": "Personal Growth",
+    "growth_desc": "Track your moods and reflections to grow every day."
+  },
+
+  "buttons": {
+    "edit": "Edit",
+    "delete": "Delete",
+    "close": "Close",
+    "upload": "Upload",
+    "choose_file": "Choose File"
+  },
+
+  "signup": {
+    "welcome": "Welcome to Vritti!",
+    "image_alt": "Signup",
+
+    "student_title": "Create Anonymous Account",
+    "other_title": "Sign up as {{role}}",
+
+    "student_desc": "Start your wellness journey with complete privacy.",
+    "other_desc": "Provide your details to join as {{role}}.",
+
+    "roles": {
+      "student": "Student (Anonymous)",
+      "counsellor": "Counsellor",
+      "volunteer": "Volunteer",
+      "admin": "Admin"
+    },
+
+    "placeholders": {
+      "student_name": "e.g., PeacefulMind, CalmStudent",
+      "fullname": "Full Name",
+      "email": "Email Address",
+      "password": "Password",
+      "confirm": "Confirm Password"
+    },
+
+    "create_btn": "Create Anonymous Account",
+    "signup_btn": "Sign Up",
+
+    "have_account": "Already have an account?",
+    "login": "Log in",
+
+    "errors": {
+      "password_mismatch": "Passwords do not match!",
+      "missing_name": "Please enter an anonymous name!",
+      "missing_fields": "Please fill all fields!"
+    },
+
+    "success": {
+      "student": "Anonymous account created successfully!",
+      "other": "Signup successful! Awaiting admin approval."
+    },
+
+    "privacy": {
+      "title": "Your Privacy is Protected",
+      "anon_name": "No real name or email required",
+      "anon_login": "Anonymous name + password for login",
+      "data_anon": "All data stored anonymously",
+      "control": "You control your information",
+      "delete": "Delete account anytime"
+    }
+  },
+
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "analytics": "Analytics",
+    "calendar": "Calendar",
+    "feedback": "Feedback",
+    "settings": "Settings",
+    "psychologist_connect": "Psychologist Connect",
+    "emergency_helpline": "Emergency Helpline",
+    "my_account": "My Account",
+    "sign_out": "Sign Out",
+    "sos": "SOS",
+    "help": "Help"
+  }
+}

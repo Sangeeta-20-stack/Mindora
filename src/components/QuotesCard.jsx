@@ -1,21 +1,26 @@
 import React, { useState, useEffect } from "react";
-
-const quotes = [
-  { text: "Education is the most powerful weapon to change the world.", author: "Nelson Mandela" },
-  { text: "Discipline is the bridge between goals and accomplishment.", author: "Jim Rohn" },
-  { text: "Success is small efforts repeated daily.", author: "Robert Collier" },
-  { text: "Consistency transforms average into excellence.", author: "Anonymous" },
-];
+import { useTranslation } from "react-i18next";
 
 const QuotesCard = () => {
+  const { t } = useTranslation();
+
+  // quotes come from translation JSON
+  const quotes = [
+    { text: t("quotes.0.text"), author: t("quotes.0.author") },
+    { text: t("quotes.1.text"), author: t("quotes.1.author") },
+    { text: t("quotes.2.text"), author: t("quotes.2.author") },
+    { text: t("quotes.3.text"), author: t("quotes.3.author") },
+    { text: t("quotes.4.text"), author: t("quotes.4.author") },
+  ];
+
   const [quoteIndex, setQuoteIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setQuoteIndex((prev) => (prev + 1) % quotes.length);
-    }, 10000);
+    }, 10000); // 10s interval
     return () => clearInterval(interval);
-  }, []);
+  }, [quotes.length]);
 
   return (
     <div className="bg-green-900 rounded-2xl shadow-lg p-6 text-white flex flex-col justify-between">
