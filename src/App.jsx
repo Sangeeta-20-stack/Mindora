@@ -8,16 +8,19 @@ import Account from "../src/pages/Account";
 import Settings from "../src/pages/Settings";
 import CalendarPage from "../src/pages/CalendarPage";
 import Analytics from "../src/pages/Analytics";
-import ReflectionBox from "./pages/ReflectionBox";  // ✅ Reflection Box
+import ReflectionBox from "./pages/ReflectionBox";  
 import Feedback from "../src/pages/Feedback";
 import Doctor from "../src/pages/Doctor";
 import EmergencyHelpline from "../src/pages/EmergencyHelpline"; 
 import WellnessBuddy from "../src/pages/WellnessBuddy"; 
 import StressCheck from "../src/pages/StressCheck"; 
 import Relaxation from "../src/pages/Relaxation"; 
-import CommunityWall from "../src/pages/CommunityWall";  // ✅ Community Wall
-import DailyMoodTracker from "../src/pages/DailyMoodTracker"; // ✅ Daily Mood Tracker
-import Help from "../src/pages/Help"; // ✅ Import Help page
+import CommunityWall from "../src/pages/CommunityWall";  
+import DailyMoodTracker from "../src/pages/DailyMoodTracker"; 
+import Help from "../src/pages/Help"; 
+
+// ✅ Import Admin Dashboard
+import AdminDashboard from "../src/pages/AdminDashboard";
 
 function App() {
   return (
@@ -54,6 +57,9 @@ function App() {
 
       {/* ✅ Help Page */}
       <Route path="/help" element={<Help />} />
+
+      {/* ✅ Admin Dashboard */}
+      <Route path="/admin-dashboard" element={<AdminDashboard />} />
     </Routes>
   );
 }

@@ -3,16 +3,15 @@ import React, { useState } from "react";
 import loginImg from "../assets/signup.png";
 import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useTranslation } from "react-i18next"; // ✅ i18n
+import { useTranslation } from "react-i18next";
 
 const Login = () => {
-  const { t } = useTranslation(); // ✅ translation hook
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [role, setRole] = useState("");
 
   const handleLogin = (e) => {
     e.preventDefault();
-
     const password = e.target.password.value.trim();
 
     if (role === "student") {
@@ -35,21 +34,21 @@ const Login = () => {
     } else {
       // Admin / Counsellor / Volunteer login
       const email = e.target.email.value.trim();
-      const storedUser = JSON.parse(localStorage.getItem("user"));
+      const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
 
-      if (!storedUser) {
-        alert(t("login.no_account"));
-        navigate("/signup");
-        return;
-      }
+      const matchedUser = storedUsers.find(
+        (u) => u.email === email && u.password === password && u.role === role
+      );
 
-      if (
-        storedUser.email === email &&
-        storedUser.password === password &&
-        storedUser.role === role
-      ) {
+      if (matchedUser) {
         alert(t("login.success_role", { role }));
-        navigate("/dashboard");
+
+        // ✅ Role-based redirect
+        if (matchedUser.role === "admin") {
+          navigate("/admin-dashboard");
+        } else {
+          navigate("/dashboard");
+        }
       } else {
         alert(t("login.invalid_role"));
       }
@@ -129,16 +128,14 @@ const Login = () => {
                   name="name"
                   type="text"
                   placeholder={t("login.anon_name")}
-                  className="w-full p-3 rounded-full bg-white/70 border border-green-900/30 text-green-900 
-                             placeholder-green-700 outline-none focus:ring-2 focus:ring-green-900 focus:border-green-900 transition"
+                  className="w-full p-3 rounded-full bg-white/70 border border-green-900/30 text-green-900 placeholder-green-700 outline-none focus:ring-2 focus:ring-green-900 focus:border-green-900 transition"
                   required
                 />
                 <input
                   name="password"
                   type="password"
                   placeholder={t("login.password")}
-                  className="w-full p-3 rounded-full bg-white/70 border border-green-900/30 text-green-900 
-                             placeholder-green-700 outline-none focus:ring-2 focus:ring-green-900 focus:border-green-900 transition"
+                  className="w-full p-3 rounded-full bg-white/70 border border-green-900/30 text-green-900 placeholder-green-700 outline-none focus:ring-2 focus:ring-green-900 focus:border-green-900 transition"
                   required
                 />
               </>
@@ -148,16 +145,14 @@ const Login = () => {
                   name="email"
                   type="email"
                   placeholder={t("login.email")}
-                  className="w-full p-3 rounded-full bg-white/70 border border-green-900/30 text-green-900 
-                             placeholder-green-700 outline-none focus:ring-2 focus:ring-green-900 focus:border-green-900 transition"
+                  className="w-full p-3 rounded-full bg-white/70 border border-green-900/30 text-green-900 placeholder-green-700 outline-none focus:ring-2 focus:ring-green-900 focus:border-green-900 transition"
                   required
                 />
                 <input
                   name="password"
                   type="password"
                   placeholder={t("login.password")}
-                  className="w-full p-3 rounded-full bg-white/70 border border-green-900/30 text-green-900 
-                             placeholder-green-700 outline-none focus:ring-2 focus:ring-green-900 focus:border-green-900 transition"
+                  className="w-full p-3 rounded-full bg-white/70 border border-green-900/30 text-green-900 placeholder-green-700 outline-none focus:ring-2 focus:ring-green-900 focus:border-green-900 transition"
                   required
                 />
               </>
