@@ -44,13 +44,14 @@ const Topbar = () => {
         defaultValue={localStorage.getItem("language") || "en"}
         className="px-3 py-1 border border-green-900 rounded-lg bg-white text-green-900 font-medium shadow hover:bg-green-50"
       >
-        <option value="en">English</option>
-        <option value="hi">हिंदी</option>
-        <option value="bn">বাংলা</option>
-        <option value="ta">தமிழ்</option>
-        <option value="te">తెలుగు</option>
-        <option value="ml">മലയാളം</option>
-        <option value="mr">मराठी</option>
+         <option value="en">English</option>
+  <option value="hi">हिंदी</option>
+  <option value="bn">বাংলা</option>
+  <option value="ta">தமிழ்</option>
+  <option value="te">తెలుగు</option>
+  <option value="ml">മലയാളം</option>
+  <option value="mr">मराठी</option>
+  <option value="gu">ગુજરાતી</option>
       </select>
     </motion.div>
   );

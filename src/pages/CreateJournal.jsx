@@ -2,13 +2,15 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Upload } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const CreateJournal = ({ onSave, initialData }) => {
+  const { t } = useTranslation();
   const [mood, setMood] = useState("");
   const [availableActivities, setAvailableActivities] = useState([
-    "Exercise",
-    "Reading",
-    "Meditation",
+    t("createJournal.defaultActivities.exercise"),
+    t("createJournal.defaultActivities.reading"),
+    t("createJournal.defaultActivities.meditation"),
   ]);
   const [selectedActivities, setSelectedActivities] = useState([]);
   const [newActivity, setNewActivity] = useState("");
@@ -20,7 +22,6 @@ const CreateJournal = ({ onSave, initialData }) => {
   const [journalEntry, setJournalEntry] = useState("");
   const [image, setImage] = useState(null);
 
-  // ✅ Pre-fill when editing
   useEffect(() => {
     if (initialData) {
       setMood(initialData.mood || "");
@@ -31,7 +32,6 @@ const CreateJournal = ({ onSave, initialData }) => {
     }
   }, [initialData]);
 
-  // Add new activity
   const addActivity = () => {
     if (newActivity.trim() && !availableActivities.includes(newActivity)) {
       setAvailableActivities([...availableActivities, newActivity]);
@@ -39,14 +39,12 @@ const CreateJournal = ({ onSave, initialData }) => {
     setNewActivity("");
   };
 
-  // Toggle activity
   const toggleActivity = (act) => {
     setSelectedActivities((prev) =>
       prev.includes(act) ? prev.filter((a) => a !== act) : [...prev, act]
     );
   };
 
-  // Add new goal
   const addGoal = () => {
     if (newGoal.trim() && !availableGoals.includes(newGoal)) {
       setAvailableGoals([...availableGoals, newGoal]);
@@ -54,14 +52,12 @@ const CreateJournal = ({ onSave, initialData }) => {
     setNewGoal("");
   };
 
-  // Toggle goal
   const toggleGoal = (goal) => {
     setSelectedGoals((prev) =>
       prev.includes(goal) ? prev.filter((g) => g !== goal) : [...prev, goal]
     );
   };
 
-  // Handle image upload
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -71,15 +67,14 @@ const CreateJournal = ({ onSave, initialData }) => {
     }
   };
 
-  // Save entry (new or updated)
   const handleSave = () => {
     if (!mood || !journalEntry.trim()) {
-      alert("Mood and journal entry are required!");
+      alert(t("createJournal.errors.required"));
       return;
     }
 
     const newEntry = {
-      id: initialData?.id || Date.now(), // ✅ keep same id if editing
+      id: initialData?.id || Date.now(),
       mood,
       activities: selectedActivities,
       goals: selectedGoals,
@@ -95,23 +90,23 @@ const CreateJournal = ({ onSave, initialData }) => {
   };
 
   const moods = [
-    { label: "Epic", emoji: "🤩" },
-    { label: "Good", emoji: "😊" },
-    { label: "Okay", emoji: "😐" },
-    { label: "Bad", emoji: "😔" },
-    { label: "Awful", emoji: "😢" },
+    { label: t("createJournal.moods.epic"), emoji: "🤩" },
+    { label: t("createJournal.moods.good"), emoji: "😊" },
+    { label: t("createJournal.moods.okay"), emoji: "😐" },
+    { label: t("createJournal.moods.bad"), emoji: "😔" },
+    { label: t("createJournal.moods.awful"), emoji: "😢" },
   ];
 
   return (
     <div className="p-6 bg-[#fdf6e3] rounded-2xl shadow-lg">
       <h1 className="text-2xl font-bold text-green-900 mb-6">
-        {initialData ? "Edit Journal Entry" : "Create Journal Entry"}
+        {initialData ? t("createJournal.editTitle") : t("createJournal.createTitle")}
       </h1>
 
-      {/* Mood Section */}
+      {/* Mood */}
       <motion.div className="mb-6">
         <label className="block text-lg font-semibold mb-3 text-green-800">
-          How are you feeling today? <span className="text-red-500">*</span>
+          {t("createJournal.moodQuestion")} <span className="text-red-500">*</span>
         </label>
         <div className="flex gap-4 flex-wrap">
           {moods.map((m) => (
@@ -134,7 +129,7 @@ const CreateJournal = ({ onSave, initialData }) => {
       {/* Activities */}
       <motion.div className="mb-6">
         <label className="block text-lg font-semibold mb-3 text-green-800">
-          Activities (optional)
+          {t("createJournal.activitiesTitle")}
         </label>
         <div className="flex flex-wrap gap-2 mb-3">
           {availableActivities.map((act, idx) => (
@@ -156,14 +151,14 @@ const CreateJournal = ({ onSave, initialData }) => {
             type="text"
             value={newActivity}
             onChange={(e) => setNewActivity(e.target.value)}
-            placeholder="Add a new activity..."
+            placeholder={t("createJournal.addActivityPlaceholder")}
             className="flex-1 p-3 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none bg-white"
           />
           <button
             onClick={addActivity}
             className="bg-green-900 text-white px-5 py-2 rounded-lg hover:bg-green-800"
           >
-            Add
+            {t("createJournal.addBtn")}
           </button>
         </div>
       </motion.div>
@@ -171,7 +166,7 @@ const CreateJournal = ({ onSave, initialData }) => {
       {/* Goals */}
       <motion.div className="mb-6">
         <label className="block text-lg font-semibold mb-3 text-green-800">
-          Goals (optional)
+          {t("createJournal.goalsTitle")}
         </label>
         <div className="flex flex-wrap gap-2 mb-3">
           {availableGoals.map((goal, idx) => (
@@ -193,14 +188,14 @@ const CreateJournal = ({ onSave, initialData }) => {
             type="text"
             value={newGoal}
             onChange={(e) => setNewGoal(e.target.value)}
-            placeholder="Add a new goal..."
+            placeholder={t("createJournal.addGoalPlaceholder")}
             className="flex-1 p-3 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none bg-white"
           />
           <button
             onClick={addGoal}
             className="bg-green-700 text-white px-5 py-2 rounded-lg hover:bg-green-800"
           >
-            Add
+            {t("createJournal.addBtn")}
           </button>
         </div>
       </motion.div>
@@ -208,12 +203,12 @@ const CreateJournal = ({ onSave, initialData }) => {
       {/* Journal Entry */}
       <motion.div className="mb-6">
         <label className="block text-lg font-semibold text-green-800 mb-3">
-          Journal Entry <span className="text-red-500">*</span>
+          {t("createJournal.entryTitle")} <span className="text-red-500">*</span>
         </label>
         <textarea
           value={journalEntry}
           onChange={(e) => setJournalEntry(e.target.value)}
-          placeholder="Write your thoughts and experiences here..."
+          placeholder={t("createJournal.entryPlaceholder")}
           rows={6}
           className="w-full p-4 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none bg-white"
         />
@@ -222,7 +217,7 @@ const CreateJournal = ({ onSave, initialData }) => {
       {/* Image Upload */}
       <motion.div className="mb-6">
         <label className="block text-lg font-semibold text-green-800 mb-3">
-          Attach an Image (optional)
+          {t("createJournal.imageTitle")}
         </label>
         <label
           htmlFor="imageUpload"
@@ -231,14 +226,14 @@ const CreateJournal = ({ onSave, initialData }) => {
           {image ? (
             <img
               src={image}
-              alt="Preview"
+              alt={t("createJournal.imageAlt")}
               className="w-32 h-32 object-cover rounded-lg shadow-md"
             />
           ) : (
             <div className="flex flex-col items-center text-green-700">
               <Upload className="w-10 h-10 mb-2 text-green-600" />
-              <span className="font-medium">Click to upload an image</span>
-              <span className="text-xs text-green-500">(JPG, PNG, etc.)</span>
+              <span className="font-medium">{t("createJournal.uploadText")}</span>
+              <span className="text-xs text-green-500">{t("createJournal.uploadHint")}</span>
             </div>
           )}
           <input
@@ -256,7 +251,7 @@ const CreateJournal = ({ onSave, initialData }) => {
         onClick={handleSave}
         className="w-full bg-green-900 text-white py-3 rounded-lg font-semibold hover:bg-green-800 shadow-lg"
       >
-        {initialData ? "Update Journal Entry" : "Save Journal Entry"}
+        {initialData ? t("createJournal.updateBtn") : t("createJournal.saveBtn")}
       </motion.button>
     </div>
   );

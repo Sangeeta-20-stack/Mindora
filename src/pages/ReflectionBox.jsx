@@ -1,48 +1,43 @@
 // src/pages/ReflectionBox.jsx
 import React, { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Trash2, Edit3, X } from "lucide-react";
-import CreateJournal from "./CreateJournal"; // ✅ reuse form inside modal
+import CreateJournal from "./CreateJournal";
 
 const ReflectionBox = () => {
+  const { t } = useTranslation();
   const [entries, setEntries] = useState([]);
   const [showForm, setShowForm] = useState(false);
-  const [editingEntry, setEditingEntry] = useState(null); // ✅ new state
+  const [editingEntry, setEditingEntry] = useState(null);
 
-  // Load entries from localStorage
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem("journalEntries")) || [];
     setEntries(stored);
   }, []);
 
-  // Delete an entry (and update moodHistory)
   const handleDelete = (id) => {
     const updated = entries.filter((entry) => entry.id !== id);
     setEntries(updated);
     localStorage.setItem("journalEntries", JSON.stringify(updated));
 
-    // ✅ Remove from moodHistory
     const moodHistory = JSON.parse(localStorage.getItem("moodHistory")) || [];
     const updatedMoodHistory = moodHistory.filter((entry) => entry.id !== id);
     localStorage.setItem("moodHistory", JSON.stringify(updatedMoodHistory));
   };
 
-  // Add or Update entry
   const handleSave = (newEntry) => {
     let updated;
 
     if (editingEntry) {
-      // ✅ Update existing entry
       updated = entries.map((entry) =>
         entry.id === editingEntry.id ? newEntry : entry
       );
     } else {
-      // ✅ Add new entry
       updated = [...entries, newEntry];
 
-      // also update moodHistory
       const moodHistory = JSON.parse(localStorage.getItem("moodHistory")) || [];
       const moodEntry = {
         id: newEntry.id,
@@ -55,30 +50,26 @@ const ReflectionBox = () => {
 
     setEntries(updated);
     localStorage.setItem("journalEntries", JSON.stringify(updated));
-
-    // reset modal state
     setShowForm(false);
     setEditingEntry(null);
   };
 
   return (
     <div className="flex h-screen bg-[#fdf6e3]">
-      {/* Sidebar */}
       <aside className="w-64 fixed h-screen bg-green-900">
         <Sidebar />
       </aside>
 
-      {/* Main Content */}
       <div className="flex flex-col flex-1 ml-64">
-        <Topbar />
+        <Topbar title={t("reflectionBox.title")} />
 
         <div className="p-6 overflow-y-auto">
           {/* Header */}
           <div className="flex justify-between items-center mb-8">
             <h2 className="text-3xl font-bold text-green-900 flex items-center gap-2">
-              Reflection Box
+              {t("reflectionBox.title")}
               <span className="text-green-700 text-lg font-normal">
-                ({entries.length} reflections)
+                ({entries.length} {t("reflectionBox.reflections")})
               </span>
             </h2>
 
@@ -86,12 +77,12 @@ const ReflectionBox = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => {
-                setEditingEntry(null); // ✅ make sure not editing
+                setEditingEntry(null);
                 setShowForm(true);
               }}
               className="px-4 py-2 bg-green-900 text-white rounded-lg flex items-center gap-2 shadow hover:bg-green-800 transition"
             >
-              <Plus size={18} /> New Reflection
+              <Plus size={18} /> {t("reflectionBox.newReflection")}
             </motion.button>
           </div>
 
@@ -110,7 +101,7 @@ const ReflectionBox = () => {
                 >
                   <div className="flex justify-between items-center">
                     <h3 className="text-lg font-semibold">
-                      {entry.mood || "Untitled"}
+                      {entry.mood || t("reflectionBox.untitled")}
                     </h3>
                     <span className="text-sm text-green-200">
                       {entry.date} {entry.time}
@@ -145,18 +136,18 @@ const ReflectionBox = () => {
                   <div className="flex gap-4 mt-5 text-green-200">
                     <button
                       onClick={() => {
-                        setEditingEntry(entry); // ✅ set entry to edit
+                        setEditingEntry(entry);
                         setShowForm(true);
                       }}
                       className="hover:text-white flex items-center gap-1"
                     >
-                      <Edit3 size={16} /> Edit
+                      <Edit3 size={16} /> {t("reflectionBox.edit")}
                     </button>
                     <button
                       onClick={() => handleDelete(entry.id)}
                       className="hover:text-red-400 flex items-center gap-1"
                     >
-                      <Trash2 size={16} /> Delete
+                      <Trash2 size={16} /> {t("reflectionBox.delete")}
                     </button>
                   </div>
                 </motion.div>
@@ -171,13 +162,13 @@ const ReflectionBox = () => {
               animate={{ opacity: 1 }}
               className="text-green-700 text-center mt-16 text-lg"
             >
-              No reflections yet. Start writing your first one! ✍️
+              {t("reflectionBox.empty")}
             </motion.p>
           )}
         </div>
       </div>
 
-      {/* Modal for CreateJournal */}
+      {/* Modal */}
       <AnimatePresence>
         {showForm && (
           <motion.div
@@ -192,7 +183,6 @@ const ReflectionBox = () => {
               exit={{ scale: 0.9 }}
               className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl h-[90vh] overflow-y-auto relative p-6"
             >
-              {/* Close Button */}
               <button
                 onClick={() => {
                   setShowForm(false);

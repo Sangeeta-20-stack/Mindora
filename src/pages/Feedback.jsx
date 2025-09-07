@@ -5,8 +5,10 @@ import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
 import { MessageSquare, Star, Send } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const Feedback = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const [rating, setRating] = useState(0);
@@ -15,7 +17,7 @@ const Feedback = () => {
 
   const handleSubmit = () => {
     if (!comment.trim()) {
-      alert("Please enter your feedback before submitting.");
+      alert(t("feedback.enterComment"));
       return;
     }
 
@@ -42,7 +44,7 @@ const Feedback = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-[#fdf6e3]"> {/* ✅ cream bg */}
+    <div className="flex min-h-screen bg-[#fdf6e3]">
       {/* Sidebar */}
       <aside className="fixed left-0 top-0 h-full w-64 bg-green-900">
         <Sidebar />
@@ -51,7 +53,7 @@ const Feedback = () => {
       {/* Main Content */}
       <div className="flex flex-col flex-1 ml-64">
         {/* Topbar */}
-        <Topbar title="Feedback" />
+        <Topbar title={t("feedback.title")} />
 
         {/* Page Content */}
         <div className="flex-1 p-10 overflow-y-auto flex flex-col items-center">
@@ -61,7 +63,7 @@ const Feedback = () => {
             transition={{ duration: 0.5 }}
             className="text-4xl font-extrabold text-green-900 mb-10 text-center"
           >
-            💬 Share Your Feedback
+            {t("feedback.heading")}
           </motion.h1>
 
           <motion.div
@@ -76,7 +78,7 @@ const Feedback = () => {
                 animate={{ scale: 1, opacity: 1 }}
                 className="text-center text-2xl font-semibold text-green-900"
               >
-                ✅ Thank you for your valuable feedback!
+                {t("feedback.thankYou")}
               </motion.p>
             ) : (
               <div className="space-y-8">
@@ -84,7 +86,7 @@ const Feedback = () => {
                 <div>
                   <label className="flex items-center justify-center text-lg font-semibold mb-2 text-green-900 gap-2">
                     <Star className="text-yellow-500" size={22} />
-                    Rate Your Experience
+                    {t("feedback.rateExperience")}
                   </label>
                   <div className="flex gap-2 justify-center">
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -106,12 +108,12 @@ const Feedback = () => {
                 <div>
                   <label className="flex items-center text-lg font-semibold mb-2 text-green-900 gap-2">
                     <MessageSquare className="text-green-900" size={22} />
-                    Your Feedback
+                    {t("feedback.yourFeedback")}
                   </label>
                   <textarea
                     value={comment}
                     onChange={(e) => setComment(e.target.value)}
-                    placeholder="Write your thoughts, suggestions, or issues here..."
+                    placeholder={t("feedback.placeholder")}
                     rows={6}
                     className="w-full p-4 border border-green-300 rounded-xl focus:ring-2 focus:ring-green-700 outline-none bg-white"
                   />
@@ -125,7 +127,7 @@ const Feedback = () => {
                     onClick={handleSubmit}
                     className="w-full bg-green-900 text-white py-4 rounded-xl font-semibold hover:shadow-lg transition flex items-center justify-center gap-2 text-lg"
                   >
-                    <Send size={22} /> Submit Feedback
+                    <Send size={22} /> {t("feedback.submit")}
                   </motion.button>
                 </div>
               </div>

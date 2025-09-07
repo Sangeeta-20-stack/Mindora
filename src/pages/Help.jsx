@@ -3,16 +3,16 @@ import React, { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  ChevronDown,
-  ChevronUp,
-  BookOpen,
-  HelpCircle,
-  Phone,
-  ShieldAlert,
-} from "lucide-react";
+import { ChevronDown, ChevronUp, BookOpen, HelpCircle, Phone, ShieldAlert } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const Help = () => {
+  const { t } = useTranslation();
+  const [openIndex, setOpenIndex] = useState(null);
+
+  // Ensure faqs is an array
+  const faqs = t("help.faqs", { returnObjects: true }) || [];
+
   return (
     <div className="flex min-h-screen bg-[#fdf6e3]">
       {/* Sidebar */}
@@ -22,109 +22,47 @@ const Help = () => {
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col ml-64">
-        <Topbar title="Help & Support" />
+        <Topbar title={t("help.title")} />
 
         <main className="p-8 space-y-10">
           {/* Hero Section */}
           <div className="bg-gradient-to-r from-green-800 to-green-600 text-white rounded-2xl p-10 text-center shadow-lg">
-            <h1 className="text-4xl font-bold mb-3">Help & Support</h1>
-            <p className="text-lg opacity-90">
-              Need guidance? You’re in the right place. Explore guides, FAQs,
-              and support resources below.
-            </p>
+            <h1 className="text-4xl font-bold mb-3">{t("help.heroTitle")}</h1>
+            <p className="text-lg opacity-90">{t("help.heroText")}</p>
           </div>
 
           {/* Quick Start Guide */}
-          <Section
-            title="Quick Start Guide"
-            icon={<BookOpen className="text-green-800" />}
-          >
+          <Section title={t("help.quickStartTitle")} icon={<BookOpen className="text-green-800" />}>
             <ul className="list-disc pl-6 space-y-2 text-green-900">
-              <li>Sign up or log in to access all features.</li>
-              <li>
-                Use the <strong>Reflection Box</strong> to journal your thoughts.
-              </li>
-              <li>
-                Check <strong>Analytics</strong> to view your mood trends.
-              </li>
-              <li>
-                Chat with your <strong>Wellness Buddy</strong> for support.
-              </li>
-              <li>
-                Visit <strong>Relaxation</strong> and{" "}
-                <strong>Stress Check</strong> for daily calm.
-              </li>
+              {t("help.quickStartItems", { returnObjects: true }).map((item, idx) => (
+                <li key={idx} dangerouslySetInnerHTML={{ __html: item }} />
+              ))}
             </ul>
           </Section>
 
           {/* FAQs */}
-          <FAQSection />
+          <FAQSection faqs={faqs} openIndex={openIndex} setOpenIndex={setOpenIndex} t={t} />
 
           {/* Feature Walkthrough */}
-          <Section
-            title="Feature Walkthroughs"
-            icon={<HelpCircle className="text-green-800" />}
-          >
+          <Section title={t("help.featureWalkthroughTitle")} icon={<HelpCircle className="text-green-800" />}>
             <ul className="list-disc pl-6 space-y-2 text-green-900">
-              <li>
-                <strong>Reflection Box:</strong> Write daily journals, track
-                moods, and set goals.
-              </li>
-              <li>
-                <strong>Analytics:</strong> View your mood distribution, word
-                count, and activity trends.
-              </li>
-              <li>
-                <strong>Wellness Buddy:</strong> Chat with the AI for
-                encouragement and support.
-              </li>
-              <li>
-                <strong>Relaxation:</strong> Try breathing exercises and calming
-                practices.
-              </li>
+              {t("help.featureWalkthroughItems", { returnObjects: true }).map((item, idx) => (
+                <li key={idx} dangerouslySetInnerHTML={{ __html: item }} />
+              ))}
             </ul>
           </Section>
 
           {/* Contact & Support */}
-          <Section
-            title="Contact & Support"
-            icon={<Phone className="text-green-800" />}
-          >
+          <Section title={t("help.contactTitle")} icon={<Phone className="text-green-800" />}>
             <div className="space-y-2">
-              <p className="text-green-900">
-                💌 Email us at{" "}
-                <a
-                  href="mailto:support@wellnessapp.com"
-                  className="text-green-700 underline"
-                >
-                  support@wellnessapp.com
-                </a>{" "}
-                for any issues or suggestions.
-              </p>
-              <p className="text-green-900">
-                🚨 For urgent help, visit the{" "}
-                <a
-                  href="/emergency-helpline"
-                  className="text-red-600 underline font-semibold"
-                >
-                  Emergency Helpline
-                </a>{" "}
-                page immediately.
-              </p>
+              <p className="text-green-900" dangerouslySetInnerHTML={{ __html: t("help.contactEmail") }} />
+              <p className="text-green-900" dangerouslySetInnerHTML={{ __html: t("help.contactUrgent") }} />
             </div>
           </Section>
 
           {/* Safety Note */}
-          <Section
-            title="Safety Note"
-            icon={<ShieldAlert className="text-red-600" />}
-          >
-            <p className="text-green-800">
-              ⚠️ This app is for self-care support and reflection. It is not a
-              substitute for professional therapy or medical advice. If you’re
-              struggling, please reach out to a licensed therapist or use the
-              Emergency Helpline.
-            </p>
+          <Section title={t("help.safetyTitle")} icon={<ShieldAlert className="text-red-600" />}>
+            <p className="text-green-800">{t("help.safetyNote")}</p>
           </Section>
         </main>
       </div>
@@ -144,30 +82,9 @@ const Section = ({ title, children, icon }) => (
 );
 
 // FAQ Section with accordion
-const FAQSection = () => {
-  const faqs = [
-    {
-      q: "How do I reset my password?",
-      a: "Go to the Login page and click 'Forgot Password'. Follow the instructions to reset it.",
-    },
-    {
-      q: "Where can I see my reflections history?",
-      a: "All your reflections are saved in the Reflection Box. You can browse, edit, or delete them anytime.",
-    },
-    {
-      q: "Is my data private?",
-      a: "Yes. All your reflections are stored locally in your browser. Your privacy is protected.",
-    },
-    {
-      q: "How do I contact support?",
-      a: "Scroll down to the Contact & Support section to reach us directly.",
-    },
-  ];
-
-  const [openIndex, setOpenIndex] = useState(null);
-
+const FAQSection = ({ faqs, openIndex, setOpenIndex, t }) => {
   return (
-    <Section title="Frequently Asked Questions" icon={<HelpCircle className="text-green-800" />}>
+    <Section title={t("help.faqTitle")} icon={<HelpCircle className="text-green-800" />}>
       <div className="space-y-4">
         {faqs.map((faq, i) => (
           <div

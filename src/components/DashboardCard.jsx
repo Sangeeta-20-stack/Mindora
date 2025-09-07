@@ -1,7 +1,11 @@
+// src/components/DashboardCard.jsx
 import React from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next"; // ✅ import translation
 
 const DashboardCard = ({ title, image }) => {
+  const { t } = useTranslation(); // ✅ translation hook
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -17,7 +21,7 @@ const DashboardCard = ({ title, image }) => {
     >
       <motion.img
         src={image}
-        alt={title}
+        alt={t(title)} // ✅ localized alt text
         className="w-20 h-20 mb-4"
         whileHover={{ rotate: 10, scale: 1.1 }}
         transition={{ type: "spring", stiffness: 200, damping: 10 }}
@@ -26,7 +30,7 @@ const DashboardCard = ({ title, image }) => {
         className="font-semibold text-gray-800 text-lg"
         whileHover={{ color: "#0d9488" }}
       >
-        {title}
+        {t(title)} {/* ✅ localized title */}
       </motion.h3>
     </motion.div>
   );

@@ -3,8 +3,10 @@ import React, { useState } from "react";
 import loginImg from "../assets/signup.png";
 import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next"; // ✅ i18n
 
 const Login = () => {
+  const { t } = useTranslation(); // ✅ translation hook
   const navigate = useNavigate();
   const [role, setRole] = useState("");
 
@@ -19,16 +21,16 @@ const Login = () => {
       const storedAnon = JSON.parse(localStorage.getItem("anonUser"));
 
       if (!storedAnon) {
-        alert("No anonymous account found. Please sign up first.");
+        alert(t("login.no_anon_account"));
         navigate("/signup");
         return;
       }
 
       if (storedAnon.name === name && storedAnon.password === password) {
-        alert("Anonymous login successful!");
+        alert(t("login.success_student"));
         navigate("/dashboard");
       } else {
-        alert("Invalid anonymous credentials!");
+        alert(t("login.invalid_anon"));
       }
     } else {
       // Admin / Counsellor / Volunteer login
@@ -36,7 +38,7 @@ const Login = () => {
       const storedUser = JSON.parse(localStorage.getItem("user"));
 
       if (!storedUser) {
-        alert("No account found. Please sign up first.");
+        alert(t("login.no_account"));
         navigate("/signup");
         return;
       }
@@ -46,10 +48,10 @@ const Login = () => {
         storedUser.password === password &&
         storedUser.role === role
       ) {
-        alert(`Login successful as ${role}!`);
+        alert(t("login.success_role", { role }));
         navigate("/dashboard");
       } else {
-        alert("Invalid credentials or role!");
+        alert(t("login.invalid_role"));
       }
     }
   };
@@ -73,7 +75,7 @@ const Login = () => {
             transition={{ duration: 0.6 }}
             className="text-4xl font-bold mt-10 text-center"
           >
-            Welcome back to Vritti!
+            {t("login.welcome")}
           </motion.h2>
 
           <motion.div
@@ -84,7 +86,7 @@ const Login = () => {
           >
             <img
               src={loginImg}
-              alt="Login"
+              alt={t("login.alt_img")}
               className="max-h-72 object-contain drop-shadow-xl"
             />
           </motion.div>
@@ -98,10 +100,10 @@ const Login = () => {
           className="w-1/2 bg-[#fdf6e3] p-12"
         >
           <h2 className="text-3xl font-bold mb-3 text-gray-800 text-center">
-            Log in to Your Account
+            {t("login.title")}
           </h2>
           <p className="text-gray-600 text-center mb-8 text-sm">
-            Choose your role and log in securely.
+            {t("login.subtitle")}
           </p>
 
           <form className="flex flex-col gap-5" onSubmit={handleLogin}>
@@ -110,14 +112,14 @@ const Login = () => {
               name="role"
               value={role}
               onChange={(e) => setRole(e.target.value)}
-               className="w-full mb-6 p-3 rounded-full bg-[#fffaf0] border border-[#e6ddc5] outline-none focus:ring-2 focus:ring-green-600 transition"
+              className="w-full mb-6 p-3 rounded-full bg-[#fffaf0] border border-[#e6ddc5] outline-none focus:ring-2 focus:ring-green-600 transition"
               required
             >
-              <option value="">Select Role</option>
-              <option value="student">Student (Anonymous)</option>
-              <option value="counsellor">Counsellor</option>
-              <option value="volunteer">Volunteer</option>
-              <option value="admin">Admin</option>
+              <option value="">{t("login.select_role")}</option>
+              <option value="student">{t("login.roles.student")}</option>
+              <option value="counsellor">{t("login.roles.counsellor")}</option>
+              <option value="volunteer">{t("login.roles.volunteer")}</option>
+              <option value="admin">{t("login.roles.admin")}</option>
             </select>
 
             {/* Conditional Fields */}
@@ -126,7 +128,7 @@ const Login = () => {
                 <input
                   name="name"
                   type="text"
-                  placeholder="Anonymous Name"
+                  placeholder={t("login.anon_name")}
                   className="w-full p-3 rounded-full bg-white/70 border border-green-900/30 text-green-900 
                              placeholder-green-700 outline-none focus:ring-2 focus:ring-green-900 focus:border-green-900 transition"
                   required
@@ -134,7 +136,7 @@ const Login = () => {
                 <input
                   name="password"
                   type="password"
-                  placeholder="Password"
+                  placeholder={t("login.password")}
                   className="w-full p-3 rounded-full bg-white/70 border border-green-900/30 text-green-900 
                              placeholder-green-700 outline-none focus:ring-2 focus:ring-green-900 focus:border-green-900 transition"
                   required
@@ -145,7 +147,7 @@ const Login = () => {
                 <input
                   name="email"
                   type="email"
-                  placeholder="Email Address"
+                  placeholder={t("login.email")}
                   className="w-full p-3 rounded-full bg-white/70 border border-green-900/30 text-green-900 
                              placeholder-green-700 outline-none focus:ring-2 focus:ring-green-900 focus:border-green-900 transition"
                   required
@@ -153,7 +155,7 @@ const Login = () => {
                 <input
                   name="password"
                   type="password"
-                  placeholder="Password"
+                  placeholder={t("login.password")}
                   className="w-full p-3 rounded-full bg-white/70 border border-green-900/30 text-green-900 
                              placeholder-green-700 outline-none focus:ring-2 focus:ring-green-900 focus:border-green-900 transition"
                   required
@@ -168,14 +170,14 @@ const Login = () => {
               type="submit"
               className="w-full bg-green-900 text-white py-3 rounded-full font-semibold shadow-md transition hover:bg-green-800"
             >
-              Log in
+              {t("login.submit")}
             </motion.button>
 
             {/* Link */}
             <p className="text-center text-sm text-gray-700">
-              Don’t have an account?{" "}
+              {t("login.no_account")}{" "}
               <Link to="/signup" className="text-green-700 hover:underline">
-                Create one
+                {t("login.create")}
               </Link>
             </p>
           </form>

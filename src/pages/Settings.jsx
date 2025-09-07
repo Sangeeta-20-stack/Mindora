@@ -1,11 +1,13 @@
 // src/pages/Settings.jsx
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
 import { User, Palette, Shield, HelpCircle, X, Mail } from "lucide-react";
 
 const Settings = () => {
+  const { t } = useTranslation();
   const [showSupport, setShowSupport] = useState(false);
 
   return (
@@ -13,14 +15,14 @@ const Settings = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
-      className="flex min-h-screen bg-[#f7f6d5]" // cream background
+      className="flex min-h-screen bg-[#f7f6d5]"
     >
       {/* Sidebar */}
       <Sidebar />
 
       {/* Main content */}
       <div className="flex-1 flex flex-col">
-        <Topbar />
+        <Topbar title={t("settings.title")} />
 
         {/* Content area */}
         <div className="p-10 space-y-10 max-w-5xl mx-auto w-full">
@@ -30,52 +32,46 @@ const Settings = () => {
             transition={{ duration: 0.5 }}
             className="text-4xl font-extrabold text-green-900 tracking-tight relative inline-block"
           >
-            Settings
+            {t("settings.title")}
             <span className="absolute -bottom-2 left-0 w-16 h-1 bg-green-900 rounded-full"></span>
           </motion.h2>
 
           {/* Profile Settings */}
-          <SettingsCard icon={<User />} title="Profile">
-            <p className="text-green-900 text-sm">
-              Set a nickname to stay anonymous.
-            </p>
+          <SettingsCard icon={<User />} title={t("settings.profile.title")}>
+            <p className="text-green-900 text-sm">{t("settings.profile.desc")}</p>
             <input
               type="text"
-              placeholder="Enter your nickname"
+              placeholder={t("settings.profile.placeholder")}
               className="mt-3 p-2 border border-green-900 rounded-lg w-full focus:ring-2 focus:ring-green-900"
             />
           </SettingsCard>
 
           {/* Appearance */}
-          <SettingsCard icon={<Palette />} title="Appearance">
-            <p className="text-green-900 text-sm">Choose light or dark mode.</p>
+          <SettingsCard icon={<Palette />} title={t("settings.appearance.title")}>
+            <p className="text-green-900 text-sm">{t("settings.appearance.desc")}</p>
             <select className="mt-3 p-2 border border-green-900 rounded-lg focus:ring-2 focus:ring-green-900">
-              <option>Light</option>
-              <option>Dark</option>
-              <option>System Default</option>
+              <option>{t("settings.appearance.light")}</option>
+              <option>{t("settings.appearance.dark")}</option>
+              <option>{t("settings.appearance.system")}</option>
             </select>
           </SettingsCard>
 
           {/* Privacy & Security */}
-          <SettingsCard icon={<Shield />} title="Privacy & Security">
-            <p className="text-green-900 text-sm">
-              Manage your privacy and secure your anonymous account.
-            </p>
+          <SettingsCard icon={<Shield />} title={t("settings.privacy.title")}>
+            <p className="text-green-900 text-sm">{t("settings.privacy.desc")}</p>
             <button className="mt-3 px-5 py-2 bg-red-500 text-white rounded-lg shadow hover:bg-red-600 transition">
-              Delete Account
+              {t("settings.privacy.delete")}
             </button>
           </SettingsCard>
 
           {/* Help & Support */}
-          <SettingsCard icon={<HelpCircle />} title="Help & Support">
-            <p className="text-green-900 text-sm">
-              Get assistance or contact support.
-            </p>
+          <SettingsCard icon={<HelpCircle />} title={t("settings.support.title")}>
+            <p className="text-green-900 text-sm">{t("settings.support.desc")}</p>
             <button
               onClick={() => setShowSupport(true)}
               className="mt-3 px-5 py-2 bg-green-900 text-white rounded-lg shadow hover:bg-green-800 transition flex items-center gap-2"
             >
-              <Mail size={18} /> Contact Support
+              <Mail size={18} /> {t("settings.support.button")}
             </button>
           </SettingsCard>
         </div>
@@ -105,27 +101,25 @@ const Settings = () => {
               </button>
 
               <h3 className="text-2xl font-bold text-green-900 mb-4">
-                Contact Support
+                {t("settings.support.modalTitle")}
               </h3>
-              <p className="text-sm text-green-700 mb-4">
-                Let us know your issue or feedback. We’ll get back to you soon.
-              </p>
+              <p className="text-sm text-green-700 mb-4">{t("settings.support.modalDesc")}</p>
 
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
-                  alert("Message sent! Our support team will reach out.");
+                  alert(t("settings.support.alert"));
                   setShowSupport(false);
                 }}
                 className="space-y-4"
               >
                 <input
                   type="email"
-                  placeholder="Your email (optional)"
+                  placeholder={t("settings.support.emailPlaceholder")}
                   className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
                 />
                 <textarea
-                  placeholder="Write your message here..."
+                  placeholder={t("settings.support.messagePlaceholder")}
                   rows={5}
                   required
                   className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
@@ -134,7 +128,7 @@ const Settings = () => {
                   type="submit"
                   className="w-full bg-green-900 text-white py-3 rounded-lg font-semibold hover:bg-green-800 shadow-lg"
                 >
-                  Send Message
+                  {t("settings.support.sendButton")}
                 </button>
               </form>
             </motion.div>
@@ -155,9 +149,7 @@ const SettingsCard = ({ icon, title, children }) => {
       className="relative bg-gradient-to-br from-white to-[#f7f6d5] p-8 rounded-2xl shadow-lg border border-green-900 hover:shadow-2xl transition"
     >
       <div className="flex items-center gap-4 mb-4">
-        <div className="p-3 bg-green-900 text-white rounded-full shadow">
-          {icon}
-        </div>
+        <div className="p-3 bg-green-900 text-white rounded-full shadow">{icon}</div>
         <h3 className="text-2xl font-semibold text-green-900">{title}</h3>
       </div>
       {children}

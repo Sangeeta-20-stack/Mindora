@@ -10,6 +10,7 @@ import bn from "./locales/bn/translation.json";
 import ta from "./locales/ta/translation.json";
 import te from "./locales/te/translation.json";
 import gu from "./locales/gu/translation.json";
+import ml from "./locales/ml/translation.json"; // ✅ Malayalam added
 
 i18n
   .use(LanguageDetector) // detects browser language
@@ -23,6 +24,7 @@ i18n
       ta: { translation: ta },
       te: { translation: te },
       gu: { translation: gu },
+      ml: { translation: ml }, // ✅ Malayalam here
     },
     fallbackLng: "en", // default if translation missing
     interpolation: {

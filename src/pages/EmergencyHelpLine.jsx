@@ -4,8 +4,11 @@ import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
 import { motion } from "framer-motion";
 import { Phone, AlertCircle, FileText } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const EmergencyHelpline = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="flex min-h-screen bg-[#fdf6e3]">
       {/* Sidebar */}
@@ -16,17 +19,17 @@ const EmergencyHelpline = () => {
       {/* Main Content */}
       <div className="flex flex-col flex-1 ml-64">
         {/* Topbar */}
-        <Topbar title="Emergency Helpline" />
+        <Topbar title={t("emergency.title")} />
 
         {/* Page Content */}
         <div className="flex-1 p-8 overflow-y-auto">
           {/* Heading Section */}
           <div className="flex items-center justify-between mb-8">
             <h1 className="text-3xl font-bold text-green-900">
-              Emergency Helpline
+              {t("emergency.heading")}
             </h1>
             <button className="flex items-center gap-2 bg-red-600 text-white font-bold px-6 py-3 rounded-xl hover:bg-red-700 transition">
-              <Phone size={20} /> Call Now
+              <Phone size={20} /> {t("emergency.callNow")}
             </button>
           </div>
 
@@ -38,8 +41,7 @@ const EmergencyHelpline = () => {
               className="bg-green-900 text-white p-6 rounded-2xl shadow-lg flex flex-col items-center justify-center text-center"
             >
               <p className="text-lg font-semibold mb-4">
-                If you are in immediate danger or feeling unsafe, please reach
-                out to your nearest hospital or emergency number.
+                {t("emergency.immediateDanger")}
               </p>
               <AlertCircle className="text-red-400" size={48} />
             </motion.div>
@@ -49,12 +51,12 @@ const EmergencyHelpline = () => {
               whileHover={{ scale: 1.02 }}
               className="bg-green-900 text-white p-6 rounded-2xl shadow-lg"
             >
-              <h2 className="text-xl font-bold mb-4">National Helplines</h2>
+              <h2 className="text-xl font-bold mb-4">{t("emergency.nationalHelplines")}</h2>
               <ul className="space-y-3 text-lg">
-                <li>▶ KIRAN Helpline: 1800-599-0019</li>
-                <li>▶ AASRA: +91 98204 66726</li>
-                <li>▶ College Counselling Center Hotline</li>
-                <li>▶ Campus Security Number</li>
+                <li>▶ {t("emergency.kiran")}</li>
+                <li>▶ {t("emergency.aasra")}</li>
+                <li>▶ {t("emergency.collegeHotline")}</li>
+                <li>▶ {t("emergency.campusSecurity")}</li>
               </ul>
             </motion.div>
 
@@ -63,7 +65,7 @@ const EmergencyHelpline = () => {
               whileHover={{ scale: 1.02 }}
               className="bg-red-500 text-white p-6 rounded-2xl shadow-lg text-center font-bold text-2xl"
             >
-              "YOU ARE NOT ALONE"
+              {t("emergency.youAreNotAlone")}
             </motion.div>
 
             {/* Quick Resources */}
@@ -71,13 +73,13 @@ const EmergencyHelpline = () => {
               whileHover={{ scale: 1.02 }}
               className="bg-green-900 text-white p-6 rounded-2xl shadow-lg"
             >
-              <h2 className="text-xl font-bold mb-4">Quick Resources</h2>
+              <h2 className="text-xl font-bold mb-4">{t("emergency.quickResources")}</h2>
               <ul className="space-y-3">
                 <li className="flex items-center gap-2">
-                  <FileText /> Self-Help Toolkit (PDF / Web link)
+                  <FileText /> {t("emergency.selfHelpToolkit")}
                 </li>
                 <li className="flex items-center gap-2">
-                  <AlertCircle /> Crisis Coping Tips
+                  <AlertCircle /> {t("emergency.crisisCopingTips")}
                 </li>
               </ul>
             </motion.div>

@@ -1,7 +1,11 @@
+// src/components/FeatureCard.jsx
 import React from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next"; // ✅ import i18n
 
 const FeatureCard = ({ image, title, delay = 0 }) => {
+  const { t } = useTranslation(); // ✅ translation hook
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -18,13 +22,13 @@ const FeatureCard = ({ image, title, delay = 0 }) => {
       <div className="w-16 h-16 mb-3">
         <img
           src={image}
-          alt={title}
+          alt={t(title)}  // ✅ localized alt text
           className="w-full h-full object-contain rounded-md"
         />
       </div>
 
       {/* Title */}
-      <h3 className="text-sm font-semibold text-center">{title}</h3>
+      <h3 className="text-sm font-semibold text-center">{t(title)}</h3> {/* ✅ localized title */}
     </motion.div>
   );
 };

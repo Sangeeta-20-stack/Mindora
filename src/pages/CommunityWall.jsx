@@ -4,36 +4,35 @@ import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
 import { motion } from "framer-motion";
 import { Flag, Send } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const CommunityWall = () => {
+  const { t } = useTranslation();
+
   const [threads, setThreads] = useState([
-    { id: 1, title: "📚 Exam Stress" },
-    { id: 2, title: "🏠 Homesickness" },
-    { id: 3, title: "💬 Open Chat" },
+    { id: 1, title: t("communityWall.threadExamStress") },
+    { id: 2, title: t("communityWall.threadHomesickness") },
+    { id: 3, title: t("communityWall.threadOpenChat") },
   ]);
   const [selectedThread, setSelectedThread] = useState(1);
   const [posts, setPosts] = useState({});
   const [newPost, setNewPost] = useState("");
 
-  // Load from localStorage
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem("communityPosts")) || {};
     setPosts(stored);
   }, []);
 
-  // Save to localStorage
   const savePosts = (updated) => {
     setPosts(updated);
     localStorage.setItem("communityPosts", JSON.stringify(updated));
   };
 
-  // Generate random avatar
   const getRandomAvatar = () => {
     const avatars = ["🐱", "🐶", "🦊", "🐼", "🐧", "🐸", "🐨"];
     return avatars[Math.floor(Math.random() * avatars.length)];
   };
 
-  // Add new post
   const handlePost = () => {
     if (!newPost.trim()) return;
     const post = {
@@ -53,7 +52,6 @@ const CommunityWall = () => {
     setNewPost("");
   };
 
-  // Report a post
   const handleReport = (threadId, postId) => {
     const updated = {
       ...posts,
@@ -66,32 +64,28 @@ const CommunityWall = () => {
 
   return (
     <div className="flex h-screen bg-[#fdf6e3]">
-      {/* Sidebar */}
       <Sidebar />
-
-      {/* Main */}
-      <div className="flex flex-col flex-1 ml-64"> {/* ✅ offset for sidebar */}
+      <div className="flex flex-col flex-1 ml-64">
         <Topbar />
 
-        {/* Content */}
         <div className="flex-1 flex p-6 gap-6 overflow-hidden">
           {/* Thread List */}
           <div className="w-1/4 bg-white rounded-2xl shadow-md p-4 border border-green-200">
             <h2 className="text-lg font-bold text-green-900 mb-4">
-              Community Threads
+              {t("communityWall.threadsTitle")}
             </h2>
             <ul className="space-y-3">
-              {threads.map((t) => (
-                <li key={t.id}>
+              {threads.map((tObj) => (
+                <li key={tObj.id}>
                   <button
-                    onClick={() => setSelectedThread(t.id)}
+                    onClick={() => setSelectedThread(tObj.id)}
                     className={`w-full text-left px-3 py-2 rounded-lg transition ${
-                      selectedThread === t.id
+                      selectedThread === tObj.id
                         ? "bg-green-900 text-white shadow"
                         : "bg-green-50 text-green-900 hover:bg-green-100"
                     }`}
                   >
-                    {t.title}
+                    {tObj.title}
                   </button>
                 </li>
               ))}
@@ -100,13 +94,11 @@ const CommunityWall = () => {
 
           {/* Posts Section */}
           <div className="flex-1 flex flex-col bg-white rounded-2xl shadow-md p-6 border border-green-200">
-            {/* Header */}
             <h2 className="text-2xl font-bold text-green-900 mb-4">
-              {threads.find((t) => t.id === selectedThread)?.title ||
-                "Select a thread"}
+              {threads.find((tObj) => tObj.id === selectedThread)?.title ||
+                t("communityWall.selectThread")}
             </h2>
 
-            {/* Posts */}
             <div className="flex-1 overflow-y-auto space-y-4 mb-4">
               {(posts[selectedThread] || []).map((post) => (
                 <motion.div
@@ -130,12 +122,12 @@ const CommunityWall = () => {
                       onClick={() => handleReport(selectedThread, post.id)}
                       className="flex items-center gap-1 text-red-500 text-sm mt-2 hover:text-red-700"
                     >
-                      <Flag size={14} /> Report
+                      <Flag size={14} /> {t("communityWall.report")}
                     </button>
                   )}
                   {post.reported && (
                     <p className="text-xs text-red-500 mt-2">
-                      🚨 This post has been reported.
+                      🚨 {t("communityWall.reportedMsg")}
                     </p>
                   )}
                 </motion.div>
@@ -143,7 +135,7 @@ const CommunityWall = () => {
 
               {(posts[selectedThread] || []).length === 0 && (
                 <p className="text-green-700 text-center mt-10">
-                  No posts yet. Start the conversation!
+                  {t("communityWall.noPosts")}
                 </p>
               )}
             </div>
@@ -154,14 +146,14 @@ const CommunityWall = () => {
                 type="text"
                 value={newPost}
                 onChange={(e) => setNewPost(e.target.value)}
-                placeholder="Share your thoughts..."
+                placeholder={t("communityWall.newPostPlaceholder")}
                 className="flex-1 p-3 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none bg-[#fdf6e3]"
               />
               <button
                 onClick={handlePost}
                 className="bg-green-900 text-white px-4 py-2 rounded-lg hover:bg-green-800 flex items-center gap-2"
               >
-                <Send size={16} /> Post
+                <Send size={16} /> {t("communityWall.postBtn")}
               </button>
             </div>
           </div>

@@ -1,3 +1,4 @@
+// src/components/MentalHealthSurvey.jsx
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -6,53 +7,8 @@ import {
   Frown,
   Angry,
   AlertCircle,
-} from "lucide-react"; // mood icons
-
-const questions = [
-  {
-    question: "How is your mood today?",
-    options: [
-      { label: "Happy", icon: <Smile /> },
-      { label: "Neutral", icon: <Meh /> },
-      { label: "Sad", icon: <Frown /> },
-      { label: "Angry", icon: <Angry /> },
-      { label: "Anxious", icon: <AlertCircle /> },
-    ],
-    color: "teal",
-  },
-  {
-    question: "How often do you feel stressed lately?",
-    options: [
-      { label: "Never", icon: <Smile /> },
-      { label: "Rarely", icon: <Meh /> },
-      { label: "Sometimes", icon: <Frown /> },
-      { label: "Often", icon: <Angry /> },
-      { label: "Always", icon: <AlertCircle /> },
-    ],
-    color: "rose",
-  },
-  {
-    question: "Are you getting enough sleep?",
-    options: [
-      { label: "Always", icon: <Smile /> },
-      { label: "Mostly", icon: <Meh /> },
-      { label: "Sometimes", icon: <Frown /> },
-      { label: "Rarely", icon: <Angry /> },
-      { label: "Never", icon: <AlertCircle /> },
-    ],
-    color: "purple",
-  },
-  {
-    question: "Do you feel supported by friends or family?",
-    options: [
-      { label: "Yes, always", icon: <Smile /> },
-      { label: "Sometimes", icon: <Meh /> },
-      { label: "Rarely", icon: <Frown /> },
-      { label: "Never", icon: <Angry /> },
-    ],
-    color: "indigo",
-  },
-];
+} from "lucide-react";
+import { useTranslation } from "react-i18next"; // ✅ import i18n
 
 const QuestionCard = ({ question, options, onSelect, color }) => {
   return (
@@ -84,8 +40,56 @@ const QuestionCard = ({ question, options, onSelect, color }) => {
 };
 
 const MentalHealthSurvey = () => {
+  const { t } = useTranslation(); // ✅ translation hook
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState({});
+
+  // ✅ pull translated questions + options
+  const questions = [
+    {
+      question: t("survey.q1.question"),
+      options: [
+        { label: t("survey.q1.options.happy"), icon: <Smile /> },
+        { label: t("survey.q1.options.neutral"), icon: <Meh /> },
+        { label: t("survey.q1.options.sad"), icon: <Frown /> },
+        { label: t("survey.q1.options.angry"), icon: <Angry /> },
+        { label: t("survey.q1.options.anxious"), icon: <AlertCircle /> },
+      ],
+      color: "teal",
+    },
+    {
+      question: t("survey.q2.question"),
+      options: [
+        { label: t("survey.q2.options.never"), icon: <Smile /> },
+        { label: t("survey.q2.options.rarely"), icon: <Meh /> },
+        { label: t("survey.q2.options.sometimes"), icon: <Frown /> },
+        { label: t("survey.q2.options.often"), icon: <Angry /> },
+        { label: t("survey.q2.options.always"), icon: <AlertCircle /> },
+      ],
+      color: "rose",
+    },
+    {
+      question: t("survey.q3.question"),
+      options: [
+        { label: t("survey.q3.options.always"), icon: <Smile /> },
+        { label: t("survey.q3.options.mostly"), icon: <Meh /> },
+        { label: t("survey.q3.options.sometimes"), icon: <Frown /> },
+        { label: t("survey.q3.options.rarely"), icon: <Angry /> },
+        { label: t("survey.q3.options.never"), icon: <AlertCircle /> },
+      ],
+      color: "purple",
+    },
+    {
+      question: t("survey.q4.question"),
+      options: [
+        { label: t("survey.q4.options.always"), icon: <Smile /> },
+        { label: t("survey.q4.options.sometimes"), icon: <Meh /> },
+        { label: t("survey.q4.options.rarely"), icon: <Frown /> },
+        { label: t("survey.q4.options.never"), icon: <Angry /> },
+      ],
+      color: "indigo",
+    },
+  ];
 
   const handleSelect = (optionLabel) => {
     const currentQuestion = questions[currentIndex].question;
@@ -95,13 +99,13 @@ const MentalHealthSurvey = () => {
       setCurrentIndex(currentIndex + 1);
     } else {
       console.log("All Answers:", { ...answers, [currentQuestion]: optionLabel });
-      alert("Thank you for submitting your responses!");
+      alert(t("survey.thank_you")); // ✅ translated message
     }
   };
 
   return (
     <div className="flex-1 max-w-lg mx-auto mt-6">
-      <AnimatePresence exitBeforeEnter>
+      <AnimatePresence mode="wait">
         <QuestionCard
           key={questions[currentIndex].question}
           question={questions[currentIndex].question}

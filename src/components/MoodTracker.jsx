@@ -9,15 +9,18 @@ import {
   FaHeart,
   FaFrown,
 } from "react-icons/fa";
+import { useTranslation } from "react-i18next"; // ✅ import i18n
 
 const MoodTracker = ({ moodTracker, setMoodTracker }) => {
+  const { t } = useTranslation(); // ✅ translation hook
+
   const moods = [
-    { id: "happy", icon: <FaSmile />, label: "Happy" },
-    { id: "sad", icon: <FaSadTear />, label: "Sad" },
-    { id: "neutral", icon: <FaMeh />, label: "Neutral" },
-    { id: "angry", icon: <FaAngry />, label: "Angry" },
-    { id: "love", icon: <FaHeart />, label: "Love" },
-    { id: "upset", icon: <FaFrown />, label: "Upset" },
+    { id: "happy", icon: <FaSmile />, label: t("moods.happy") },
+    { id: "sad", icon: <FaSadTear />, label: t("moods.sad") },
+    { id: "neutral", icon: <FaMeh />, label: t("moods.neutral") },
+    { id: "angry", icon: <FaAngry />, label: t("moods.angry") },
+    { id: "love", icon: <FaHeart />, label: t("moods.love") },
+    { id: "upset", icon: <FaFrown />, label: t("moods.upset") },
   ];
 
   // Load last selected mood (today's mood if already chosen)
@@ -46,8 +49,12 @@ const MoodTracker = ({ moodTracker, setMoodTracker }) => {
       className="bg-green-900 p-6 rounded-xl shadow-md h-full flex flex-col"
     >
       {/* Heading */}
-      <h1 className="text-lg font-bold text-white mb-1">Mood-o-Meter 💭</h1>
-      <h2 className="text-gray-200 mb-4 text-sm">Describe your day:</h2>
+      <h1 className="text-lg font-bold text-white mb-1">
+        {t("moodTracker.title")}
+      </h1>
+      <h2 className="text-gray-200 mb-4 text-sm">
+        {t("moodTracker.subtitle")}
+      </h2>
 
       {/* Mood Icons */}
       <div className="flex justify-between md:justify-start md:gap-4 gap-3 flex-wrap">
@@ -77,14 +84,16 @@ const MoodTracker = ({ moodTracker, setMoodTracker }) => {
         ))}
       </div>
 
-      {/* Spacer to keep height consistent */}
+      {/* Spacer */}
       <div className="flex-grow" />
 
       {/* Selected mood text */}
       {selectedMood && (
         <p className="text-gray-100 text-sm mt-2">
-          You’re feeling:{" "}
-          <span className="font-semibold capitalize">{selectedMood}</span>
+          {t("moodTracker.you_feel")}{" "}
+          <span className="font-semibold capitalize">
+            {t(`moods.${selectedMood}`)}
+          </span>
         </p>
       )}
     </motion.div>

@@ -1,7 +1,8 @@
 // src/components/FeatureGrid.jsx
 import React from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom"; // ✅ import navigate hook
+import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next"; // ✅ i18n
 import DashboardCard from "./DashboardCard";
 import moodImg from "../assets/mood.png";
 import wellnessImg from "../assets/wellness.png";
@@ -11,15 +12,16 @@ import reflectionImg from "../assets/reflection.png";
 import communityImg from "../assets/community.png";
 
 const FeatureGrid = () => {
-  const navigate = useNavigate(); // ✅ initialize navigate
+  const { t } = useTranslation(); // ✅ hook
+  const navigate = useNavigate();
 
   const features = [
-    { title: "Daily Mood Tracker", image: moodImg, color: "from-teal-500 to-teal-300", path: "/daily-mood-tracker" },
-    { title: "Wellness Buddy", image: wellnessImg, color: "from-indigo-500 to-indigo-300", path: "/wellness-buddy" }, // ✅ navigate here
-    { title: "Stress Level Check", image: stressImg, color: "from-rose-500 to-rose-300", path: "/stress-check" },
-    { title: "Relaxation Tools", image: relaxImg, color: "from-emerald-500 to-emerald-300", path: "/relaxation" },
-    { title: "Reflection Box", image: reflectionImg, color: "from-orange-500 to-orange-300", path: "/reflection" },
-    { title: "Community Wall", image: communityImg, color: "from-purple-500 to-purple-300", path: "/community-wall" },
+    { title: t("features.mood"), image: moodImg, color: "from-teal-500 to-teal-300", path: "/daily-mood-tracker" },
+    { title: t("features.wellness"), image: wellnessImg, color: "from-indigo-500 to-indigo-300", path: "/wellness-buddy" },
+    { title: t("features.stress"), image: stressImg, color: "from-rose-500 to-rose-300", path: "/stress-check" },
+    { title: t("features.relax"), image: relaxImg, color: "from-emerald-500 to-emerald-300", path: "/relaxation" },
+    { title: t("features.reflection"), image: reflectionImg, color: "from-orange-500 to-orange-300", path: "/reflection" },
+    { title: t("features.community"), image: communityImg, color: "from-purple-500 to-purple-300", path: "/community-wall" },
   ];
 
   // Animation variants
@@ -27,9 +29,7 @@ const FeatureGrid = () => {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-      },
+      transition: { staggerChildren: 0.15 },
     },
   };
 
@@ -56,7 +56,7 @@ const FeatureGrid = () => {
           }}
           transition={{ type: "spring", stiffness: 200, damping: 14 }}
           className={`rounded-2xl p-[2px] bg-gradient-to-r ${f.color} cursor-pointer`}
-          onClick={() => f.path && navigate(f.path)} // ✅ navigate on click
+          onClick={() => f.path && navigate(f.path)}
         >
           <div className="bg-white rounded-2xl h-full">
             <DashboardCard title={f.title} image={f.image} />

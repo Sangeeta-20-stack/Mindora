@@ -163,5 +163,581 @@
     "sign_out": "Sign Out",
     "sos": "SOS",
     "help": "Help"
+  },
+
+  "questions": {
+    "q1": "How are you feeling today?",
+    "q2": "Did you sleep well?",
+    "q3": "Do you feel stressed?",
+    "q4": "Are you satisfied with your progress?"
+  },
+
+  "options": {
+    "yes": "Yes",
+    "no": "No",
+    "maybe": "Maybe",
+    "good": "Good",
+    "bad": "Bad",
+    "neutral": "Neutral"
+  },
+  "moodTracker": {
+  "title": "Mood-o-Meter 💭",
+  "subtitle": "Describe your day:",
+  "you_feel": "You’re feeling:"
+},
+"moods": {
+  "happy": "Happy",
+  "sad": "Sad",
+  "neutral": "Neutral",
+  "angry": "Angry",
+  "love": "Love",
+  "upset": "Upset"
+},
+"survey": {
+  "thank_you": "Thank you for submitting your responses!",
+  "q1": {
+    "question": "How is your mood today?",
+    "options": {
+      "happy": "Happy",
+      "neutral": "Neutral",
+      "sad": "Sad",
+      "angry": "Angry",
+      "anxious": "Anxious"
+    }
+  },
+  "q2": {
+    "question": "How often do you feel stressed lately?",
+    "options": {
+      "never": "Never",
+      "rarely": "Rarely",
+      "sometimes": "Sometimes",
+      "often": "Often",
+      "always": "Always"
+    }
+  },
+  "q3": {
+    "question": "Are you getting enough sleep?",
+    "options": {
+      "always": "Always",
+      "mostly": "Mostly",
+      "sometimes": "Sometimes",
+      "rarely": "Rarely",
+      "never": "Never"
+    }
+  },
+  "q4": {
+    "question": "Do you feel supported by friends or family?",
+    "options": {
+      "always": "Yes, always",
+      "sometimes": "Sometimes",
+      "rarely": "Rarely",
+      "never": "Never"
+    }
+  }
+},
+"login": {
+  "welcome": "Welcome back to Vritti!",
+  "alt_img": "Login",
+  "title": "Log in to Your Account",
+  "subtitle": "Choose your role and log in securely.",
+  "select_role": "Select Role",
+  "roles": {
+    "student": "Student (Anonymous)",
+    "counsellor": "Counsellor",
+    "volunteer": "Volunteer",
+    "admin": "Admin"
+  },
+  "anon_name": "Anonymous Name",
+  "email": "Email Address",
+  "password": "Password",
+  "submit": "Log in",
+  "no_account": "Don’t have an account?",
+  "create": "Create one",
+  "no_anon_account": "No anonymous account found. Please sign up first.",
+  "success_student": "Anonymous login successful!",
+  "invalid_anon": "Invalid anonymous credentials!",
+  "no_account": "No account found. Please sign up first.",
+  "success_role": "Login successful as {{role}}!",
+  "invalid_role": "Invalid credentials or role!"
+},
+"features": {
+  "mood": "Daily Mood Tracker",
+  "wellness": "Wellness Buddy",
+  "stress": "Stress Level Check",
+  "relax": "Relaxation Tools",
+  "reflection": "Reflection Box",
+  "community": "Community Wall"
+},
+
+"dailyTasks": {
+  "title": "Daily Tasks",
+  "completed": "completed"
+},
+"tasks": {
+  "readBooks": "Read Books",
+  "workout": "Workout",
+  "familyTime": "Family Time",
+  "journalWrite": "Journal Write",
+  "selfDiscipline": "Self-discipline",
+  "moodTracker": "Mood Tracker",
+  "friendsTime": "Friends Time"
+},
+"contact": {
+  "email": "Email Us",
+  "phone": "Call Us",
+  "chat": "Live Chat",
+  "emailDesc": "Send us an email for support",
+  "phoneDesc": "Call our helpline",
+  "chatDesc": "Chat with our counsellors online"
+},
+"contact": {
+  "name": "Your Name",
+  "email": "Your Email",
+  "message": "Your Message",
+  "send": "Send Message",
+  "formSubmitted": "Form submitted! (You can integrate a backend here)"
+},
+"calendar": {
+  "today": "Today",
+  "days": ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"],
+  "months": [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ]
+},
+"badges": {
+  "streakMaster": {
+    "title": "Streak Master",
+    "desc": "Logged in 7 days in a row"
+  },
+  "moodChampion": {
+    "title": "Mood Champion",
+    "desc": "Tracked your mood 10 times"
+  }
+},
+"account": {
+  "myAccount": "My Account",
+  "details": "Account Details",
+  "name": "Name",
+  "role": "Role",
+  "notProvided": "Not provided",
+  "defaultRole": "User",
+  "logout": "Log Out",
+  "goDashboard": "Go to Dashboard",
+  "loginFirst": "Please log in first.",
+  "logoutSuccess": "Logged out successfully!"
+},
+"analytics": {
+  "title": "Analytics",
+  "subtitle": "Analytics & Insights from Reflections",
+  "noReflections": "No reflections yet.",
+  "hint": "Write in your Reflection Box to see insights here.",
+  "totalReflections": "Total Reflections",
+  "avgWords": "Avg. Words",
+  "dominantSentiment": "Dominant Sentiment",
+  "sentimentDistribution": "Sentiment Distribution",
+  "reflectionsPerDay": "Reflections Per Day",
+  "sentiments": {
+    "positive": "Positive",
+    "neutral": "Neutral",
+    "negative": "Negative"
+  },
+  "days": {
+    "sun": "Sun",
+    "mon": "Mon",
+    "tue": "Tue",
+    "wed": "Wed",
+    "thu": "Thu",
+    "fri": "Fri",
+    "sat": "Sat"
   }
 }
+  ,
+  "calendarPage": {
+    "topbar": "Dashboard",
+    "title": "Wellness Dashboard",
+    "badges": {
+      "consistencyChamp": {
+        "title": "Consistency Champ",
+        "desc": "You’ve completed most of your tasks!"
+      },
+      "positivityStar": {
+        "title": "Positivity Star",
+        "desc": "Your mood has been mostly happy!"
+      },
+      "streakMaster": {
+        "title": "Streak Master",
+        "desc": "7+ day mood streak achieved!"
+      },
+      "wellnessWarrior": {
+        "title": "Wellness Warrior",
+        "desc": "Balanced progress across tasks & mood!"
+      },
+      "keepGoing": {
+        "title": "Keep Going",
+        "desc": "Stay consistent to earn a badge!"
+      }
+    }
+  },
+  
+  "communityWall": {
+    "threadsTitle": "Community Threads",
+    "threadExamStress": "📚 Exam Stress",
+    "threadHomesickness": "🏠 Homesickness",
+    "threadOpenChat": "💬 Open Chat",
+    "selectThread": "Select a thread",
+    "report": "Report",
+    "reportedMsg": "This post has been reported.",
+    "noPosts": "No posts yet. Start the conversation!",
+    "newPostPlaceholder": "Share your thoughts...",
+    "postBtn": "Post"
+  },
+  "createJournal": {
+  "createTitle": "Create Journal Entry",
+  "editTitle": "Edit Journal Entry",
+  "moodQuestion": "How are you feeling today?",
+  "activitiesTitle": "Activities (optional)",
+  "addActivityPlaceholder": "Add a new activity...",
+  "goalsTitle": "Goals (optional)",
+  "addGoalPlaceholder": "Add a new goal...",
+  "entryTitle": "Journal Entry",
+  "entryPlaceholder": "Write your thoughts and experiences here...",
+  "imageTitle": "Attach an Image (optional)",
+  "imageAlt": "Preview",
+  "uploadText": "Click to upload an image",
+  "uploadHint": "(JPG, PNG, etc.)",
+  "saveBtn": "Save Journal Entry",
+  "updateBtn": "Update Journal Entry",
+  "addBtn": "Add",
+  "errors": {
+    "required": "Mood and journal entry are required!"
+  },
+  "moods": {
+    "epic": "Epic",
+    "good": "Good",
+    "okay": "Okay",
+    "bad": "Bad",
+    "awful": "Awful"
+  },
+  "defaultActivities": {
+    "exercise": "Exercise",
+    "reading": "Reading",
+    "meditation": "Meditation"
+  }
+},
+"dailyMoodTracker": {
+  "pageTitle": "🌿 Daily Mood Tracker",
+  "moodSection": {
+    "title": "How are you feeling today?",
+    "options": {
+      "happy": "😊 Happy",
+      "sad": "😔 Sad",
+      "stressed": "😤 Stressed",
+      "tired": "😴 Tired",
+      "excited": "🤩 Excited"
+    }
+  },
+  "habitSection": {
+    "title": "✅ Habit Tracker",
+    "options": {
+      "water": "Drink Water",
+      "exercise": "Exercise",
+      "meditate": "Meditate",
+      "journal": "Journal",
+      "sleepEarly": "Sleep Early"
+    }
+  },
+  "affirmationSection": {
+    "title": "🌸 Affirmations",
+    "list": {
+      "capable": "I am capable and strong.",
+      "peace": "I choose peace over worry.",
+      "grateful": "I am grateful for today.",
+      "rest": "I deserve rest and balance.",
+      "bestSelf": "I am becoming my best self."
+    }
+  },
+  "sleepEnergySection": {
+    "title": "😴 Sleep & Energy",
+    "sleepPlaceholder": "Hours of sleep",
+    "energyPlaceholder": "Energy level",
+    "energyOptions": {
+      "low": "🔴 Low",
+      "medium": "🟡 Medium",
+      "high": "🟢 High"
+    }
+  }
+},
+"dashboard": {
+    "welcomeCard": {
+      "title": "Welcome to Vritti! 🌿",
+      "subtitle": "Track your daily moods, habits, and growth."
+    },
+    "features": {
+      "title": "Features",
+      "items": {
+        "moodTracker": "Daily Mood Tracker",
+        "habitTracker": "Habit Tracker",
+        "affirmations": "Affirmations",
+        "sleepEnergy": "Sleep & Energy",
+        "calendar": "Calendar",
+        "insights": "Insights & Analytics"
+      }
+    }
+  },
+  "doctor": {
+    "title": "Appointment",
+    "greeting": "Hello, User",
+    "enterDate": "Enter appointment date (e.g. 2025-09-10):",
+    "enterTime": "Enter time (e.g. 4:30 PM):",
+    "enterMode": "Enter mode (Chat / Voice / Video):",
+    "fillDetails": "Please fill all details!",
+    "availability": "Availability",
+    "bookSession": "Book Session",
+    "mySessions": "My Sessions",
+    "mode": "Mode",
+    "cancel": "Cancel",
+    "noSessions": "No active sessions scheduled.",
+    "modesTitle": "Modes of Connect",
+    "chat": "Chat",
+    "videoCall": "Video Call",
+    "voiceCall": "Voice Call"
+  },
+  "emergency": {
+    "title": "Emergency Helpline",
+    "heading": "Emergency Helpline",
+    "callNow": "Call Now",
+    "immediateDanger": "If you are in immediate danger or feeling unsafe, please reach out to your nearest hospital or emergency number.",
+    "nationalHelplines": "National Helplines",
+    "kiran": "KIRAN Helpline: 1800-599-0019",
+    "aasra": "AASRA: +91 98204 66726",
+    "collegeHotline": "College Counselling Center Hotline",
+    "campusSecurity": "Campus Security Number",
+    "youAreNotAlone": "YOU ARE NOT ALONE",
+    "quickResources": "Quick Resources",
+    "selfHelpToolkit": "Self-Help Toolkit (PDF / Web link)",
+    "crisisCopingTips": "Crisis Coping Tips"
+  },
+  
+  "feedback": {
+    "title": "Feedback",
+    "heading": "💬 Share Your Feedback",
+    "enterComment": "Please enter your feedback before submitting.",
+    "rateExperience": "Rate Your Experience",
+    "yourFeedback": "Your Feedback",
+    "placeholder": "Write your thoughts, suggestions, or issues here...",
+    "submit": "Submit Feedback",
+    "thankYou": "✅ Thank you for your valuable feedback!"
+  }
+,
+
+  "help": {
+    "title": "Help & Support",
+    "heroTitle": "Help & Support",
+    "heroText": "Need guidance? You’re in the right place. Explore guides, FAQs, and support resources below.",
+    "quickStartTitle": "Quick Start Guide",
+    "quickStartItems": [
+      "Sign up or log in to access all features.",
+      "Use the <strong>Reflection Box</strong> to journal your thoughts.",
+      "Check <strong>Analytics</strong> to view your mood trends.",
+      "Chat with your <strong>Wellness Buddy</strong> for support.",
+      "Visit <strong>Relaxation</strong> and <strong>Stress Check</strong> for daily calm."
+    ],
+    "faqTitle": "Frequently Asked Questions",
+    "faqs": [
+      {
+        "q": "How do I reset my password?",
+        "a": "Go to the Login page and click 'Forgot Password'. Follow the instructions to reset it."
+      },
+      {
+        "q": "Where can I see my reflections history?",
+        "a": "All your reflections are saved in the Reflection Box. You can browse, edit, or delete them anytime."
+      },
+      {
+        "q": "Is my data private?",
+        "a": "Yes. All your reflections are stored locally in your browser. Your privacy is protected."
+      },
+      {
+        "q": "How do I contact support?",
+        "a": "Scroll down to the Contact & Support section to reach us directly."
+      }
+    ],
+    "featureWalkthroughTitle": "Feature Walkthroughs",
+    "featureWalkthroughItems": [
+      "<strong>Reflection Box:</strong> Write daily journals, track moods, and set goals.",
+      "<strong>Analytics:</strong> View your mood distribution, word count, and activity trends.",
+      "<strong>Wellness Buddy:</strong> Chat with the AI for encouragement and support.",
+      "<strong>Relaxation:</strong> Try breathing exercises and calming practices."
+    ],
+    "contactTitle": "Contact & Support",
+    "contactEmail": "💌 Email us at <a href='mailto:support@wellnessapp.com' class='text-green-700 underline'>support@wellnessapp.com</a> for any issues or suggestions.",
+    "contactUrgent": "🚨 For urgent help, visit the <a href='/emergency-helpline' class='text-red-600 underline font-semibold'>Emergency Helpline</a> page immediately.",
+    "safetyTitle": "Safety Note",
+    "safetyNote": "⚠️ This app is for self-care support and reflection. It is not a substitute for professional therapy or medical advice. If you’re struggling, please reach out to a licensed therapist or use the Emergency Helpline."
+  },
+  "reflectionBox": {
+    "title": "Reflection Box",
+    "reflections": "reflections",
+    "newReflection": "New Reflection",
+    "edit": "Edit",
+    "delete": "Delete",
+    "empty": "No reflections yet. Start writing your first one! ✍️",
+    "untitled": "Untitled"
+  }
+,
+ "relaxation": {
+    "title": "Relaxation Tool",
+    "videos": "Motivational Videos",
+    "video1": "Les Brown – Motivational Video",
+    "video2": "Study & Focus Motivation Video",
+    "songs": "Relaxing Songs",
+    "breathing": "Breathing & Meditation",
+    "breathing1": "5-Minute Breathing Exercise",
+    "breathing2": "10-Minute Guided Meditation"
+  },
+  "settings": {
+    "title": "Settings",
+    "profile": {
+      "title": "Profile",
+      "desc": "Set a nickname to stay anonymous.",
+      "placeholder": "Enter your nickname"
+    },
+    "appearance": {
+      "title": "Appearance",
+      "desc": "Choose light or dark mode.",
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System Default"
+    },
+    "privacy": {
+      "title": "Privacy & Security",
+      "desc": "Manage your privacy and secure your anonymous account.",
+      "delete": "Delete Account"
+    },
+    "support": {
+      "title": "Help & Support",
+      "desc": "Get assistance or contact support.",
+      "button": "Contact Support",
+      "modalTitle": "Contact Support",
+      "modalDesc": "Let us know your issue or feedback. We’ll get back to you soon.",
+      "emailPlaceholder": "Your email (optional)",
+      "messagePlaceholder": "Write your message here...",
+      "sendButton": "Send Message",
+      "alert": "Message sent! Our support team will reach out."
+    }
+  },
+  "stressCheck": {
+    "title": "Stress Level Check",
+    "questions": {
+      "q1": "How often have you felt overwhelmed this week?",
+      "q2": "How well are you sleeping these days?",
+      "q3": "How often do you feel anxious about the future?",
+      "q4": "Do you find time for yourself and hobbies?",
+      "q5": "How is your energy level today?",
+      "q6": "When facing stress, what do you usually do?",
+      "q7": "How often do you experience headaches or muscle tension?",
+      "q8": "Do you struggle to focus or concentrate?",
+      "q9": "How often do you feel fatigued even after resting?",
+      "q10": "Do you notice changes in your eating habits under stress?"
+    },
+    "options": {
+      "rarely": "Rarely",
+      "sometimes": "Sometimes",
+      "often": "Often",
+      "almostAlways": "Almost always",
+      "veryWell": "Very well",
+      "okay": "Okay",
+      "poorly": "Poorly",
+      "cantSleep": "Can't sleep",
+      "always": "Always",
+      "never": "Never",
+      "high": "High",
+      "normal": "Normal",
+      "low": "Low",
+      "average": "Average",
+      "talkSomeone": "Talk to someone",
+      "directMyself": "Direct myself",
+      "stayQuiet": "Stay quiet",
+      "dontKnow": "Don't know what to do",
+      "occasionally": "Occasionally",
+      "frequently": "Frequently",
+      "almostDaily": "Almost daily",
+      "no": "No",
+      "slightChanges": "Slight changes",
+      "frequentChanges": "Frequent changes",
+      "majorChanges": "Major changes"
+    }
+  },
+  "wellnessBuddy": {
+    "title": "Wellness Buddy",
+    "intro": "Hi! I’m your Wellness Buddy chatbot. How can I support you today?",
+    "chatPlaceholder": "Your conversation with Wellness Buddy will appear here...",
+    "inputPlaceholder": "Type your message...",
+    "tipTitle": "Tip of the Day",
+    "tipText": "Take a deep breath and remind yourself:",
+    "tipHighlight": "“I am stronger than my challenges.”"
+  },
+  "help": {
+    "title": "Help & Support",
+    "heroTitle": "Help & Support",
+    "heroText": "Need guidance? You’re in the right place. Explore guides, FAQs, and support resources below.",
+    "quickStartTitle": "Quick Start Guide",
+    "quickStartItems": [
+      "Sign up or log in to access all features.",
+      "Use the <strong>Reflection Box</strong> to journal your thoughts.",
+      "Check <strong>Analytics</strong> to view your mood trends.",
+      "Chat with your <strong>Wellness Buddy</strong> for support.",
+      "Visit <strong>Relaxation</strong> and <strong>Stress Check</strong> for daily calm."
+    ],
+    "faqTitle": "Frequently Asked Questions",
+    "faqs": [
+      {
+        "q": "How do I reset my password?",
+        "a": "Go to the Login page and click 'Forgot Password'. Follow the instructions to reset it."
+      },
+      {
+        "q": "Where can I see my reflections history?",
+        "a": "All your reflections are saved in the Reflection Box. You can browse, edit, or delete them anytime."
+      },
+      {
+        "q": "Is my data private?",
+        "a": "Yes. All your reflections are stored locally in your browser. Your privacy is protected."
+      },
+      {
+        "q": "How do I contact support?",
+        "a": "Scroll down to the Contact & Support section to reach us directly."
+      }
+    ],
+    "featureWalkthroughTitle": "Feature Walkthroughs",
+    "featureWalkthroughItems": [
+      "<strong>Reflection Box:</strong> Write daily journals, track moods, and set goals.",
+      "<strong>Analytics:</strong> View your mood distribution, word count, and activity trends.",
+      "<strong>Wellness Buddy:</strong> Chat with the AI for encouragement and support.",
+      "<strong>Relaxation:</strong> Try breathing exercises and calming practices."
+    ],
+    "contactTitle": "Contact & Support",
+    "contactEmail": "💌 Email us at <a href='mailto:support@wellnessapp.com' class='text-green-700 underline'>support@wellnessapp.com</a> for any issues or suggestions.",
+    "contactUrgent": "🚨 For urgent help, visit the <a href='/emergency-helpline' class='text-red-600 underline font-semibold'>Emergency Helpline</a> page immediately.",
+    "safetyTitle": "Safety Note",
+    "safetyNote": "⚠️ This app is for self-care support and reflection. It is not a substitute for professional therapy or medical advice. If you’re struggling, please reach out to a licensed therapist or use the Emergency Helpline."
+  }
+}
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

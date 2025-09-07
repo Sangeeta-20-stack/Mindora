@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next"; // ✅ i18n hook
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
 import { User, Shield } from "lucide-react";
@@ -9,25 +10,26 @@ import { User, Shield } from "lucide-react";
 const Account = () => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
+  const { t } = useTranslation(); // ✅ translation instance
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     if (!storedUser) {
-      alert("Please log in first.");
+      alert(t("account.loginFirst")); // ✅ translated
       navigate("/login");
     } else {
       setUser(storedUser);
     }
-  }, [navigate]);
+  }, [navigate, t]);
 
   const handleLogout = () => {
     localStorage.removeItem("user");
-    alert("Logged out successfully!");
+    alert(t("account.logoutSuccess")); // ✅ translated
     navigate("/login");
   };
 
   return (
-    <div className="flex min-h-screen bg-[#fdf6e3]"> {/* ✅ full page cream */}
+    <div className="flex min-h-screen bg-[#fdf6e3]">
       {/* Sidebar */}
       <aside className="fixed left-0 top-0 h-full w-64 bg-green-900">
         <Sidebar />
@@ -36,7 +38,7 @@ const Account = () => {
       {/* Main Content */}
       <div className="flex-1 flex flex-col ml-64">
         {/* Topbar */}
-        <Topbar title="My Account" />
+        <Topbar title={t("account.myAccount")} />
 
         {/* Account Section */}
         <div className="flex-1 p-8 overflow-y-auto">
@@ -47,7 +49,7 @@ const Account = () => {
             className="bg-[#fdf6e3] w-full rounded-2xl shadow-xl p-10 border border-green-200"
           >
             <h2 className="text-3xl font-extrabold text-green-900 mb-8 text-center">
-              Account Details
+              {t("account.details")}
             </h2>
 
             {user && (
@@ -64,9 +66,9 @@ const Account = () => {
                 >
                   <User className="text-yellow-300 w-7 h-7" />
                   <div>
-                    <h3 className="text-sm text-gray-200">Name</h3>
+                    <h3 className="text-sm text-gray-200">{t("account.name")}</h3>
                     <p className="text-lg font-semibold">
-                      {user.name || "Not provided"}
+                      {user.name || t("account.notProvided")}
                     </p>
                   </div>
                 </motion.div>
@@ -78,9 +80,9 @@ const Account = () => {
                 >
                   <Shield className="text-yellow-300 w-7 h-7" />
                   <div>
-                    <h3 className="text-sm text-gray-200">Role</h3>
+                    <h3 className="text-sm text-gray-200">{t("account.role")}</h3>
                     <p className="text-lg font-semibold">
-                      {user.role || "User"}
+                      {user.role || t("account.defaultRole")}
                     </p>
                   </div>
                 </motion.div>
@@ -95,7 +97,7 @@ const Account = () => {
                 onClick={handleLogout}
                 className="w-full bg-red-500 text-white py-3 rounded-xl font-semibold shadow-md transition"
               >
-                Log Out
+                {t("account.logout")}
               </motion.button>
 
               <motion.button
@@ -104,7 +106,7 @@ const Account = () => {
                 onClick={() => navigate("/dashboard")}
                 className="w-full bg-green-900 text-white py-3 rounded-xl font-semibold shadow-md transition"
               >
-                Go to Dashboard
+                {t("account.goDashboard")}
               </motion.button>
             </div>
           </motion.div>

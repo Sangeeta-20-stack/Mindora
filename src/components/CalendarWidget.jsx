@@ -1,9 +1,11 @@
+// src/components/CalendarWidget.jsx
 import React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-
-const daysOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+import { useTranslation } from "react-i18next"; // ✅ i18n
 
 const CalendarWidget = ({ currentDate, handlePrevMonth, handleNextMonth, handleToday }) => {
+  const { t } = useTranslation(); // ✅ translation hook
+
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
   const firstDay = new Date(year, month, 1).getDay();
@@ -15,33 +17,49 @@ const CalendarWidget = ({ currentDate, handlePrevMonth, handleNextMonth, handleT
 
   return (
     <div className="bg-green-900 rounded-3xl shadow-xl p-6 text-white">
+      {/* Header */}
       <div className="flex items-center justify-between mb-6">
-        <button onClick={handlePrevMonth} className="p-2 rounded-full bg-gray-100 hover:bg-green-100 shadow-sm">
+        <button
+          onClick={handlePrevMonth}
+          className="p-2 rounded-full bg-gray-100 hover:bg-green-100 shadow-sm"
+        >
           <ChevronLeft className="w-5 h-5 text-gray-700" />
         </button>
+
         <h3 className="text-lg font-semibold">
-          {currentDate.toLocaleString("default", { month: "long" })} {year}
+          {t(`calendar.months.${month}`)} {year} {/* ✅ translated month */}
         </h3>
-        <button onClick={handleNextMonth} className="p-2 rounded-full bg-gray-100 hover:bg-green-100 shadow-sm">
+
+        <button
+          onClick={handleNextMonth}
+          className="p-2 rounded-full bg-gray-100 hover:bg-green-100 shadow-sm"
+        >
           <ChevronRight className="w-5 h-5 text-gray-700" />
         </button>
+
         <button
           onClick={handleToday}
           className="ml-2 px-4 py-2 bg-yellow-400 text-green-900 font-bold rounded-xl shadow hover:bg-yellow-300 transition"
         >
-          Today
+          {t("calendar.today")} {/* ✅ translated */}
         </button>
       </div>
 
+      {/* Days of week */}
       <div className="grid grid-cols-7 text-center font-semibold mb-4">
-        {daysOfWeek.map((day) => (
-          <div key={day} className="tracking-wide">{day}</div>
+        {t("calendar.days", { returnObjects: true }).map((day, i) => (
+          <div key={i} className="tracking-wide">
+            {day}
+          </div>
         ))}
       </div>
 
+      {/* Dates */}
       <div className="grid grid-cols-7 gap-2">
         {prevMonthDays.map((day, i) => (
-          <div key={`prev-${i}`} className="p-4 rounded-xl text-gray-400 text-center bg-green-800">{day}</div>
+          <div key={`prev-${i}`} className="p-4 rounded-xl text-gray-400 text-center bg-green-800">
+            {day}
+          </div>
         ))}
 
         {monthDays.map((day) => {
@@ -54,7 +72,9 @@ const CalendarWidget = ({ currentDate, handlePrevMonth, handleNextMonth, handleT
             <div
               key={day}
               className={`p-4 rounded-2xl text-center cursor-pointer transition ${
-                isToday ? "bg-yellow-400 text-green-900 font-bold shadow-lg" : "bg-green-800 hover:bg-green-700"
+                isToday
+                  ? "bg-yellow-400 text-green-900 font-bold shadow-lg"
+                  : "bg-green-800 hover:bg-green-700"
               }`}
             >
               {day}
@@ -63,7 +83,9 @@ const CalendarWidget = ({ currentDate, handlePrevMonth, handleNextMonth, handleT
         })}
 
         {nextMonthDays.map((day, i) => (
-          <div key={`next-${i}`} className="p-4 rounded-xl text-gray-400 text-center bg-green-800">{day}</div>
+          <div key={`next-${i}`} className="p-4 rounded-xl text-gray-400 text-center bg-green-800">
+            {day}
+          </div>
         ))}
       </div>
     </div>

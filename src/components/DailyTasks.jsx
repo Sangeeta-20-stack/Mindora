@@ -1,18 +1,22 @@
+// src/components/DailyTasks.jsx
 import React, { useState, useEffect } from "react";
 import { Book, Dumbbell, Users, PenTool, Sun, Smile, Heart } from "lucide-react";
+import { useTranslation } from "react-i18next"; // ✅ import translation
 
-// Define master task list (icons fixed here)
+// Define master task list (keys instead of raw labels)
 const taskList = [
-  { label: "Read Books", icon: Book },
-  { label: "Workout", icon: Dumbbell },
-  { label: "Family Time", icon: Users },
-  { label: "Journal Write", icon: PenTool },
-  { label: "Self-discipline", icon: Sun },
-  { label: "Mood Tracker", icon: Smile },
-  { label: "Friends Time", icon: Heart },
+  { key: "readBooks", icon: Book },
+  { key: "workout", icon: Dumbbell },
+  { key: "familyTime", icon: Users },
+  { key: "journalWrite", icon: PenTool },
+  { key: "selfDiscipline", icon: Sun },
+  { key: "moodTracker", icon: Smile },
+  { key: "friendsTime", icon: Heart },
 ];
 
 const DailyTasks = ({ onCompletionChange }) => {
+  const { t } = useTranslation(); // ✅ translation hook
+
   const [completedTasks, setCompletedTasks] = useState(() => {
     const saved = localStorage.getItem("completedTasks");
     return saved ? JSON.parse(saved) : taskList.map(() => false);
@@ -37,9 +41,9 @@ const DailyTasks = ({ onCompletionChange }) => {
 
   return (
     <div className="bg-green-900 rounded-2xl shadow-lg p-6 text-white">
-      <h3 className="font-bold text-lg mb-3">📋 Daily Tasks</h3>
+      <h3 className="font-bold text-lg mb-3">📋 {t("dailyTasks.title")}</h3>
       <p className="mb-3 text-sm">
-        {completed}/{total} completed
+        {completed}/{total} {t("dailyTasks.completed")}
       </p>
       <ul className="space-y-2">
         {taskList.map((task, i) => {
@@ -57,7 +61,7 @@ const DailyTasks = ({ onCompletionChange }) => {
                 }`}
               />
               <span className={done ? "line-through text-gray-300" : ""}>
-                {task.label}
+                {t(`tasks.${task.key}`)} {/* ✅ translated task label */}
               </span>
             </li>
           );

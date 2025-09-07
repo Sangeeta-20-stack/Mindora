@@ -1,6 +1,7 @@
 // src/pages/CalendarPage.jsx
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
 import MoodTracker from "../components/MoodTracker";
@@ -11,6 +12,8 @@ import BadgeCard from "../components/BadgeCard";
 import CalendarWidget from "../components/CalendarWidget";
 
 const CalendarPage = () => {
+  const { t } = useTranslation();
+
   const [currentDate, setCurrentDate] = useState(new Date());
   const [moodTracker, setMoodTracker] = useState(
     () => JSON.parse(localStorage.getItem("moodTracker")) || Array(35).fill("none")
@@ -18,8 +21,8 @@ const CalendarPage = () => {
   const [completionRate, setCompletionRate] = useState(0);
   const [badge, setBadge] = useState({
     emoji: "❓",
-    title: "Keep Going",
-    desc: "Stay consistent to earn a badge!",
+    title: t("calendarPage.badges.keepGoing.title"),
+    desc: t("calendarPage.badges.keepGoing.desc"),
   });
 
   useEffect(() => {
@@ -40,8 +43,8 @@ const CalendarPage = () => {
     if (completionRate >= 0.8) {
       setBadge({
         emoji: "🏅",
-        title: "Consistency Champ",
-        desc: "You’ve completed most of your tasks!",
+        title: t("calendarPage.badges.consistencyChamp.title"),
+        desc: t("calendarPage.badges.consistencyChamp.desc"),
       });
     } else if (
       moodCount.happy > moodCount.neutral &&
@@ -49,36 +52,36 @@ const CalendarPage = () => {
     ) {
       setBadge({
         emoji: "🌟",
-        title: "Positivity Star",
-        desc: "Your mood has been mostly happy!",
+        title: t("calendarPage.badges.positivityStar.title"),
+        desc: t("calendarPage.badges.positivityStar.desc"),
       });
     } else if (bestStreak >= 7) {
       setBadge({
         emoji: "🔥",
-        title: "Streak Master",
-        desc: "7+ day mood streak achieved!",
+        title: t("calendarPage.badges.streakMaster.title"),
+        desc: t("calendarPage.badges.streakMaster.desc"),
       });
     } else if (completionRate >= 0.5 && moodCount.happy > moodCount.sad) {
       setBadge({
         emoji: "💪",
-        title: "Wellness Warrior",
-        desc: "Balanced progress across tasks & mood!",
+        title: t("calendarPage.badges.wellnessWarrior.title"),
+        desc: t("calendarPage.badges.wellnessWarrior.desc"),
       });
     } else {
       setBadge({
         emoji: "❓",
-        title: "Keep Going",
-        desc: "Stay consistent to earn a badge!",
+        title: t("calendarPage.badges.keepGoing.title"),
+        desc: t("calendarPage.badges.keepGoing.desc"),
       });
     }
-  }, [completionRate, moodTracker]);
+  }, [completionRate, moodTracker, t]);
 
   return (
     <div className="flex min-h-screen bg-[#f7f6d5]">
       <Sidebar />
 
       <div className="flex-1 flex flex-col overflow-hidden ml-64">
-        <Topbar title="Dashboard" />
+        <Topbar title={t("calendarPage.topbar")} />
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -88,13 +91,15 @@ const CalendarPage = () => {
         >
           <div className="max-w-7xl mx-auto space-y-8">
             <h2 className="text-3xl font-bold text-green-900 mb-4">
-              Wellness Dashboard
+              {t("calendarPage.title")}
             </h2>
 
             {/* Uniform card grid */}
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
-              {/* ✅ Fixed: pass props */}
-              <MoodTracker moodTracker={moodTracker} setMoodTracker={setMoodTracker} />
+              <MoodTracker
+                moodTracker={moodTracker}
+                setMoodTracker={setMoodTracker}
+              />
               <StreakTracker moodTracker={moodTracker} />
               <QuotesCard />
               <BadgeCard badge={badge} />

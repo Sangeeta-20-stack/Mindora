@@ -1,30 +1,30 @@
 // src/pages/StressCheck.jsx
 import React, { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
 
-const questions = [
-  { q: "How often have you felt overwhelmed this week?", options: ["Rarely", "Sometimes", "Often", "Almost always"] },
-  { q: "How well are you sleeping these days?", options: ["Very well", "Okay", "Poorly", "Can't sleep"] },
-  { q: "How often do you feel anxious about the future?", options: ["Rarely", "Sometimes", "Often", "Almost always"] },
-  { q: "Do you find time for yourself and hobbies?", options: ["Always", "Sometimes", "Rarely", "Never"] },
-  { q: "How is your energy level today?", options: ["High", "Normal", "Low", "Average"] },
-  { q: "When facing stress, what do you usually do?", options: ["Talk to someone", "Direct myself", "Stay quiet", "Don’t know what to do"] },
-  { q: "How often do you experience headaches or muscle tension?", options: ["Never", "Occasionally", "Frequently", "Almost daily"] },
-  { q: "Do you struggle to focus or concentrate?", options: ["No", "Sometimes", "Often", "Always"] },
-  { q: "How often do you feel fatigued even after resting?", options: ["Rarely", "Sometimes", "Often", "Always"] },
-  { q: "Do you notice changes in your eating habits under stress?", options: ["No", "Slight changes", "Frequent changes", "Major changes"] },
+const questionsList = [
+  { qKey: "q1", optionsKey: ["rarely", "sometimes", "often", "almostAlways"] },
+  { qKey: "q2", optionsKey: ["veryWell", "okay", "poorly", "cantSleep"] },
+  { qKey: "q3", optionsKey: ["rarely", "sometimes", "often", "almostAlways"] },
+  { qKey: "q4", optionsKey: ["always", "sometimes", "rarely", "never"] },
+  { qKey: "q5", optionsKey: ["high", "normal", "low", "average"] },
+  { qKey: "q6", optionsKey: ["talkSomeone", "directMyself", "stayQuiet", "dontKnow"] },
+  { qKey: "q7", optionsKey: ["never", "occasionally", "frequently", "almostDaily"] },
+  { qKey: "q8", optionsKey: ["no", "sometimes", "often", "always"] },
+  { qKey: "q9", optionsKey: ["rarely", "sometimes", "often", "always"] },
+  { qKey: "q10", optionsKey: ["no", "slightChanges", "frequentChanges", "majorChanges"] },
 ];
 
 const StressCheck = () => {
+  const { t } = useTranslation();
   const [answers, setAnswers] = useState({});
 
   // Load saved answers on mount
   useEffect(() => {
     const saved = localStorage.getItem("stressAnswers");
-    if (saved) {
-      setAnswers(JSON.parse(saved));
-    }
+    if (saved) setAnswers(JSON.parse(saved));
   }, []);
 
   // Save to localStorage whenever answers update
@@ -32,11 +32,8 @@ const StressCheck = () => {
     localStorage.setItem("stressAnswers", JSON.stringify(answers));
   }, [answers]);
 
-  const handleSelect = (qIdx, option) => {
-    setAnswers((prev) => ({
-      ...prev,
-      [qIdx]: option,
-    }));
+  const handleSelect = (qIdx, optionKey) => {
+    setAnswers((prev) => ({ ...prev, [qIdx]: optionKey }));
   };
 
   return (
@@ -50,35 +47,37 @@ const StressCheck = () => {
       <div className="flex-1 flex flex-col ml-64 overflow-y-auto h-screen">
         {/* Topbar */}
         <div className="sticky top-0 z-10">
-          <Topbar />
+          <Topbar title={t("stressCheck.title")} />
         </div>
 
         {/* Stress Check Section */}
         <main className="p-6 space-y-6">
           <h1 className="text-3xl font-bold text-green-900 mb-6">
-            Stress Level Check
+            {t("stressCheck.title")}
           </h1>
 
           {/* Questions list */}
           <div className="space-y-6">
-            {questions.map((item, idx) => (
+            {questionsList.map((item, idx) => (
               <div
                 key={idx}
                 className="bg-green-900 text-white rounded-2xl p-6 shadow-lg"
               >
-                <h2 className="text-lg font-semibold mb-4">{item.q}</h2>
+                <h2 className="text-lg font-semibold mb-4">
+                  {t(`stressCheck.questions.${item.qKey}`)}
+                </h2>
                 <div className="flex flex-wrap gap-3">
-                  {item.options.map((opt, i) => (
+                  {item.optionsKey.map((optKey, i) => (
                     <button
                       key={i}
-                      onClick={() => handleSelect(idx, opt)}
+                      onClick={() => handleSelect(idx, optKey)}
                       className={`px-4 py-2 rounded-xl transition ${
-                        answers[idx] === opt
+                        answers[idx] === optKey
                           ? "bg-yellow-400 text-black font-semibold"
                           : "bg-green-800 hover:bg-green-700 text-white"
                       }`}
                     >
-                      {opt}
+                      {t(`stressCheck.options.${optKey}`)}
                     </button>
                   ))}
                 </div>
