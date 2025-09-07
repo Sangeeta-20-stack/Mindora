@@ -1,8 +1,8 @@
 // src/components/WelcomeCard.jsx
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useTranslation } from "react-i18next"; // ✅ import hook
-import welcomeImg from "../assets/welcome.png";
+import { useTranslation } from "react-i18next"; // ✅ translation hook
+import welcomeImg from "../assets/welcome.jpg";
 
 const quotes = [
   "Believe you can and you're halfway there. – Theodore Roosevelt",
@@ -13,7 +13,7 @@ const quotes = [
 ];
 
 const WelcomeCard = () => {
-  const { t } = useTranslation(); // ✅ translation hook
+  const { t } = useTranslation();
   const [userName, setUserName] = useState("User");
   const [quoteIndex, setQuoteIndex] = useState(0);
 
@@ -54,7 +54,6 @@ const WelcomeCard = () => {
         transition={{ delay: 0.2, duration: 0.6 }}
         className="max-w-lg"
       >
-        {/* Translated welcome */}
         <h2 className="text-3xl font-bold">
           {t("welcome", { name: userName })}
         </h2>
@@ -85,12 +84,12 @@ const WelcomeCard = () => {
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 0.3, duration: 0.7 }}
-        className="w-56 h-56 bg-[#f7f6d5] rounded-t-full rounded-b-3xl flex items-center justify-center drop-shadow-lg p-4"
+        className="w-56 h-64 rounded-t-full rounded-b-2xl overflow-hidden drop-shadow-lg"
       >
         <img
           src={welcomeImg}
           alt="Welcome"
-          className="w-full h-full object-contain"
+          className="w-full h-full object-cover"
         />
       </motion.div>
     </motion.div>

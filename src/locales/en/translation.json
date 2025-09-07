@@ -721,6 +721,114 @@
     "safetyTitle": "Safety Note",
     "safetyNote": "⚠️ This app is for self-care support and reflection. It is not a substitute for professional therapy or medical advice. If you’re struggling, please reach out to a licensed therapist or use the Emergency Helpline."
   }
+  ,
+  "admin": {
+    "brand": "VRITTI",
+    "dashboard": "Dashboard",
+    "manageResources": "Manage Resources",
+    "analytics": "Analytics",
+    "communityContribution": "Community Contribution",
+    "forumModeration": "Forum Moderation",
+    "feedbackInbox": "Feedback Inbox"
+  },
+   "adminDashboard": {
+    "loading": "Loading...",
+    "anonymousPost": "Anonymous post on stress",
+    "forumEntry": "Forum entry about exams",
+    "wellnessRequest": "New wellness buddy request",
+    "reflectionAdded": "Reflection entry added",
+    "doctorBooked": "Doctor consultation booked",
+    "recentActivityFeed": "Recent Activity Feed"
+  },
+  "quickStats": {
+  "title": "Quick Stats Card",
+  "activeStudents": "Active Students Today",
+  "anonymousChats": "No of Anonymous Chats",
+  "appointmentsPending": "Psychologist Appointments Pending"
+},
+"stressChart": {
+  "title": "Stress Level Quick Stat"
+},
+"adminAnalytics": {
+  "topStressedDepartments": "Top Stressed Departments",
+  "stressed": "Stressed",
+  "highlyStressed": "Highly Stressed",
+  "departments": "Departments",
+  "studentsPercent": "{{percent}}% of total students"
+},
+"manageResources": {
+  "title": "Manage Doctors",
+  "addNew": "Add New",
+  "appointments": "Appointments",
+  "manage": "Manage"
+},
+"communityForum": {
+  "title": "Community Forum",
+  "volunteer": "Volunteer",
+  "reply": "Reply",
+  "reports": "Reports",
+  "delete": "Delete",
+  "placeholder": "Say something...",
+  "samplePost": "Stress management is the practice of using techniques—like deep breathing, exercise, journaling, or time management—to reduce tension and improve resilience when facing challenges."
+},
+"forumModeration": {
+  "title": "Reported Articles",
+  "sort": "Sort",
+  "reports": "Reports",
+  "delete": "Delete",
+  "volunteer": "Volunteer",
+  "samplePost": "Stress management is the practice of using techniques—like deep breathing, exercise, journaling, or time management—to reduce tension and improve resilience when facing challenges."
+},
+"feedbackInbox": {
+  "title": "Feedback Inbox",
+  "searchHere": "Search Here",
+  "student": "Student",
+  "feedbackDetails": "Feedback details...",
+  "category": "Category",
+  "high": "High",
+  "mid": "Mid",
+  "low": "Low"
+},
+  "welcomeMessage": "Welcome, {{name}}!",
+  "overview": "Overview",
+  "upcomingAppointments": "Upcoming Appointments",
+  "upcomingCommunityChats": "Upcoming Community Chats",
+  "shortDetails": "Click to view more details",
+
+  "counsellor": {
+    "dashboard": "Dashboard",
+    "appointment": "Appointments",
+    "communityWall": "Community Wall",
+    "appointmentSchedule": "Appointment Schedule",
+    "activeSessions": "Active Sessions",
+    "today": "Today",
+    "offlineCollege": "Offline (College)",
+    "onlineCall": "Online Call",
+    "upcomingSessions": "Upcoming Sessions",
+    "noUpcoming": "No upcoming sessions available.",
+    "noPosts": "No posts yet. Start a conversation!",
+    "typeMessage": "Type your message...",
+    "sharePositive": "Share positive thoughts and messages with students."
+  },
+  "volunteer": {
+    "dashboard": "Dashboard",
+    "communityChat": "Community Chat",
+    "welcomeMessage": "Welcome, {{name}}!",
+    "dashboardOverview": "Here you can view your activities, manage tasks, and track progress.",
+    "chatOverview": "Join and participate in community discussions with students and counsellors.",
+    "noMessages": "No messages yet. Start the conversation!",
+    "typeMessage": "Type your message...",
+    "sharePositive": "Share positive thoughts and supportive messages.",
+    "helpCommunity": "As a volunteer, your role is to guide, support, and inspire students in this space."
+  }
+
+
+
+
+
+
+
+
 }
 
   

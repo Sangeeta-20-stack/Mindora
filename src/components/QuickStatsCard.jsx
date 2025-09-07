@@ -1,12 +1,22 @@
+// src/components/QuickStatsCard.jsx
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const QuickStatsCard = ({ activeStudents, anonymousChats, appointmentsPending }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="bg-green-900 text-white p-5 rounded-2xl w-full">
-      <h3 className="font-bold text-lg mb-3">Quick Stats Cards:</h3>
-      <p>Active Students Today: <b>{activeStudents}</b></p>
-      <p>No of Anonymous Chats: <b>{anonymousChats}</b></p>
-      <p>Psychologist Appointments Pending: <b>{appointmentsPending}</b></p>
+      <h3 className="font-bold text-lg mb-3">{t("quickStats.title")}</h3>
+      <p>
+        {t("quickStats.activeStudents")}: <b>{activeStudents}</b>
+      </p>
+      <p>
+        {t("quickStats.anonymousChats")}: <b>{anonymousChats}</b>
+      </p>
+      <p>
+        {t("quickStats.appointmentsPending")}: <b>{appointmentsPending}</b>
+      </p>
     </div>
   );
 };
