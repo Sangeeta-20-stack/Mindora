@@ -37,7 +37,7 @@ const StressCheck = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-[#fdf6e3]">
+    <div className="flex min-h-screen bg-[#fdf6e3] dark:bg-gray-900 transition-colors duration-300">
       {/* Sidebar */}
       <aside className="w-64 bg-green-900 flex-shrink-0 h-screen fixed">
         <Sidebar />
@@ -52,7 +52,7 @@ const StressCheck = () => {
 
         {/* Stress Check Section */}
         <main className="p-6 space-y-6">
-          <h1 className="text-3xl font-bold text-green-900 mb-6">
+          <h1 className="text-3xl font-bold text-green-900 dark:text-gray-100 mb-6">
             {t("stressCheck.title")}
           </h1>
 
@@ -61,7 +61,7 @@ const StressCheck = () => {
             {questionsList.map((item, idx) => (
               <div
                 key={idx}
-                className="bg-green-900 text-white rounded-2xl p-6 shadow-lg"
+                className="bg-green-900 dark:bg-green-800 text-white rounded-2xl p-6 shadow-lg transition-colors"
               >
                 <h2 className="text-lg font-semibold mb-4">
                   {t(`stressCheck.questions.${item.qKey}`)}
@@ -71,7 +71,7 @@ const StressCheck = () => {
                     <button
                       key={i}
                       onClick={() => handleSelect(idx, optKey)}
-                      className={`px-4 py-2 rounded-xl transition ${
+                      className={`px-4 py-2 rounded-xl transition-colors ${
                         answers[idx] === optKey
                           ? "bg-yellow-400 text-black font-semibold"
                           : "bg-green-800 hover:bg-green-700 text-white"

@@ -1,3 +1,4 @@
+// src/pages/AdminAnalytics.jsx
 import React from "react";
 import AdminSidebar from "../components/AdminSidebar";
 import Topbar from "../components/Topbar";
@@ -24,7 +25,7 @@ const AdminAnalytics = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-[#fdf6e3]">
+    <div className="flex min-h-screen bg-[#fdf6e3] dark:bg-gray-900 transition-colors">
       {/* Sidebar */}
       <div className="fixed top-0 left-0 h-full w-64">
         <AdminSidebar />
@@ -33,14 +34,14 @@ const AdminAnalytics = () => {
       {/* Main Content */}
       <div className="ml-64 flex-1 flex flex-col">
         {/* Topbar */}
-        <div className="sticky top-0 z-20 bg-[#fdf6e3] shadow">
+        <div className="sticky top-0 z-20 bg-[#fdf6e3] dark:bg-gray-800 shadow transition-colors">
           <Topbar />
         </div>
 
         {/* Page Content */}
         <div className="p-8 space-y-8">
           {/* Top Chart Section */}
-          <div className="bg-green-900 text-white p-6 rounded-2xl shadow-lg">
+          <div className="bg-green-900 dark:bg-green-800 text-white p-6 rounded-2xl shadow-lg transition-colors">
             <h2 className="text-xl font-bold mb-4">
               {t("adminAnalytics.topStressedDepartments")}
             </h2>
@@ -61,11 +62,18 @@ const AdminAnalytics = () => {
                     />
                   ))}
                 </Pie>
-                <Tooltip />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "#1f2937", // dark:bg-gray-800
+                    color: "#fff",
+                    borderRadius: "8px",
+                    border: "none",
+                  }}
+                />
               </PieChart>
 
               {/* Legend */}
-              <div className="mt-6 lg:mt-0 lg:ml-10 space-y-2">
+              <div className="mt-6 lg:mt-0 lg:ml-10 space-y-2 text-gray-900 dark:text-gray-200">
                 {data.map((item, index) => (
                   <div key={index} className="flex items-center gap-2">
                     <span
@@ -82,8 +90,10 @@ const AdminAnalytics = () => {
           {/* Bottom Stats Section */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Card 1 */}
-            <div className="bg-green-900 text-white p-6 rounded-2xl shadow-lg text-center">
-              <h3 className="text-lg font-semibold">{t("adminAnalytics.stressed")}</h3>
+            <div className="bg-green-900 dark:bg-green-800 text-white p-6 rounded-2xl shadow-lg text-center transition-colors">
+              <h3 className="text-lg font-semibold">
+                {t("adminAnalytics.stressed")}
+              </h3>
               <p className="text-4xl font-bold mt-2">25</p>
               <p className="text-sm mt-1">
                 {t("adminAnalytics.studentsPercent", { percent: 21 })}
@@ -91,8 +101,10 @@ const AdminAnalytics = () => {
             </div>
 
             {/* Card 2 */}
-            <div className="bg-green-900 text-white p-6 rounded-2xl shadow-lg text-center">
-              <h3 className="text-lg font-semibold">{t("adminAnalytics.highlyStressed")}</h3>
+            <div className="bg-green-900 dark:bg-green-800 text-white p-6 rounded-2xl shadow-lg text-center transition-colors">
+              <h3 className="text-lg font-semibold">
+                {t("adminAnalytics.highlyStressed")}
+              </h3>
               <p className="text-4xl font-bold mt-2">35</p>
               <p className="text-sm mt-1">
                 {t("adminAnalytics.studentsPercent", { percent: 30 })}
@@ -100,8 +112,10 @@ const AdminAnalytics = () => {
             </div>
 
             {/* Card 3 */}
-            <div className="bg-[#fdf6e3] border border-green-900 text-green-900 p-6 rounded-2xl shadow-lg">
-              <h3 className="text-lg font-semibold mb-3">{t("adminAnalytics.departments")}</h3>
+            <div className="bg-[#fdf6e3] dark:bg-gray-800 border border-green-900 dark:border-green-600 text-green-900 dark:text-green-100 p-6 rounded-2xl shadow-lg transition-colors">
+              <h3 className="text-lg font-semibold mb-3">
+                {t("adminAnalytics.departments")}
+              </h3>
               <ul className="space-y-2">
                 {data.map((d, i) => (
                   <li key={i}>{d.name}</li>

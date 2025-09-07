@@ -9,7 +9,7 @@ const StressChart = ({ data }) => {
   const { t } = useTranslation();
 
   return (
-    <div className="bg-green-900 text-white p-5 rounded-2xl w-full flex flex-col items-center">
+    <div className="bg-green-900 dark:bg-gray-800 text-white dark:text-green-100 p-5 rounded-2xl w-full flex flex-col items-center shadow-md">
       <h3 className="font-bold text-lg mb-3">{t("stressChart.title")}</h3>
       <PieChart width={250} height={250}>
         <Pie
@@ -25,7 +25,15 @@ const StressChart = ({ data }) => {
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
-        <Tooltip />
+        <Tooltip
+          contentStyle={{
+            backgroundColor: "#1f2937", // dark gray background
+            border: "none",
+            borderRadius: "0.5rem",
+            color: "#f9fafb", // light text
+          }}
+          wrapperStyle={{ outline: "none" }}
+        />
       </PieChart>
     </div>
   );

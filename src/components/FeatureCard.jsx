@@ -14,7 +14,11 @@ const FeatureCard = ({ image, title, delay = 0 }) => {
       viewport={{ once: true }}
       className="
         w-32 sm:w-36 md:w-40 h-40 flex flex-col items-center justify-center
-        rounded-xl shadow-md bg-white hover:bg-green-900 hover:text-white 
+        rounded-xl shadow-md 
+        bg-white text-green-900 
+        dark:bg-gray-800 dark:text-gray-100
+        hover:bg-green-900 hover:text-white 
+        dark:hover:bg-green-600 dark:hover:text-white
         transition-all duration-300 ease-in-out cursor-pointer
       "
     >
@@ -22,7 +26,7 @@ const FeatureCard = ({ image, title, delay = 0 }) => {
       <div className="w-16 h-16 mb-3">
         <img
           src={image}
-          alt={t(title)}  // ✅ localized alt text
+          alt={t(title)} // ✅ localized alt text
           className="w-full h-full object-contain rounded-md"
         />
       </div>

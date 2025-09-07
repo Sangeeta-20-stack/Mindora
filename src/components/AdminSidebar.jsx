@@ -1,3 +1,4 @@
+// src/components/AdminSidebar.jsx
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
@@ -15,16 +16,16 @@ const AdminSidebar = () => {
   const { t } = useTranslation();
 
   return (
-    <aside className="bg-green-900 text-white w-64 min-h-screen p-4 flex flex-col">
-      {/* Keep brand name static */}
-      <h1 className="text-2xl font-bold mb-6">VRITTI</h1>  
+    <aside className="bg-green-900 dark:bg-gray-900 text-white dark:text-green-100 w-64 min-h-screen p-4 flex flex-col transition-colors">
+      {/* Brand */}
+      <h1 className="text-2xl font-bold mb-6">VRITTI</h1>
 
       <nav className="flex flex-col gap-4">
         <Link
           to="/admin-dashboard"
-          className={`flex items-center gap-3 px-3 py-2 rounded-lg ${
+          className={`flex items-center gap-3 px-3 py-2 rounded-lg transition ${
             location.pathname === "/admin-dashboard"
-              ? "bg-green-600"
+              ? "bg-green-600 dark:bg-green-700"
               : "hover:text-green-400"
           }`}
         >
@@ -33,9 +34,9 @@ const AdminSidebar = () => {
 
         <Link
           to="/manage-resources"
-          className={`flex items-center gap-3 px-3 py-2 rounded-lg ${
+          className={`flex items-center gap-3 px-3 py-2 rounded-lg transition ${
             location.pathname === "/manage-resources"
-              ? "bg-green-600"
+              ? "bg-green-600 dark:bg-green-700"
               : "hover:text-green-400"
           }`}
         >
@@ -44,9 +45,9 @@ const AdminSidebar = () => {
 
         <Link
           to="/admin-analytics"
-          className={`flex items-center gap-3 px-3 py-2 rounded-lg ${
+          className={`flex items-center gap-3 px-3 py-2 rounded-lg transition ${
             location.pathname === "/admin-analytics"
-              ? "bg-green-600"
+              ? "bg-green-600 dark:bg-green-700"
               : "hover:text-green-400"
           }`}
         >
@@ -55,9 +56,9 @@ const AdminSidebar = () => {
 
         <Link
           to="/community-forum"
-          className={`flex items-center gap-3 px-3 py-2 rounded-lg ${
+          className={`flex items-center gap-3 px-3 py-2 rounded-lg transition ${
             location.pathname === "/community-forum"
-              ? "bg-green-600"
+              ? "bg-green-600 dark:bg-green-700"
               : "hover:text-green-400"
           }`}
         >
@@ -66,9 +67,9 @@ const AdminSidebar = () => {
 
         <Link
           to="/forum-moderation"
-          className={`flex items-center gap-3 px-3 py-2 rounded-lg ${
+          className={`flex items-center gap-3 px-3 py-2 rounded-lg transition ${
             location.pathname === "/forum-moderation"
-              ? "bg-green-600"
+              ? "bg-green-600 dark:bg-green-700"
               : "hover:text-green-400"
           }`}
         >
@@ -77,9 +78,9 @@ const AdminSidebar = () => {
 
         <Link
           to="/feedback-inbox"
-          className={`flex items-center gap-3 px-3 py-2 rounded-lg ${
+          className={`flex items-center gap-3 px-3 py-2 rounded-lg transition ${
             location.pathname === "/feedback-inbox"
-              ? "bg-green-600"
+              ? "bg-green-600 dark:bg-green-700"
               : "hover:text-green-400"
           }`}
         >

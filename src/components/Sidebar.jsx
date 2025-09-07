@@ -14,12 +14,12 @@ import {
 } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useTranslation } from "react-i18next"; // ✅ import hook
+import { useTranslation } from "react-i18next";
 
 const Sidebar = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { t } = useTranslation(); // ✅ translation hook
+  const { t } = useTranslation();
 
   const menuItems = [
     { icon: <LayoutDashboard size={20} />, label: t("sidebar.dashboard"), path: "/dashboard" },
@@ -41,7 +41,11 @@ const Sidebar = () => {
       initial={{ x: -100, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ type: "spring", stiffness: 80, damping: 20 }}
-      className="fixed top-0 left-0 w-64 bg-green-900 text-white h-screen flex flex-col justify-between p-4 shadow-lg z-50"
+      className="fixed top-0 left-0 w-64 
+                 bg-green-900 text-white 
+                 dark:bg-gray-900 dark:text-gray-100
+                 h-screen flex flex-col justify-between 
+                 p-4 shadow-lg z-50 transition-colors duration-300"
     >
       {/* Logo */}
       <div className="flex flex-col items-center mb-6 mt-4">
@@ -70,7 +74,9 @@ const Sidebar = () => {
           animate={{ scale: 1 }}
           transition={{ type: "spring", stiffness: 120, damping: 12 }}
           onClick={() => navigate("/sos")}
-          className="flex items-center gap-2 px-6 py-3 rounded-full bg-red-600 text-white font-semibold shadow-lg transition"
+          className="flex items-center gap-2 px-6 py-3 rounded-full 
+                     bg-red-600 text-white font-semibold shadow-lg transition 
+                     hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-800"
         >
           <PhoneCall size={20} />
           {t("sidebar.sos")}
@@ -111,8 +117,8 @@ const SidebarItem = ({ icon, label, active, onClick }) => {
       className={`flex items-center gap-3 px-4 py-2 rounded-2xl cursor-pointer text-sm transition 
         ${
           active
-            ? "bg-green-600 text-white"
-            : "text-gray-200 hover:bg-green-700 hover:text-white"
+            ? "bg-green-600 text-white dark:bg-green-500 dark:text-white"
+            : "text-gray-200 hover:bg-green-700 hover:text-white dark:text-gray-300 dark:hover:bg-green-600"
         }`}
     >
       {icon}

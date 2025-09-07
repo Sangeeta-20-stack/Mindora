@@ -20,7 +20,7 @@ const VolunteerCommunityChat = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-[#fdf6e3]">
+    <div className="flex min-h-screen bg-[#fdf6e3] dark:bg-gray-900">
       {/* Sidebar */}
       <div className="fixed top-0 left-0 h-full w-64">
         <VolunteerSidebar />
@@ -29,33 +29,35 @@ const VolunteerCommunityChat = () => {
       {/* Main Section */}
       <div className="ml-64 flex-1 flex flex-col">
         {/* Topbar */}
-        <div className="sticky top-0 z-20 bg-[#fdf6e3] shadow">
+        <div className="sticky top-0 z-20 bg-[#fdf6e3] dark:bg-gray-800 shadow">
           <Topbar />
         </div>
 
         {/* Chat Content */}
         <div className="p-8">
-          <h1 className="text-3xl font-bold text-green-900 mb-6">
+          <h1 className="text-3xl font-bold text-green-900 dark:text-green-300 mb-6">
             {t("volunteer.communityChat")}
           </h1>
 
           <div className="flex gap-6">
             {/* Chat Box */}
-            <div className="flex-1 bg-green-900 text-white p-6 rounded-3xl shadow-md flex flex-col justify-between">
+            <div className="flex-1 bg-green-900 dark:bg-green-800 text-white p-6 rounded-3xl shadow-md flex flex-col justify-between">
               {/* Messages */}
               <div className="flex-1 overflow-y-auto space-y-3 mb-4">
                 {messages.length === 0 ? (
-                  <p className="text-gray-300 text-sm">
+                  <p className="text-gray-300 dark:text-gray-400 text-sm">
                     {t("volunteer.noMessages")}
                   </p>
                 ) : (
                   messages.map((msg, idx) => (
                     <div
                       key={idx}
-                      className="bg-white text-green-900 p-3 rounded-xl shadow-sm"
+                      className="bg-white dark:bg-gray-700 text-green-900 dark:text-gray-100 p-3 rounded-xl shadow-sm"
                     >
                       <p>{msg.text}</p>
-                      <span className="text-xs text-gray-500">{msg.time}</span>
+                      <span className="text-xs text-gray-500 dark:text-gray-400">
+                        {msg.time}
+                      </span>
                     </div>
                   ))
                 )}
@@ -68,11 +70,11 @@ const VolunteerCommunityChat = () => {
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder={t("volunteer.typeMessage")}
-                  className="flex-1 p-3 rounded-full bg-white text-green-900 outline-none"
+                  className="flex-1 p-3 rounded-full bg-white dark:bg-gray-700 text-green-900 dark:text-gray-100 outline-none"
                 />
                 <button
                   onClick={handleSend}
-                  className="bg-green-700 p-3 rounded-full hover:bg-green-800 transition"
+                  className="bg-green-700 dark:bg-green-600 p-3 rounded-full hover:bg-green-800 dark:hover:bg-green-700 transition"
                 >
                   <Send size={20} className="text-white" />
                 </button>
@@ -80,7 +82,7 @@ const VolunteerCommunityChat = () => {
             </div>
 
             {/* Side Info Box */}
-            <div className="bg-green-900 text-white p-6 rounded-2xl w-64 flex items-center justify-center text-center text-sm">
+            <div className="bg-green-900 dark:bg-green-800 text-white dark:text-gray-100 p-6 rounded-2xl w-64 flex items-center justify-center text-center text-sm">
               {t("volunteer.helpCommunity")}
             </div>
           </div>

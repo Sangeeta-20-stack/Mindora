@@ -44,9 +44,14 @@ const Feedback = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-[#fdf6e3]">
+    <div
+      className="
+        flex min-h-screen bg-[#fdf6e3] dark:bg-gray-900
+        transition-colors duration-300
+      "
+    >
       {/* Sidebar */}
-      <aside className="fixed left-0 top-0 h-full w-64 bg-green-900">
+      <aside className="fixed left-0 top-0 h-full w-64 bg-green-900 dark:bg-green-950">
         <Sidebar />
       </aside>
 
@@ -61,7 +66,10 @@ const Feedback = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-4xl font-extrabold text-green-900 mb-10 text-center"
+            className="
+              text-4xl font-extrabold text-green-900 dark:text-gray-100
+              mb-10 text-center transition-colors duration-300
+            "
           >
             {t("feedback.heading")}
           </motion.h1>
@@ -70,13 +78,17 @@ const Feedback = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="bg-[#fdf6e3] shadow-lg rounded-2xl p-10 border border-green-200 w-full max-w-3xl"
+            className="
+              bg-[#fdf6e3] dark:bg-gray-800 
+              shadow-lg rounded-2xl p-10 border border-green-200 dark:border-gray-700 
+              w-full max-w-3xl transition-colors duration-300
+            "
           >
             {submitted ? (
               <motion.p
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                className="text-center text-2xl font-semibold text-green-900"
+                className="text-center text-2xl font-semibold text-green-900 dark:text-gray-100"
               >
                 {t("feedback.thankYou")}
               </motion.p>
@@ -84,7 +96,12 @@ const Feedback = () => {
               <div className="space-y-8">
                 {/* Rating */}
                 <div>
-                  <label className="flex items-center justify-center text-lg font-semibold mb-2 text-green-900 gap-2">
+                  <label
+                    className="
+                      flex items-center justify-center text-lg font-semibold mb-2 
+                      text-green-900 dark:text-gray-100 gap-2
+                    "
+                  >
                     <Star className="text-yellow-500" size={22} />
                     {t("feedback.rateExperience")}
                   </label>
@@ -106,8 +123,16 @@ const Feedback = () => {
 
                 {/* Comment */}
                 <div>
-                  <label className="flex items-center text-lg font-semibold mb-2 text-green-900 gap-2">
-                    <MessageSquare className="text-green-900" size={22} />
+                  <label
+                    className="
+                      flex items-center text-lg font-semibold mb-2 
+                      text-green-900 dark:text-gray-100 gap-2
+                    "
+                  >
+                    <MessageSquare
+                      className="text-green-900 dark:text-gray-100"
+                      size={22}
+                    />
                     {t("feedback.yourFeedback")}
                   </label>
                   <textarea
@@ -115,7 +140,13 @@ const Feedback = () => {
                     onChange={(e) => setComment(e.target.value)}
                     placeholder={t("feedback.placeholder")}
                     rows={6}
-                    className="w-full p-4 border border-green-300 rounded-xl focus:ring-2 focus:ring-green-700 outline-none bg-white"
+                    className="
+                      w-full p-4 border border-green-300 dark:border-gray-600 
+                      rounded-xl focus:ring-2 focus:ring-green-700 
+                      outline-none bg-white dark:bg-gray-900 
+                      text-green-900 dark:text-gray-100 
+                      transition-colors duration-300
+                    "
                   />
                 </div>
 
@@ -125,7 +156,11 @@ const Feedback = () => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={handleSubmit}
-                    className="w-full bg-green-900 text-white py-4 rounded-xl font-semibold hover:shadow-lg transition flex items-center justify-center gap-2 text-lg"
+                    className="
+                      w-full bg-green-900 dark:bg-green-700 text-white py-4 rounded-xl 
+                      font-semibold hover:shadow-lg transition flex items-center justify-center 
+                      gap-2 text-lg
+                    "
                   >
                     <Send size={22} /> {t("feedback.submit")}
                   </motion.button>

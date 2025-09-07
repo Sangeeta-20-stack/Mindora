@@ -13,9 +13,13 @@ const SocialLinks = ({ links }) => {
           href={link.url}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label={t(`social.${link.name}`)} // ✅ translated label
-          title={t(`social.${link.name}`)}      // ✅ tooltip in selected language
-          className="text-white hover:text-teal-100 transition-colors duration-300"
+          aria-label={t(`social.${link.name}`)}
+          title={t(`social.${link.name}`)}
+          className="
+            text-green-900 dark:text-green-100 
+            hover:text-teal-600 dark:hover:text-teal-300 
+            transition-colors duration-300
+          "
         >
           <i className={link.icon}></i>
         </a>

@@ -9,10 +9,10 @@ import {
   FaHeart,
   FaFrown,
 } from "react-icons/fa";
-import { useTranslation } from "react-i18next"; // ✅ import i18n
+import { useTranslation } from "react-i18next"; 
 
 const MoodTracker = ({ moodTracker, setMoodTracker }) => {
-  const { t } = useTranslation(); // ✅ translation hook
+  const { t } = useTranslation();
 
   const moods = [
     { id: "happy", icon: <FaSmile />, label: t("moods.happy") },
@@ -23,20 +23,17 @@ const MoodTracker = ({ moodTracker, setMoodTracker }) => {
     { id: "upset", icon: <FaFrown />, label: t("moods.upset") },
   ];
 
-  // Load last selected mood (today's mood if already chosen)
+  // Load last selected mood
   const [selectedMood, setSelectedMood] = useState(() => {
     const saved = localStorage.getItem("selectedMood");
     return saved || null;
   });
 
-  // Sync localStorage whenever mood changes
   useEffect(() => {
     if (selectedMood) {
       localStorage.setItem("selectedMood", selectedMood);
-
-      // Update today's mood in the moodTracker array
       const updated = [...moodTracker];
-      updated[updated.length - 1] = selectedMood; // mark today
+      updated[updated.length - 1] = selectedMood;
       setMoodTracker(updated);
     }
   }, [selectedMood]);
@@ -46,13 +43,18 @@ const MoodTracker = ({ moodTracker, setMoodTracker }) => {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="bg-green-900 p-6 rounded-xl shadow-md h-full flex flex-col"
+      className="
+        p-6 rounded-xl shadow-md h-full flex flex-col
+        bg-green-900 text-white
+        dark:bg-gray-800 dark:text-gray-100
+        transition-colors duration-300
+      "
     >
       {/* Heading */}
-      <h1 className="text-lg font-bold text-white mb-1">
+      <h1 className="text-lg font-bold mb-1">
         {t("moodTracker.title")}
       </h1>
-      <h2 className="text-gray-200 mb-4 text-sm">
+      <h2 className="text-gray-200 dark:text-gray-400 mb-4 text-sm">
         {t("moodTracker.subtitle")}
       </h2>
 
@@ -74,7 +76,7 @@ const MoodTracker = ({ moodTracker, setMoodTracker }) => {
               ${
                 selectedMood === m.id
                   ? "bg-yellow-300 border-yellow-500 text-green-900 shadow-lg"
-                  : "bg-[#f7f6d5] border-green-900 text-green-900"
+                  : "bg-[#f7f6d5] border-green-900 text-green-900 dark:bg-gray-700 dark:border-gray-500 dark:text-gray-100"
               }
             `}
             title={m.label}
@@ -84,14 +86,13 @@ const MoodTracker = ({ moodTracker, setMoodTracker }) => {
         ))}
       </div>
 
-      {/* Spacer */}
       <div className="flex-grow" />
 
       {/* Selected mood text */}
       {selectedMood && (
-        <p className="text-gray-100 text-sm mt-2">
+        <p className="text-gray-100 dark:text-gray-300 text-sm mt-2">
           {t("moodTracker.you_feel")}{" "}
-          <span className="font-semibold capitalize">
+          <span className="font-semibold capitalize text-yellow-300 dark:text-yellow-400">
             {t(`moods.${selectedMood}`)}
           </span>
         </p>

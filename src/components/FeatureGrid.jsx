@@ -2,7 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next"; // ✅ i18n
+import { useTranslation } from "react-i18next";
 import DashboardCard from "./DashboardCard";
 import moodImg from "../assets/mood.png";
 import wellnessImg from "../assets/wellness.png";
@@ -12,7 +12,7 @@ import reflectionImg from "../assets/reflection.png";
 import communityImg from "../assets/community.png";
 
 const FeatureGrid = () => {
-  const { t } = useTranslation(); // ✅ hook
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const features = [
@@ -24,7 +24,6 @@ const FeatureGrid = () => {
     { title: t("features.community"), image: communityImg, color: "from-purple-500 to-purple-300", path: "/community-wall" },
   ];
 
-  // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -58,7 +57,14 @@ const FeatureGrid = () => {
           className={`rounded-2xl p-[2px] bg-gradient-to-r ${f.color} cursor-pointer`}
           onClick={() => f.path && navigate(f.path)}
         >
-          <div className="bg-white rounded-2xl h-full">
+          {/* Inner card adapts to theme */}
+          <div
+            className="
+              rounded-2xl h-full transition-colors duration-300
+              bg-white text-green-900
+              dark:bg-gray-800 dark:text-gray-100
+            "
+          >
             <DashboardCard title={f.title} image={f.image} />
           </div>
         </motion.div>

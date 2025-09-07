@@ -6,7 +6,7 @@ const QuickStatsCard = ({ activeStudents, anonymousChats, appointmentsPending })
   const { t } = useTranslation();
 
   return (
-    <div className="bg-green-900 text-white p-5 rounded-2xl w-full">
+    <div className="bg-green-900 dark:bg-gray-800 text-white dark:text-green-100 p-5 rounded-2xl w-full shadow-md">
       <h3 className="font-bold text-lg mb-3">{t("quickStats.title")}</h3>
       <p>
         {t("quickStats.activeStudents")}: <b>{activeStudents}</b>

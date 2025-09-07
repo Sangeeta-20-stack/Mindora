@@ -46,10 +46,7 @@ const CalendarPage = () => {
         title: t("calendarPage.badges.consistencyChamp.title"),
         desc: t("calendarPage.badges.consistencyChamp.desc"),
       });
-    } else if (
-      moodCount.happy > moodCount.neutral &&
-      moodCount.happy > moodCount.sad
-    ) {
+    } else if (moodCount.happy > moodCount.neutral && moodCount.happy > moodCount.sad) {
       setBadge({
         emoji: "🌟",
         title: t("calendarPage.badges.positivityStar.title"),
@@ -77,7 +74,12 @@ const CalendarPage = () => {
   }, [completionRate, moodTracker, t]);
 
   return (
-    <div className="flex min-h-screen bg-[#f7f6d5]">
+    <div
+      className="
+        flex min-h-screen bg-[#f7f6d5] 
+        dark:bg-gray-900 transition-colors duration-300
+      "
+    >
       <Sidebar />
 
       <div className="flex-1 flex flex-col overflow-hidden ml-64">
@@ -90,16 +92,18 @@ const CalendarPage = () => {
           className="flex-1 w-full px-6 md:px-12 py-8 overflow-y-auto"
         >
           <div className="max-w-7xl mx-auto space-y-8">
-            <h2 className="text-3xl font-bold text-green-900 mb-4">
+            <h2
+              className="
+                text-3xl font-bold text-green-900 mb-4
+                dark:text-gray-100 transition-colors duration-300
+              "
+            >
               {t("calendarPage.title")}
             </h2>
 
             {/* Uniform card grid */}
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
-              <MoodTracker
-                moodTracker={moodTracker}
-                setMoodTracker={setMoodTracker}
-              />
+              <MoodTracker moodTracker={moodTracker} setMoodTracker={setMoodTracker} />
               <StreakTracker moodTracker={moodTracker} />
               <QuotesCard />
               <BadgeCard badge={badge} />

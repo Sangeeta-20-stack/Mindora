@@ -44,16 +44,16 @@ const AdminDashboard = () => {
 
   if (!analytics) {
     return (
-      <div className="flex items-center justify-center h-screen">
+      <div className="flex items-center justify-center h-screen bg-[#fdf6e3] dark:bg-gray-900 text-green-900 dark:text-green-100">
         {t("adminDashboard.loading")}
       </div>
     );
   }
 
   return (
-    <div className="flex min-h-screen bg-[#fdf6e3]">
+    <div className="flex min-h-screen bg-[#fdf6e3] dark:bg-gray-900">
       {/* Sidebar */}
-      <aside className="fixed left-0 top-0 h-full w-64 bg-green-900">
+      <aside className="fixed left-0 top-0 h-full w-64 bg-green-900 dark:bg-gray-800">
         <AdminSidebar />
       </aside>
 
@@ -73,7 +73,7 @@ const AdminDashboard = () => {
 
         {/* Recent Activity */}
         <div className="p-6">
-          <div className="bg-green-900 text-white p-5 rounded-2xl shadow-md">
+          <div className="bg-green-900 dark:bg-gray-800 text-white dark:text-green-100 p-5 rounded-2xl shadow-md">
             <h3 className="font-bold text-lg">
               {t("adminDashboard.recentActivityFeed")}
             </h3>

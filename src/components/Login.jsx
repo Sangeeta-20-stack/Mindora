@@ -13,7 +13,6 @@ const Login = () => {
     const password = e.target.password.value.trim();
 
     if (role === "student") {
-      // ✅ Anonymous student login
       const name = e.target.name.value.trim();
       const storedAnon = JSON.parse(localStorage.getItem("anonUser"));
 
@@ -30,7 +29,6 @@ const Login = () => {
         alert("Invalid anonymous name or password.");
       }
     } else {
-      // ✅ Admin / Counsellor / Volunteer login
       const email = e.target.email.value.trim();
       const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
 
@@ -40,8 +38,6 @@ const Login = () => {
 
       if (matchedUser) {
         alert(`Login successful! Welcome, ${role}.`);
-
-        // ✅ Role-based redirect
         if (matchedUser.role === "admin") {
           navigate("/admin-dashboard");
         } else if (matchedUser.role === "counsellor") {
@@ -58,15 +54,18 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#FDFBF7]">
+    <div className="min-h-screen flex items-center justify-center 
+                    bg-[#FDFBF7] dark:bg-gray-950 transition-colors duration-300">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="flex w-[90%] max-w-5xl rounded-3xl shadow-xl overflow-hidden"
+        className="flex w-[90%] max-w-5xl rounded-3xl shadow-xl overflow-hidden
+                   bg-white dark:bg-gray-900 transition-colors duration-300"
       >
         {/* Left Section */}
-        <div className="relative w-1/2 bg-green-900 p-10 text-white flex flex-col justify-between items-center">
+        <div className="relative w-1/2 bg-green-900 dark:bg-green-800 
+                        p-10 text-white flex flex-col justify-between items-center">
           <div className="absolute -top-10 -left-10 w-32 h-32 bg-white/20 rounded-full blur-2xl animate-pulse"></div>
           <div className="absolute bottom-10 right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl animate-bounce"></div>
 
@@ -98,12 +97,12 @@ const Login = () => {
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7 }}
-          className="w-1/2 bg-[#fdf6e3] p-12"
+          className="w-1/2 bg-[#fdf6e3] dark:bg-gray-800 p-12 transition-colors duration-300"
         >
-          <h2 className="text-3xl font-bold mb-3 text-gray-800 text-center">
+          <h2 className="text-3xl font-bold mb-3 text-gray-800 dark:text-gray-100 text-center">
             Login to Your Account
           </h2>
-          <p className="text-gray-600 text-center mb-8 text-sm">
+          <p className="text-gray-600 dark:text-gray-400 text-center mb-8 text-sm">
             Choose your role and enter your details.
           </p>
 
@@ -113,7 +112,11 @@ const Login = () => {
               name="role"
               value={role}
               onChange={(e) => setRole(e.target.value)}
-              className="w-full mb-6 p-3 rounded-full bg-[#fffaf0] border border-[#e6ddc5] outline-none focus:ring-2 focus:ring-green-600 transition"
+              className="w-full mb-6 p-3 rounded-full 
+                         bg-[#fffaf0] dark:bg-gray-700 
+                         border border-[#e6ddc5] dark:border-gray-600 
+                         text-gray-800 dark:text-gray-100 
+                         outline-none focus:ring-2 focus:ring-green-600 transition"
               required
             >
               <option value="">Select Role</option>
@@ -130,14 +133,24 @@ const Login = () => {
                   name="name"
                   type="text"
                   placeholder="Anonymous Name"
-                  className="w-full p-3 rounded-full bg-white/70 border border-green-900/30 text-green-900 placeholder-green-700 outline-none focus:ring-2 focus:ring-green-900 focus:border-green-900 transition"
+                  className="w-full p-3 rounded-full 
+                             bg-white/70 dark:bg-gray-700 
+                             border border-green-900/30 dark:border-gray-600 
+                             text-green-900 dark:text-gray-100 
+                             placeholder-green-700 dark:placeholder-gray-400 
+                             outline-none focus:ring-2 focus:ring-green-900 transition"
                   required
                 />
                 <input
                   name="password"
                   type="password"
                   placeholder="Password"
-                  className="w-full p-3 rounded-full bg-white/70 border border-green-900/30 text-green-900 placeholder-green-700 outline-none focus:ring-2 focus:ring-green-900 focus:border-green-900 transition"
+                  className="w-full p-3 rounded-full 
+                             bg-white/70 dark:bg-gray-700 
+                             border border-green-900/30 dark:border-gray-600 
+                             text-green-900 dark:text-gray-100 
+                             placeholder-green-700 dark:placeholder-gray-400 
+                             outline-none focus:ring-2 focus:ring-green-900 transition"
                   required
                 />
               </>
@@ -147,14 +160,24 @@ const Login = () => {
                   name="email"
                   type="email"
                   placeholder="Email Address"
-                  className="w-full p-3 rounded-full bg-white/70 border border-green-900/30 text-green-900 placeholder-green-700 outline-none focus:ring-2 focus:ring-green-900 focus:border-green-900 transition"
+                  className="w-full p-3 rounded-full 
+                             bg-white/70 dark:bg-gray-700 
+                             border border-green-900/30 dark:border-gray-600 
+                             text-green-900 dark:text-gray-100 
+                             placeholder-green-700 dark:placeholder-gray-400 
+                             outline-none focus:ring-2 focus:ring-green-900 transition"
                   required
                 />
                 <input
                   name="password"
                   type="password"
                   placeholder="Password"
-                  className="w-full p-3 rounded-full bg-white/70 border border-green-900/30 text-green-900 placeholder-green-700 outline-none focus:ring-2 focus:ring-green-900 focus:border-green-900 transition"
+                  className="w-full p-3 rounded-full 
+                             bg-white/70 dark:bg-gray-700 
+                             border border-green-900/30 dark:border-gray-600 
+                             text-green-900 dark:text-gray-100 
+                             placeholder-green-700 dark:placeholder-gray-400 
+                             outline-none focus:ring-2 focus:ring-green-900 transition"
                   required
                 />
               </>
@@ -165,15 +188,16 @@ const Login = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               type="submit"
-              className="w-full bg-green-900 text-white py-3 rounded-full font-semibold shadow-md transition hover:bg-green-800"
+              className="w-full bg-green-900 text-white py-3 rounded-full 
+                         font-semibold shadow-md transition hover:bg-green-800"
             >
               Log In
             </motion.button>
 
             {/* Link */}
-            <p className="text-center text-sm text-gray-700">
+            <p className="text-center text-sm text-gray-700 dark:text-gray-400">
               Don’t have an account?{" "}
-              <Link to="/signup" className="text-green-700 hover:underline">
+              <Link to="/signup" className="text-green-700 dark:text-green-400 hover:underline">
                 Create one
               </Link>
             </p>

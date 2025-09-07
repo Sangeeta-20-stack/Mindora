@@ -12,7 +12,7 @@ const CounsellorAppointments = () => {
   const month = today.toLocaleString("default", { month: "long" }); // e.g., "September"
 
   return (
-    <div className="flex min-h-screen bg-[#fdf6e3]">
+    <div className="flex min-h-screen bg-[#fdf6e3] dark:bg-gray-950">
       {/* Sidebar */}
       <div className="fixed top-0 left-0 h-full w-64">
         <CounsellorSidebar />
@@ -21,19 +21,19 @@ const CounsellorAppointments = () => {
       {/* Main Content */}
       <div className="ml-64 flex-1 flex flex-col">
         {/* Topbar */}
-        <div className="sticky top-0 z-20 bg-[#fdf6e3] shadow">
+        <div className="sticky top-0 z-20 bg-[#fdf6e3] dark:bg-gray-900 shadow">
           <Topbar />
         </div>
 
         {/* Page Content */}
         <div className="p-8">
           {/* Header */}
-          <h1 className="text-3xl font-bold text-green-900 mb-6">
+          <h1 className="text-3xl font-bold text-green-900 dark:text-green-200 mb-6">
             {t("counsellor.appointmentSchedule")}
           </h1>
 
           {/* Appointment Schedule Box */}
-          <div className="bg-green-900 text-white p-6 rounded-3xl shadow-md">
+          <div className="bg-green-900 dark:bg-green-800 text-white p-6 rounded-3xl shadow-md">
             {/* Title */}
             <h2 className="text-xl font-semibold mb-4">
               {t("counsellor.appointmentSchedule")}
@@ -43,7 +43,7 @@ const CounsellorAppointments = () => {
             {/* Content */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {/* Active Sessions */}
-              <div className="bg-[#fdf6e3] text-green-900 p-6 rounded-2xl shadow-sm">
+              <div className="bg-[#fdf6e3] dark:bg-gray-100 text-green-900 p-6 rounded-2xl shadow-sm">
                 <h3 className="font-bold text-lg mb-4">
                   {t("counsellor.activeSessions")} ({t("counsellor.today")})
                 </h3>
@@ -64,18 +64,18 @@ const CounsellorAppointments = () => {
               </div>
 
               {/* Upcoming Sessions */}
-              <div className="bg-[#fdf6e3] text-green-900 p-6 rounded-2xl shadow-sm">
+              <div className="bg-[#fdf6e3] dark:bg-gray-100 text-green-900 p-6 rounded-2xl shadow-sm">
                 <h3 className="font-bold text-lg mb-4">
                   {t("counsellor.upcomingSessions")}
                 </h3>
-                <p className="text-sm text-gray-700">
+                <p className="text-sm text-gray-700 dark:text-gray-800">
                   {t("counsellor.noUpcoming")}
                 </p>
               </div>
 
               {/* Calendar Card */}
-              <div className="bg-green-800 flex flex-col items-center justify-center p-6 rounded-2xl shadow-md">
-                <div className="bg-white rounded-2xl p-6 text-center">
+              <div className="bg-green-800 dark:bg-green-700 flex flex-col items-center justify-center p-6 rounded-2xl shadow-md">
+                <div className="bg-white dark:bg-gray-100 rounded-2xl p-6 text-center">
                   <p className="text-red-600 font-bold text-lg">{month}</p>
                   <p className="text-4xl font-bold text-green-900">{day}</p>
                 </div>

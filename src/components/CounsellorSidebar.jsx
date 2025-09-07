@@ -26,9 +26,11 @@ const CounsellorSidebar = () => {
   ];
 
   return (
-    <div className="h-full bg-green-900 text-white flex flex-col p-5">
+    <div className="h-full bg-green-900 dark:bg-gray-900 text-white dark:text-gray-100 flex flex-col p-5">
       {/* Brand */}
-      <div className="text-2xl font-bold mb-10">VRITTI</div>
+      <div className="text-2xl font-bold mb-10 text-white dark:text-gray-100">
+        VRITTI
+      </div>
 
       {/* Menu */}
       <nav className="flex-1 space-y-3">
@@ -39,12 +41,23 @@ const CounsellorSidebar = () => {
             <Link
               key={idx}
               to={item.path}
-              className={`flex items-center gap-3 px-4 py-3 rounded-lg transition 
-                ${isActive ? "bg-green-700 text-yellow-300" : "hover:bg-green-800"}
+              className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors
+                ${
+                  isActive
+                    ? "bg-green-700 dark:bg-green-800 text-white dark:text-gray-100"
+                    : "hover:bg-green-800 dark:hover:bg-gray-800"
+                }
               `}
             >
-              {/* ✅ Fixed icons */}
-              <Icon size={22} strokeWidth={2} className="shrink-0 text-white" />
+              <Icon
+                size={22}
+                strokeWidth={2}
+                className={`shrink-0 ${
+                  isActive
+                    ? "text-white dark:text-gray-100"
+                    : "text-gray-200 dark:text-gray-400"
+                }`}
+              />
               <span className="capitalize">{item.name}</span>
             </Link>
           );

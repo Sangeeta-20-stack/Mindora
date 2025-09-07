@@ -1,16 +1,10 @@
 // src/components/MentalHealthSurvey.jsx
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  Smile,
-  Meh,
-  Frown,
-  Angry,
-  AlertCircle,
-} from "lucide-react";
-import { useTranslation } from "react-i18next"; // ✅ import i18n
+import { Smile, Meh, Frown, Angry, AlertCircle } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
-const QuestionCard = ({ question, options, onSelect, color }) => {
+const QuestionCard = ({ question, options, onSelect }) => {
   return (
     <motion.div
       key={question}
@@ -18,16 +12,18 @@ const QuestionCard = ({ question, options, onSelect, color }) => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ type: "spring", stiffness: 100, damping: 15 }}
-      className="bg-[#f7f6d5] p-6 rounded-2xl shadow-md border border-green-900"
+      className="bg-[#f7f6d5] dark:bg-gray-800 p-6 rounded-2xl shadow-md border border-green-900 dark:border-green-700 transition-colors"
     >
-      <h3 className="text-green-900 font-semibold text-xl mb-4">{question}</h3>
+      <h3 className="text-green-900 dark:text-green-100 font-semibold text-xl mb-4 transition-colors">
+        {question}
+      </h3>
       <div className="flex flex-wrap gap-4">
         {options.map((option) => (
           <motion.button
             key={option.label}
-            whileHover={{ scale: 1.05, backgroundColor: "#e5e4c7" }}
+            whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl border border-green-900 text-green-900 font-medium hover:text-white hover:bg-green-900 transition"
+            className="flex items-center gap-2 px-4 py-2 rounded-xl border border-green-900 dark:border-green-700 text-green-900 dark:text-green-100 font-medium hover:text-white hover:bg-green-900 dark:hover:bg-green-700 transition-colors"
             onClick={() => onSelect(option.label)}
           >
             {option.icon}
@@ -40,11 +36,10 @@ const QuestionCard = ({ question, options, onSelect, color }) => {
 };
 
 const MentalHealthSurvey = () => {
-  const { t } = useTranslation(); // ✅ translation hook
+  const { t } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState({});
 
-  // ✅ pull translated questions + options
   const questions = [
     {
       question: t("survey.q1.question"),
@@ -55,7 +50,6 @@ const MentalHealthSurvey = () => {
         { label: t("survey.q1.options.angry"), icon: <Angry /> },
         { label: t("survey.q1.options.anxious"), icon: <AlertCircle /> },
       ],
-      color: "teal",
     },
     {
       question: t("survey.q2.question"),
@@ -66,7 +60,6 @@ const MentalHealthSurvey = () => {
         { label: t("survey.q2.options.often"), icon: <Angry /> },
         { label: t("survey.q2.options.always"), icon: <AlertCircle /> },
       ],
-      color: "rose",
     },
     {
       question: t("survey.q3.question"),
@@ -77,7 +70,6 @@ const MentalHealthSurvey = () => {
         { label: t("survey.q3.options.rarely"), icon: <Angry /> },
         { label: t("survey.q3.options.never"), icon: <AlertCircle /> },
       ],
-      color: "purple",
     },
     {
       question: t("survey.q4.question"),
@@ -87,7 +79,6 @@ const MentalHealthSurvey = () => {
         { label: t("survey.q4.options.rarely"), icon: <Frown /> },
         { label: t("survey.q4.options.never"), icon: <Angry /> },
       ],
-      color: "indigo",
     },
   ];
 
@@ -99,7 +90,7 @@ const MentalHealthSurvey = () => {
       setCurrentIndex(currentIndex + 1);
     } else {
       console.log("All Answers:", { ...answers, [currentQuestion]: optionLabel });
-      alert(t("survey.thank_you")); // ✅ translated message
+      alert(t("survey.thank_you"));
     }
   };
 
@@ -110,7 +101,6 @@ const MentalHealthSurvey = () => {
           key={questions[currentIndex].question}
           question={questions[currentIndex].question}
           options={questions[currentIndex].options}
-          color={questions[currentIndex].color}
           onSelect={handleSelect}
         />
       </AnimatePresence>

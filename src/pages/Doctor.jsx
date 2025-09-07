@@ -65,9 +65,9 @@ const Doctor = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-[#fdf6e3]">
+    <div className="flex min-h-screen bg-[#fdf6e3] dark:bg-gray-900 transition-colors duration-300">
       {/* Sidebar */}
-      <aside className="fixed top-0 left-0 h-full w-64 bg-green-900">
+      <aside className="fixed top-0 left-0 h-full w-64 bg-green-900 dark:bg-green-800">
         <Sidebar />
       </aside>
 
@@ -78,7 +78,7 @@ const Doctor = () => {
         <div className="flex flex-1 p-8 gap-8 overflow-y-auto">
           {/* Left: Doctor list */}
           <div className="flex-1">
-            <h1 className="text-4xl font-bold text-green-900 mb-8">
+            <h1 className="text-4xl font-bold text-green-900 dark:text-gray-100 mb-8">
               {t("doctor.greeting")}
             </h1>
 
@@ -87,10 +87,10 @@ const Doctor = () => {
                 <motion.div
                   key={doc.id}
                   whileHover={{ scale: 1.02 }}
-                  className="bg-green-900 text-white p-6 rounded-2xl shadow-lg flex flex-col justify-between"
+                  className="bg-green-900 dark:bg-green-800 text-white p-6 rounded-2xl shadow-lg flex flex-col justify-between transition-colors"
                 >
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="bg-white p-3 rounded-full">
+                    <div className="bg-white dark:bg-gray-200 p-3 rounded-full">
                       <User className="text-green-900" size={32} />
                     </div>
                     <div>
@@ -118,13 +118,13 @@ const Doctor = () => {
           {/* Right: My Sessions + Modes of Connect */}
           <div className="w-80 flex flex-col gap-6">
             {/* My Sessions */}
-            <div className="bg-green-900 text-white p-6 rounded-2xl shadow-lg">
+            <div className="bg-green-900 dark:bg-green-800 text-white p-6 rounded-2xl shadow-lg transition-colors">
               <h2 className="text-xl font-bold mb-4">{t("doctor.mySessions")}</h2>
               {appointments.length > 0 ? (
                 appointments.map((appt) => (
                   <div
                     key={appt.id}
-                    className="mb-4 p-3 rounded-lg bg-green-800 flex flex-col gap-1"
+                    className="mb-4 p-3 rounded-lg bg-green-800 dark:bg-green-700 flex flex-col gap-1"
                   >
                     <p className="font-semibold">{appt.date}</p>
                     <p className="text-sm">
@@ -147,7 +147,7 @@ const Doctor = () => {
             </div>
 
             {/* Modes of Connect */}
-            <div className="bg-green-900 text-white p-6 rounded-2xl shadow-lg">
+            <div className="bg-green-900 dark:bg-green-800 text-white p-6 rounded-2xl shadow-lg transition-colors">
               <h2 className="text-xl font-bold mb-4">{t("doctor.modesTitle")}</h2>
               <ul className="space-y-3">
                 <li className="flex items-center gap-3">

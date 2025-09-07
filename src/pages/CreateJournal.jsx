@@ -98,14 +98,14 @@ const CreateJournal = ({ onSave, initialData }) => {
   ];
 
   return (
-    <div className="p-6 bg-[#fdf6e3] rounded-2xl shadow-lg">
-      <h1 className="text-2xl font-bold text-green-900 mb-6">
+    <div className="p-6 bg-[#fdf6e3] dark:bg-gray-900 rounded-2xl shadow-lg transition-colors duration-300">
+      <h1 className="text-2xl font-bold text-green-900 dark:text-gray-100 mb-6">
         {initialData ? t("createJournal.editTitle") : t("createJournal.createTitle")}
       </h1>
 
       {/* Mood */}
       <motion.div className="mb-6">
-        <label className="block text-lg font-semibold mb-3 text-green-800">
+        <label className="block text-lg font-semibold mb-3 text-green-800 dark:text-gray-200">
           {t("createJournal.moodQuestion")} <span className="text-red-500">*</span>
         </label>
         <div className="flex gap-4 flex-wrap">
@@ -117,7 +117,7 @@ const CreateJournal = ({ onSave, initialData }) => {
                 ${
                   mood === m.label
                     ? "bg-green-900 text-white shadow-md"
-                    : "bg-white text-green-800 hover:bg-green-100 border-green-300"
+                    : "bg-white dark:bg-gray-800 text-green-800 dark:text-gray-200 hover:bg-green-100 dark:hover:bg-gray-700 border-green-300 dark:border-gray-600"
                 }`}
             >
               <span>{m.emoji}</span> {m.label}
@@ -128,7 +128,7 @@ const CreateJournal = ({ onSave, initialData }) => {
 
       {/* Activities */}
       <motion.div className="mb-6">
-        <label className="block text-lg font-semibold mb-3 text-green-800">
+        <label className="block text-lg font-semibold mb-3 text-green-800 dark:text-gray-200">
           {t("createJournal.activitiesTitle")}
         </label>
         <div className="flex flex-wrap gap-2 mb-3">
@@ -139,7 +139,7 @@ const CreateJournal = ({ onSave, initialData }) => {
               className={`px-4 py-2 rounded-full border text-sm transition shadow-sm ${
                 selectedActivities.includes(act)
                   ? "bg-green-900 text-white border-green-900 shadow-md"
-                  : "bg-white text-green-800 hover:bg-green-100 border-green-300"
+                  : "bg-white dark:bg-gray-800 text-green-800 dark:text-gray-200 hover:bg-green-100 dark:hover:bg-gray-700 border-green-300 dark:border-gray-600"
               }`}
             >
               {act}
@@ -152,11 +152,11 @@ const CreateJournal = ({ onSave, initialData }) => {
             value={newActivity}
             onChange={(e) => setNewActivity(e.target.value)}
             placeholder={t("createJournal.addActivityPlaceholder")}
-            className="flex-1 p-3 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none bg-white"
+            className="flex-1 p-3 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border-green-300 dark:border-gray-600"
           />
           <button
             onClick={addActivity}
-            className="bg-green-900 text-white px-5 py-2 rounded-lg hover:bg-green-800"
+            className="bg-green-900 text-white px-5 py-2 rounded-lg hover:bg-green-800 transition"
           >
             {t("createJournal.addBtn")}
           </button>
@@ -165,7 +165,7 @@ const CreateJournal = ({ onSave, initialData }) => {
 
       {/* Goals */}
       <motion.div className="mb-6">
-        <label className="block text-lg font-semibold mb-3 text-green-800">
+        <label className="block text-lg font-semibold mb-3 text-green-800 dark:text-gray-200">
           {t("createJournal.goalsTitle")}
         </label>
         <div className="flex flex-wrap gap-2 mb-3">
@@ -176,7 +176,7 @@ const CreateJournal = ({ onSave, initialData }) => {
               className={`px-4 py-2 rounded-full border text-sm transition shadow-sm ${
                 selectedGoals.includes(goal)
                   ? "bg-green-700 text-white border-green-700 shadow-md"
-                  : "bg-white text-green-800 hover:bg-green-100 border-green-300"
+                  : "bg-white dark:bg-gray-800 text-green-800 dark:text-gray-200 hover:bg-green-100 dark:hover:bg-gray-700 border-green-300 dark:border-gray-600"
               }`}
             >
               {goal}
@@ -189,11 +189,11 @@ const CreateJournal = ({ onSave, initialData }) => {
             value={newGoal}
             onChange={(e) => setNewGoal(e.target.value)}
             placeholder={t("createJournal.addGoalPlaceholder")}
-            className="flex-1 p-3 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none bg-white"
+            className="flex-1 p-3 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border-green-300 dark:border-gray-600"
           />
           <button
             onClick={addGoal}
-            className="bg-green-700 text-white px-5 py-2 rounded-lg hover:bg-green-800"
+            className="bg-green-700 text-white px-5 py-2 rounded-lg hover:bg-green-800 transition"
           >
             {t("createJournal.addBtn")}
           </button>
@@ -202,7 +202,7 @@ const CreateJournal = ({ onSave, initialData }) => {
 
       {/* Journal Entry */}
       <motion.div className="mb-6">
-        <label className="block text-lg font-semibold text-green-800 mb-3">
+        <label className="block text-lg font-semibold text-green-800 dark:text-gray-200 mb-3">
           {t("createJournal.entryTitle")} <span className="text-red-500">*</span>
         </label>
         <textarea
@@ -210,18 +210,18 @@ const CreateJournal = ({ onSave, initialData }) => {
           onChange={(e) => setJournalEntry(e.target.value)}
           placeholder={t("createJournal.entryPlaceholder")}
           rows={6}
-          className="w-full p-4 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none bg-white"
+          className="w-full p-4 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border-green-300 dark:border-gray-600"
         />
       </motion.div>
 
       {/* Image Upload */}
       <motion.div className="mb-6">
-        <label className="block text-lg font-semibold text-green-800 mb-3">
+        <label className="block text-lg font-semibold text-green-800 dark:text-gray-200 mb-3">
           {t("createJournal.imageTitle")}
         </label>
         <label
           htmlFor="imageUpload"
-          className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-green-400 rounded-xl cursor-pointer bg-white hover:bg-green-50 transition"
+          className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-green-400 rounded-xl cursor-pointer bg-white dark:bg-gray-800 hover:bg-green-50 dark:hover:bg-gray-700 transition"
         >
           {image ? (
             <img
@@ -230,10 +230,10 @@ const CreateJournal = ({ onSave, initialData }) => {
               className="w-32 h-32 object-cover rounded-lg shadow-md"
             />
           ) : (
-            <div className="flex flex-col items-center text-green-700">
-              <Upload className="w-10 h-10 mb-2 text-green-600" />
+            <div className="flex flex-col items-center text-green-700 dark:text-gray-300">
+              <Upload className="w-10 h-10 mb-2 text-green-600 dark:text-gray-400" />
               <span className="font-medium">{t("createJournal.uploadText")}</span>
-              <span className="text-xs text-green-500">{t("createJournal.uploadHint")}</span>
+              <span className="text-xs text-green-500 dark:text-gray-400">{t("createJournal.uploadHint")}</span>
             </div>
           )}
           <input
@@ -249,7 +249,7 @@ const CreateJournal = ({ onSave, initialData }) => {
       {/* Save Button */}
       <motion.button
         onClick={handleSave}
-        className="w-full bg-green-900 text-white py-3 rounded-lg font-semibold hover:bg-green-800 shadow-lg"
+        className="w-full bg-green-900 text-white py-3 rounded-lg font-semibold hover:bg-green-800 shadow-lg transition-colors"
       >
         {initialData ? t("createJournal.updateBtn") : t("createJournal.saveBtn")}
       </motion.button>

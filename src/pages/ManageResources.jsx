@@ -1,3 +1,4 @@
+// src/pages/ManageResources.jsx
 import React from "react";
 import AdminSidebar from "../components/AdminSidebar";
 import Topbar from "../components/Topbar";
@@ -12,7 +13,7 @@ const ManageResources = () => {
   ];
 
   return (
-    <div className="flex min-h-screen bg-[#fdf6e3]">
+    <div className="flex min-h-screen bg-[#fdf6e3] dark:bg-gray-900 transition-colors">
       {/* Sidebar fixed */}
       <div className="fixed top-0 left-0 h-full w-64">
         <AdminSidebar />
@@ -21,7 +22,7 @@ const ManageResources = () => {
       {/* Main Content */}
       <div className="ml-64 flex-1 flex flex-col">
         {/* Topbar */}
-        <div className="sticky top-0 z-20 bg-[#fdf6e3] shadow">
+        <div className="sticky top-0 z-20 bg-[#fdf6e3] dark:bg-gray-800 shadow transition-colors">
           <Topbar />
         </div>
 
@@ -29,12 +30,12 @@ const ManageResources = () => {
         <div className="p-8">
           {/* Heading */}
           <div className="flex justify-between items-center mb-8">
-            <h1 className="text-3xl font-bold text-green-900">
+            <h1 className="text-3xl font-bold text-green-900 dark:text-green-100">
               {t("manageResources.title")}
             </h1>
 
             {/* Add New Button */}
-            <button className="bg-green-900 text-white px-6 py-2 rounded-full flex items-center gap-2 hover:bg-green-800 transition">
+            <button className="bg-green-900 dark:bg-green-700 text-white px-6 py-2 rounded-full flex items-center gap-2 hover:bg-green-800 dark:hover:bg-green-600 transition">
               <span className="text-xl">+</span> {t("manageResources.addNew")}
             </button>
           </div>
@@ -44,7 +45,7 @@ const ManageResources = () => {
             {doctors.map((doc, index) => (
               <div
                 key={index}
-                className="bg-green-900 text-white p-6 rounded-2xl shadow-lg flex flex-col justify-between"
+                className="bg-green-900 dark:bg-green-800 text-white p-6 rounded-2xl shadow-lg flex flex-col justify-between transition-colors"
               >
                 {/* Top Section */}
                 <div className="flex items-center gap-4 mb-6">
@@ -72,7 +73,7 @@ const ManageResources = () => {
 
                 {/* Buttons */}
                 <div className="flex gap-3">
-                  <button className="relative bg-white text-green-900 px-5 py-2 rounded-full font-medium hover:bg-green-100 transition">
+                  <button className="relative bg-white text-green-900 dark:bg-gray-200 dark:text-green-900 px-5 py-2 rounded-full font-medium hover:bg-green-100 dark:hover:bg-gray-300 transition">
                     {t("manageResources.appointments")}
                     {doc.appointments > 0 && (
                       <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
@@ -81,7 +82,7 @@ const ManageResources = () => {
                     )}
                   </button>
 
-                  <button className="bg-white text-green-900 px-5 py-2 rounded-full font-medium hover:bg-green-100 transition">
+                  <button className="bg-white text-green-900 dark:bg-gray-200 dark:text-green-900 px-5 py-2 rounded-full font-medium hover:bg-green-100 dark:hover:bg-gray-300 transition">
                     {t("manageResources.manage")}
                   </button>
                 </div>

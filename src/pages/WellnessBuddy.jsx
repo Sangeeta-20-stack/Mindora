@@ -8,7 +8,7 @@ const WellnessBuddy = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="flex min-h-screen bg-[#fdf6e3]">
+    <div className="flex min-h-screen bg-[#fdf6e3] dark:bg-gray-900 transition-colors duration-300">
       {/* Sidebar */}
       <aside className="w-64 bg-green-900 flex-shrink-0 h-screen fixed">
         <Sidebar />
@@ -23,7 +23,7 @@ const WellnessBuddy = () => {
 
         {/* Chat Section */}
         <main className="p-6 space-y-6">
-          <h1 className="text-3xl font-bold text-green-900 mb-6">
+          <h1 className="text-3xl font-bold text-green-900 dark:text-gray-100 mb-6">
             {t("wellnessBuddy.title")}
           </h1>
 
@@ -42,13 +42,13 @@ const WellnessBuddy = () => {
               </div>
 
               {/* Input box */}
-              <div className="flex items-center bg-[#fdf6e3] rounded-xl px-3 py-2">
+              <div className="flex items-center bg-[#fdf6e3] dark:bg-gray-800 rounded-xl px-3 py-2 transition-colors">
                 <input
                   type="text"
                   placeholder={t("wellnessBuddy.inputPlaceholder")}
-                  className="flex-1 bg-transparent outline-none text-black"
+                  className="flex-1 bg-transparent outline-none text-black dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
                 />
-                <button className="bg-green-700 text-white px-4 py-1 rounded-xl ml-2">
+                <button className="bg-green-700 hover:bg-green-600 text-white px-4 py-1 rounded-xl ml-2 transition-colors">
                   ➤
                 </button>
               </div>

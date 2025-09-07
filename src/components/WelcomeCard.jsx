@@ -1,7 +1,7 @@
 // src/components/WelcomeCard.jsx
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useTranslation } from "react-i18next"; // ✅ translation hook
+import { useTranslation } from "react-i18next";
 import welcomeImg from "../assets/welcome.jpg";
 
 const quotes = [
@@ -27,7 +27,7 @@ const WelcomeCard = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setQuoteIndex((prev) => (prev + 1) % quotes.length);
-    }, 7000); // change every 7 seconds
+    }, 7000);
     return () => clearInterval(interval);
   }, []);
 
@@ -45,7 +45,11 @@ const WelcomeCard = () => {
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, ease: "easeOut" }}
-      className="bg-green-900 text-white rounded-3xl p-8 flex justify-between items-center shadow-xl"
+      className="
+        rounded-3xl p-8 flex justify-between items-center shadow-xl
+        bg-green-900 text-white
+        dark:bg-gray-800 dark:text-gray-100
+      "
     >
       {/* Left Section */}
       <motion.div
@@ -58,7 +62,7 @@ const WelcomeCard = () => {
           {t("welcome", { name: userName })}
         </h2>
 
-        <p className="mt-2 text-xl font-semibold text-[#f7f6d5]">
+        <p className="mt-2 text-xl font-semibold text-[#f7f6d5] dark:text-green-300">
           {formattedDate}
         </p>
 
@@ -71,7 +75,11 @@ const WelcomeCard = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.6 }}
-              className="italic text-xl text-gray-200 border-l-4 border-[#f7f6d5] pl-4"
+              className="
+                italic text-xl border-l-4 pl-4
+                text-gray-200 border-[#f7f6d5]
+                dark:text-gray-300 dark:border-green-300
+              "
             >
               “{quotes[quoteIndex]}”
             </motion.blockquote>

@@ -35,7 +35,6 @@ const Analytics = () => {
 
   useEffect(() => {
     loadEntries();
-
     const handleStorageChange = () => loadEntries();
     window.addEventListener("storage", handleStorageChange);
     return () => window.removeEventListener("storage", handleStorageChange);
@@ -83,8 +82,22 @@ const Analytics = () => {
   );
 
   return (
-    <div className="flex min-h-screen bg-[#fdf6e3]">
-      <aside className="fixed left-0 top-0 h-full w-64 bg-green-900">
+    <div
+      className="
+        flex min-h-screen 
+        bg-[#fdf6e3] text-green-900 
+        dark:bg-gray-900 dark:text-gray-100
+        transition-colors duration-300
+      "
+    >
+      <aside
+        className="
+          fixed left-0 top-0 h-full w-64
+          bg-green-900 text-white
+          dark:bg-gray-800 dark:text-gray-100
+          transition-colors duration-300
+        "
+      >
         <Sidebar />
       </aside>
 
@@ -92,14 +105,22 @@ const Analytics = () => {
         <Topbar title={t("analytics.title")} />
 
         <motion.div className="p-8" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <h2 className="text-3xl font-bold mb-6 text-green-900 text-center">
+          <h2 className="text-3xl font-bold mb-6 text-green-900 dark:text-green-300 text-center">
             {t("analytics.subtitle")}
           </h2>
 
           {totalEntries === 0 ? (
-            <div className="bg-[#fdf6e3] p-8 rounded-xl shadow-md text-center border border-green-200">
-              <p className="text-green-900 text-lg">{t("analytics.noReflections")}</p>
-              <p className="text-gray-600 text-sm mt-2">{t("analytics.hint")}</p>
+            <div
+              className="
+                p-8 rounded-xl shadow-md text-center border
+                bg-[#fdf6e3] border-green-200 text-green-900
+                dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100
+              "
+            >
+              <p className="text-lg">{t("analytics.noReflections")}</p>
+              <p className="text-sm mt-2 text-gray-600 dark:text-gray-400">
+                {t("analytics.hint")}
+              </p>
             </div>
           ) : (
             <>
@@ -127,8 +148,15 @@ const Analytics = () => {
               {/* Charts */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* Sentiment Pie Chart */}
-                <div className="bg-white p-6 rounded-xl shadow-md border border-green-200">
-                  <h3 className="text-lg font-semibold mb-3 text-green-900">
+                <div
+                  className="
+                    p-6 rounded-xl shadow-md border
+                    bg-white border-green-200 text-green-900
+                    dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100
+                    transition-colors duration-300
+                  "
+                >
+                  <h3 className="text-lg font-semibold mb-3">
                     {t("analytics.sentimentDistribution")}
                   </h3>
                   <ResponsiveContainer width="100%" height={300}>
@@ -151,15 +179,27 @@ const Analytics = () => {
                 </div>
 
                 {/* Weekly Activity Bar Chart */}
-                <div className="bg-white p-6 rounded-xl shadow-md border border-green-200">
-                  <h3 className="text-lg font-semibold mb-3 text-green-900">
+                <div
+                  className="
+                    p-6 rounded-xl shadow-md border
+                    bg-white border-green-200 text-green-900
+                    dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100
+                    transition-colors duration-300
+                  "
+                >
+                  <h3 className="text-lg font-semibold mb-3">
                     {t("analytics.reflectionsPerDay")}
                   </h3>
                   <ResponsiveContainer width="100%" height={300}>
                     <BarChart data={weeklyData}>
-                      <XAxis dataKey="day" />
-                      <YAxis />
-                      <Tooltip />
+                      <XAxis dataKey="day" stroke="currentColor" />
+                      <YAxis stroke="currentColor" />
+                      <Tooltip
+                        contentStyle={{
+                          backgroundColor: "var(--tw-bg-opacity, #fff)",
+                          color: "inherit",
+                        }}
+                      />
                       <Bar dataKey="entries" fill="#14532d" radius={[6, 6, 0, 0]} />
                     </BarChart>
                   </ResponsiveContainer>
@@ -176,16 +216,23 @@ const Analytics = () => {
 // Stat card component
 const StatCard = ({ title, value, color }) => {
   const colors = {
-    green: "bg-green-900 text-white",
-    purple: "bg-purple-600 text-white",
-    orange: "bg-orange-500 text-white",
+    green: "bg-green-900 text-white dark:bg-green-700",
+    purple: "bg-purple-600 text-white dark:bg-purple-500",
+    orange: "bg-orange-500 text-white dark:bg-orange-400",
   };
   return (
-    <div className="bg-white p-6 rounded-xl text-center shadow-md border border-green-200">
+    <div
+      className="
+        p-6 rounded-xl text-center shadow-md border
+        bg-white border-green-200 text-green-900
+        dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100
+        transition-colors duration-300
+      "
+    >
       <h4 className={`text-sm font-semibold ${colors[color]} px-3 py-1 rounded-full inline-block`}>
         {title}
       </h4>
-      <p className="text-3xl font-bold mt-3 text-green-900">{value}</p>
+      <p className="text-3xl font-bold mt-3">{value}</p>
     </div>
   );
 };

@@ -10,9 +10,23 @@ const Dashboard = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="flex min-h-screen bg-[#f7f6d5]">
+    <div
+      className="
+        flex min-h-screen 
+        bg-[#f7f6d5] text-green-900 
+        dark:bg-gray-900 dark:text-gray-100
+        transition-colors duration-300
+      "
+    >
       {/* Sidebar */}
-      <aside className="w-64 bg-green-900 flex-shrink-0 h-screen fixed">
+      <aside
+        className="
+          w-64 flex-shrink-0 h-screen fixed
+          bg-green-900 text-white
+          dark:bg-gray-800 dark:text-gray-100
+          transition-colors duration-300
+        "
+      >
         <Sidebar />
       </aside>
 
@@ -26,7 +40,7 @@ const Dashboard = () => {
         {/* Scrollable main area */}
         <main className="p-6 space-y-6">
           {/* Welcome Section */}
-          <WelcomeCard 
+          <WelcomeCard
             title={t("dashboard.welcomeCard.title")}
             subtitle={t("dashboard.welcomeCard.subtitle")}
           />

@@ -1,3 +1,4 @@
+// src/pages/FeedbackInbox.jsx
 import React from "react";
 import AdminSidebar from "../components/AdminSidebar";
 import Topbar from "../components/Topbar";
@@ -15,7 +16,7 @@ const FeedbackInbox = () => {
   ];
 
   return (
-    <div className="flex min-h-screen bg-[#fdf6e3]">
+    <div className="flex min-h-screen bg-[#fdf6e3] dark:bg-gray-900 transition-colors">
       {/* Sidebar */}
       <div className="fixed top-0 left-0 h-full w-64">
         <AdminSidebar />
@@ -24,7 +25,7 @@ const FeedbackInbox = () => {
       {/* Main Content */}
       <div className="ml-64 flex-1 flex flex-col">
         {/* Topbar */}
-        <div className="sticky top-0 z-20 bg-[#fdf6e3] shadow">
+        <div className="sticky top-0 z-20 bg-[#fdf6e3] dark:bg-gray-800 shadow transition-colors">
           <Topbar />
         </div>
 
@@ -32,7 +33,7 @@ const FeedbackInbox = () => {
         <div className="p-8">
           {/* Header */}
           <div className="flex justify-between items-center mb-6">
-            <h1 className="text-3xl font-bold text-green-900">
+            <h1 className="text-3xl font-bold text-green-900 dark:text-green-100 transition-colors">
               {t("feedbackInbox.title")}
             </h1>
 
@@ -43,9 +44,9 @@ const FeedbackInbox = () => {
                 placeholder={t("feedbackInbox.searchHere")}
                 className="bg-green-900 text-white placeholder-white px-5 py-2 rounded-full focus:outline-none"
               />
-              <SlidersHorizontal className="w-6 h-6 text-green-900 cursor-pointer" />
+              <SlidersHorizontal className="w-6 h-6 text-green-900 dark:text-green-100 cursor-pointer transition-colors" />
               <div className="relative">
-                <Bell className="w-6 h-6 text-green-900 cursor-pointer" />
+                <Bell className="w-6 h-6 text-green-900 dark:text-green-100 cursor-pointer transition-colors" />
                 <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full">
                   1
                 </span>
@@ -60,7 +61,7 @@ const FeedbackInbox = () => {
               {feedbacks.map((fb) => (
                 <div
                   key={fb.id}
-                  className="bg-green-900 text-white p-6 rounded-3xl shadow-md"
+                  className="bg-green-900 text-white p-6 rounded-3xl shadow-md dark:bg-gray-800 transition-colors"
                 >
                   <h2 className="text-xl font-semibold">
                     {t("feedbackInbox.student")} {fb.id}
@@ -71,7 +72,7 @@ const FeedbackInbox = () => {
             </div>
 
             {/* Category Section */}
-            <div className="bg-green-900 text-white p-6 rounded-3xl shadow-md">
+            <div className="bg-green-900 text-white p-6 rounded-3xl shadow-md dark:bg-gray-800 transition-colors">
               <h2 className="text-xl font-semibold mb-4">
                 {t("feedbackInbox.category")}
               </h2>

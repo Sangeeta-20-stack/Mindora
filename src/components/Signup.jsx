@@ -33,7 +33,7 @@ const Signup = () => {
         role,
         name,
         password,
-        status: "approved", // students auto-approved
+        status: "approved",
       };
     } else {
       const fullname = e.target.fullname.value.trim();
@@ -49,11 +49,10 @@ const Signup = () => {
         fullname,
         email,
         password,
-        status: "pending", // needs admin approval
+        status: "pending",
       };
     }
 
-    // Save user (demo only)
     const existing = JSON.parse(localStorage.getItem("users")) || [];
     existing.push(newUser);
     localStorage.setItem("users", JSON.stringify(existing));
@@ -68,15 +67,18 @@ const Signup = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#FDFBF7]">
+    <div className="min-h-screen flex items-center justify-center 
+                    bg-[#FDFBF7] dark:bg-gray-950 transition-colors duration-300">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="flex w-[90%] max-w-5xl rounded-3xl shadow-xl overflow-hidden"
+        className="flex w-[90%] max-w-5xl rounded-3xl shadow-xl overflow-hidden 
+                   bg-white dark:bg-gray-900 transition-colors duration-300"
       >
         {/* Left Section */}
-        <div className="relative w-1/2 bg-green-900 p-10 text-white flex flex-col justify-between items-center">
+        <div className="relative w-1/2 bg-green-900 dark:bg-green-800 
+                        p-10 text-white flex flex-col justify-between items-center">
           <div className="absolute -top-10 -left-10 w-32 h-32 bg-white/20 rounded-full blur-2xl animate-pulse"></div>
           <div className="absolute bottom-10 right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl animate-bounce"></div>
 
@@ -108,15 +110,16 @@ const Signup = () => {
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7 }}
-          className="w-1/2 bg-[#fdf6e3] p-12 overflow-y-auto"
+          className="w-1/2 bg-[#fdf6e3] dark:bg-gray-800 p-12 overflow-y-auto 
+                     transition-colors duration-300"
         >
-          <h2 className="text-3xl font-bold mb-3 text-gray-800 text-center">
+          <h2 className="text-3xl font-bold mb-3 text-gray-800 dark:text-gray-100 text-center">
             {role === "student"
               ? "Create Anonymous Account"
               : `Sign up as ${role.charAt(0).toUpperCase() + role.slice(1)}`}
           </h2>
 
-          <p className="text-gray-600 text-center mb-8 text-sm">
+          <p className="text-gray-600 dark:text-gray-400 text-center mb-8 text-sm">
             {role === "student"
               ? "Start your wellness journey with complete privacy."
               : "Provide your details to join as " + role + "."}
@@ -126,7 +129,11 @@ const Signup = () => {
           <select
             value={role}
             onChange={(e) => setRole(e.target.value)}
-            className="w-full mb-6 p-3 rounded-full bg-gray-100 outline-none focus:ring-2 focus:ring-green-600 transition"
+            className="w-full mb-6 p-3 rounded-full 
+                       bg-gray-100 dark:bg-gray-700 
+                       text-gray-800 dark:text-gray-100 
+                       border border-gray-300 dark:border-gray-600 
+                       outline-none focus:ring-2 focus:ring-green-600 transition"
           >
             <option value="student">Student (Anonymous)</option>
             <option value="counsellor">Counsellor</option>
@@ -137,29 +144,39 @@ const Signup = () => {
           {/* Form */}
           <form className="flex flex-col gap-5" onSubmit={handleSignup}>
             {role === "student" ? (
-              <>
-                <input
-                  name="name"
-                  type="text"
-                  placeholder="e.g., PeacefulMind, CalmStudent"
-                  className="w-full p-3 rounded-full bg-gray-100 outline-none focus:ring-2 focus:ring-green-600 transition"
-                  required
-                />
-              </>
+              <input
+                name="name"
+                type="text"
+                placeholder="e.g., PeacefulMind, CalmStudent"
+                className="w-full p-3 rounded-full 
+                           bg-gray-100 dark:bg-gray-700 
+                           text-gray-800 dark:text-gray-100 
+                           border border-gray-300 dark:border-gray-600 
+                           outline-none focus:ring-2 focus:ring-green-600 transition"
+                required
+              />
             ) : (
               <>
                 <input
                   name="fullname"
                   type="text"
                   placeholder="Full Name"
-                  className="w-full p-3 rounded-full bg-gray-100 outline-none focus:ring-2 focus:ring-green-600 transition"
+                  className="w-full p-3 rounded-full 
+                             bg-gray-100 dark:bg-gray-700 
+                             text-gray-800 dark:text-gray-100 
+                             border border-gray-300 dark:border-gray-600 
+                             outline-none focus:ring-2 focus:ring-green-600 transition"
                   required
                 />
                 <input
                   name="email"
                   type="email"
                   placeholder="Email Address"
-                  className="w-full p-3 rounded-full bg-gray-100 outline-none focus:ring-2 focus:ring-green-600 transition"
+                  className="w-full p-3 rounded-full 
+                             bg-gray-100 dark:bg-gray-700 
+                             text-gray-800 dark:text-gray-100 
+                             border border-gray-300 dark:border-gray-600 
+                             outline-none focus:ring-2 focus:ring-green-600 transition"
                   required
                 />
               </>
@@ -170,14 +187,22 @@ const Signup = () => {
               name="password"
               type="password"
               placeholder="Password"
-              className="w-full p-3 rounded-full bg-gray-100 outline-none focus:ring-2 focus:ring-green-600 transition"
+              className="w-full p-3 rounded-full 
+                         bg-gray-100 dark:bg-gray-700 
+                         text-gray-800 dark:text-gray-100 
+                         border border-gray-300 dark:border-gray-600 
+                         outline-none focus:ring-2 focus:ring-green-600 transition"
               required
             />
             <input
               name="confirm"
               type="password"
               placeholder="Confirm Password"
-              className="w-full p-3 rounded-full bg-gray-100 outline-none focus:ring-2 focus:ring-green-600 transition"
+              className="w-full p-3 rounded-full 
+                         bg-gray-100 dark:bg-gray-700 
+                         text-gray-800 dark:text-gray-100 
+                         border border-gray-300 dark:border-gray-600 
+                         outline-none focus:ring-2 focus:ring-green-600 transition"
               required
             />
 
@@ -186,14 +211,18 @@ const Signup = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               type="submit"
-              className="w-full bg-green-900 text-white py-3 rounded-full font-semibold shadow-md transition"
+              className="w-full bg-green-900 hover:bg-green-800 
+                         text-white py-3 rounded-full font-semibold shadow-md transition"
             >
               {role === "student" ? "Create Anonymous Account" : "Sign Up"}
             </motion.button>
 
-            <p className="text-center text-sm text-gray-600">
+            <p className="text-center text-sm text-gray-600 dark:text-gray-400">
               Already have an account?{" "}
-              <Link to="/login" className="text-green-700 hover:underline">
+              <Link
+                to="/login"
+                className="text-green-700 dark:text-green-400 hover:underline"
+              >
                 Log in
               </Link>
             </p>
@@ -201,14 +230,17 @@ const Signup = () => {
 
           {/* Privacy Info (only for students) */}
           {role === "student" && (
-            <div className="mt-8 p-5 rounded-xl bg-[#F6F3EB] border border-[#E6E1D8]">
+            <div className="mt-8 p-5 rounded-xl 
+                            bg-[#F6F3EB] dark:bg-gray-700 
+                            border border-[#E6E1D8] dark:border-gray-600 
+                            transition-colors duration-300">
               <div className="flex items-center gap-2 mb-3">
-                <ShieldCheck className="text-green-700" size={20} />
-                <h3 className="font-semibold text-gray-800">
+                <ShieldCheck className="text-green-700 dark:text-green-400" size={20} />
+                <h3 className="font-semibold text-gray-800 dark:text-gray-100">
                   Your Privacy is Protected
                 </h3>
               </div>
-              <ul className="text-sm text-gray-700 list-disc list-inside space-y-1">
+              <ul className="text-sm text-gray-700 dark:text-gray-300 list-disc list-inside space-y-1">
                 <li>No real name or email required</li>
                 <li>Anonymous name + password for login</li>
                 <li>All data stored anonymously</li>

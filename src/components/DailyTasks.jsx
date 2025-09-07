@@ -40,7 +40,14 @@ const DailyTasks = ({ onCompletionChange }) => {
   const total = taskList.length;
 
   return (
-    <div className="bg-green-900 rounded-2xl shadow-lg p-6 text-white">
+    <div
+      className="
+        bg-green-900 text-white
+        dark:bg-gray-800 dark:text-gray-100
+        rounded-2xl shadow-lg p-6
+        transition-colors duration-300
+      "
+    >
       <h3 className="font-bold text-lg mb-3">📋 {t("dailyTasks.title")}</h3>
       <p className="mb-3 text-sm">
         {completed}/{total} {t("dailyTasks.completed")}
@@ -57,10 +64,18 @@ const DailyTasks = ({ onCompletionChange }) => {
             >
               <Icon
                 className={`w-5 h-5 mr-2 ${
-                  done ? "text-yellow-300" : "text-white"
+                  done
+                    ? "text-yellow-300"
+                    : "text-white dark:text-gray-300"
                 }`}
               />
-              <span className={done ? "line-through text-gray-300" : ""}>
+              <span
+                className={
+                  done
+                    ? "line-through text-gray-300 dark:text-gray-500"
+                    : ""
+                }
+              >
                 {t(`tasks.${task.key}`)} {/* ✅ translated task label */}
               </span>
             </li>

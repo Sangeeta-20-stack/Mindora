@@ -1,3 +1,4 @@
+// src/components/QuotesCard.jsx
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -23,9 +24,18 @@ const QuotesCard = () => {
   }, [quotes.length]);
 
   return (
-    <div className="bg-green-900 rounded-2xl shadow-lg p-6 text-white flex flex-col justify-between">
+    <div
+      className="
+        bg-green-900 text-white
+        dark:bg-gray-800 dark:text-gray-100
+        rounded-2xl shadow-lg p-6 flex flex-col justify-between
+        transition-colors duration-300
+      "
+    >
       <p className="italic text-sm">“{quotes[quoteIndex].text}”</p>
-      <span className="mt-4 font-bold text-sm self-end">- {quotes[quoteIndex].author}</span>
+      <span className="mt-4 font-bold text-sm self-end">
+        - {quotes[quoteIndex].author}
+      </span>
     </div>
   );
 };

@@ -1,3 +1,4 @@
+// src/components/AboutSection.jsx
 import React from "react";
 import { motion } from "framer-motion";
 import { Globe, Target, Sparkles } from "lucide-react";
@@ -9,7 +10,7 @@ const AboutSection = () => {
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
       viewport={{ once: true, amount: 0.2 }}
-      className="bg-[#f7f6d5] py-20 px-6 text-center"
+      className="bg-[#f7f6d5] dark:bg-gray-900 py-20 px-6 text-center transition-colors duration-300"
     >
       {/* Heading */}
       <motion.h1
@@ -17,7 +18,7 @@ const AboutSection = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
-        className="text-4xl font-extrabold mb-10 text-[#144d25] font-serif"
+        className="text-4xl font-extrabold mb-10 text-[#144d25] dark:text-green-200 font-serif transition-colors duration-300"
       >
         About Us
       </motion.h1>
@@ -30,11 +31,11 @@ const AboutSection = () => {
         viewport={{ once: true }}
         className="max-w-4xl mx-auto mb-16 text-lg leading-relaxed"
       >
-        <h2 className="mb-2 text-lg text-[#144d25] mb-12">
+        <h2 className="mb-2 text-lg text-[#144d25] dark:text-gray-200 mb-12">
           At <span className="font-bold">Vritti</span>, we believe that mental
           health is just as important as academics.
         </h2>
-        <p className="text-lg text-[#144d25] mb-12">
+        <p className="text-lg text-[#144d25] dark:text-gray-300 mb-12">
           Our platform is designed to support students by providing:
         </p>
       </motion.div>
@@ -52,16 +53,15 @@ const AboutSection = () => {
             y: -5,
             boxShadow: "0 15px 25px rgba(20,77,37,0.4)",
           }}
-          className="bg-[#144d25] text-white rounded-2xl p-10 shadow-lg relative overflow-hidden"
+          className="bg-[#144d25] dark:bg-green-800 text-white dark:text-green-50 rounded-2xl p-10 shadow-lg relative overflow-hidden transition-colors duration-300"
         >
-          <Globe className="w-10 h-10 mx-auto mb-4" />
+          <Globe className="w-10 h-10 mx-auto mb-4 text-green-200" />
           <h3 className="text-xl font-semibold mb-4">Our Mission</h3>
           <p className="text-sm leading-relaxed">
             To create a safe, stigma-free digital ecosystem where institutions
             can proactively support mental well-being through AI-driven tools,
             community care, and accessibility for all.
           </p>
-          {/* Reflection glow */}
           <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-white/10 to-transparent rounded-2xl pointer-events-none"></div>
         </motion.div>
 
@@ -76,9 +76,9 @@ const AboutSection = () => {
             y: -5,
             boxShadow: "0 15px 25px rgba(20,77,37,0.4)",
           }}
-          className="bg-[#144d25] text-white rounded-2xl p-10 shadow-lg relative overflow-hidden"
+          className="bg-[#144d25] dark:bg-green-800 text-white dark:text-green-50 rounded-2xl p-10 shadow-lg relative overflow-hidden transition-colors duration-300"
         >
-          <Target className="w-10 h-10 mx-auto mb-4" />
+          <Target className="w-10 h-10 mx-auto mb-4 text-green-200" />
           <h3 className="text-xl font-semibold mb-4">Our Vision</h3>
           <p className="text-sm leading-relaxed">
             A future where mental health is seamlessly integrated into every
@@ -99,9 +99,9 @@ const AboutSection = () => {
             y: -5,
             boxShadow: "0 15px 25px rgba(20,77,37,0.4)",
           }}
-          className="bg-[#144d25] text-white rounded-2xl p-10 shadow-lg relative overflow-hidden"
+          className="bg-[#144d25] dark:bg-green-800 text-white dark:text-green-50 rounded-2xl p-10 shadow-lg relative overflow-hidden transition-colors duration-300"
         >
-          <Sparkles className="w-10 h-10 mx-auto mb-4" />
+          <Sparkles className="w-10 h-10 mx-auto mb-4 text-green-200" />
           <h3 className="text-xl font-semibold mb-4">Our Values</h3>
           <p className="text-sm leading-relaxed">
             Compassion, Innovation, Inclusivity, Collaboration, Confidentiality

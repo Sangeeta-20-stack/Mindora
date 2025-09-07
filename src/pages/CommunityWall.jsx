@@ -63,15 +63,15 @@ const CommunityWall = () => {
   };
 
   return (
-    <div className="flex h-screen bg-[#fdf6e3]">
+    <div className="flex h-screen bg-[#fdf6e3] dark:bg-gray-900">
       <Sidebar />
       <div className="flex flex-col flex-1 ml-64">
         <Topbar />
 
         <div className="flex-1 flex p-6 gap-6 overflow-hidden">
           {/* Thread List */}
-          <div className="w-1/4 bg-white rounded-2xl shadow-md p-4 border border-green-200">
-            <h2 className="text-lg font-bold text-green-900 mb-4">
+          <div className="w-1/4 bg-white dark:bg-gray-800 rounded-2xl shadow-md p-4 border border-green-200 dark:border-gray-700">
+            <h2 className="text-lg font-bold text-green-900 dark:text-green-100 mb-4">
               {t("communityWall.threadsTitle")}
             </h2>
             <ul className="space-y-3">
@@ -81,8 +81,8 @@ const CommunityWall = () => {
                     onClick={() => setSelectedThread(tObj.id)}
                     className={`w-full text-left px-3 py-2 rounded-lg transition ${
                       selectedThread === tObj.id
-                        ? "bg-green-900 text-white shadow"
-                        : "bg-green-50 text-green-900 hover:bg-green-100"
+                        ? "bg-green-900 text-white shadow dark:bg-green-700"
+                        : "bg-green-50 text-green-900 hover:bg-green-100 dark:bg-gray-700 dark:text-green-100 dark:hover:bg-gray-600"
                     }`}
                   >
                     {tObj.title}
@@ -93,8 +93,8 @@ const CommunityWall = () => {
           </div>
 
           {/* Posts Section */}
-          <div className="flex-1 flex flex-col bg-white rounded-2xl shadow-md p-6 border border-green-200">
-            <h2 className="text-2xl font-bold text-green-900 mb-4">
+          <div className="flex-1 flex flex-col bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6 border border-green-200 dark:border-gray-700">
+            <h2 className="text-2xl font-bold text-green-900 dark:text-green-100 mb-4">
               {threads.find((tObj) => tObj.id === selectedThread)?.title ||
                 t("communityWall.selectThread")}
             </h2>
@@ -107,20 +107,22 @@ const CommunityWall = () => {
                   animate={{ opacity: 1, y: 0 }}
                   className={`p-4 rounded-xl shadow-sm border ${
                     post.reported
-                      ? "bg-red-50 border-red-300"
-                      : "bg-green-50 border-green-200"
+                      ? "bg-red-50 border-red-300 dark:bg-red-900 dark:border-red-700"
+                      : "bg-green-50 border-green-200 dark:bg-green-900 dark:border-green-700"
                   }`}
                 >
                   <div className="flex justify-between items-center">
                     <span className="text-xl">{post.avatar}</span>
-                    <span className="text-xs text-gray-500">{post.date}</span>
+                    <span className="text-xs text-gray-500 dark:text-gray-400">
+                      {post.date}
+                    </span>
                   </div>
-                  <p className="mt-2 text-green-900">{post.text}</p>
+                  <p className="mt-2 text-green-900 dark:text-green-100">{post.text}</p>
 
                   {!post.reported && (
                     <button
                       onClick={() => handleReport(selectedThread, post.id)}
-                      className="flex items-center gap-1 text-red-500 text-sm mt-2 hover:text-red-700"
+                      className="flex items-center gap-1 text-red-500 text-sm mt-2 hover:text-red-700 dark:hover:text-red-400"
                     >
                       <Flag size={14} /> {t("communityWall.report")}
                     </button>
@@ -134,7 +136,7 @@ const CommunityWall = () => {
               ))}
 
               {(posts[selectedThread] || []).length === 0 && (
-                <p className="text-green-700 text-center mt-10">
+                <p className="text-green-700 dark:text-green-300 text-center mt-10">
                   {t("communityWall.noPosts")}
                 </p>
               )}
@@ -147,11 +149,11 @@ const CommunityWall = () => {
                 value={newPost}
                 onChange={(e) => setNewPost(e.target.value)}
                 placeholder={t("communityWall.newPostPlaceholder")}
-                className="flex-1 p-3 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none bg-[#fdf6e3]"
+                className="flex-1 p-3 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none bg-[#fdf6e3] dark:bg-gray-700 dark:text-white dark:placeholder-gray-400"
               />
               <button
                 onClick={handlePost}
-                className="bg-green-900 text-white px-4 py-2 rounded-lg hover:bg-green-800 flex items-center gap-2"
+                className="bg-green-900 text-white px-4 py-2 rounded-lg hover:bg-green-800 flex items-center gap-2 dark:bg-green-700 dark:hover:bg-green-600"
               >
                 <Send size={16} /> {t("communityWall.postBtn")}
               </button>

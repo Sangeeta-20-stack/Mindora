@@ -29,9 +29,9 @@ const Account = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-[#fdf6e3]">
+    <div className="flex min-h-screen bg-[#fdf6e3] dark:bg-gray-900 transition-colors duration-300">
       {/* Sidebar */}
-      <aside className="fixed left-0 top-0 h-full w-64 bg-green-900">
+      <aside className="fixed left-0 top-0 h-full w-64 bg-green-900 dark:bg-green-800">
         <Sidebar />
       </aside>
 
@@ -46,9 +46,9 @@ const Account = () => {
             initial={{ opacity: 0, y: 50, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
-            className="bg-[#fdf6e3] w-full rounded-2xl shadow-xl p-10 border border-green-200"
+            className="bg-[#fdf6e3] dark:bg-gray-800 w-full rounded-2xl shadow-xl p-10 border border-green-200 dark:border-gray-700"
           >
-            <h2 className="text-3xl font-extrabold text-green-900 mb-8 text-center">
+            <h2 className="text-3xl font-extrabold text-green-900 dark:text-gray-100 mb-8 text-center">
               {t("account.details")}
             </h2>
 
@@ -62,7 +62,7 @@ const Account = () => {
                 {/* Name */}
                 <motion.div
                   whileHover={{ scale: 1.02 }}
-                  className="flex items-center gap-4 p-5 rounded-xl shadow-md bg-green-900 text-white"
+                  className="flex items-center gap-4 p-5 rounded-xl shadow-md bg-green-900 dark:bg-green-800 text-white"
                 >
                   <User className="text-yellow-300 w-7 h-7" />
                   <div>
@@ -76,7 +76,7 @@ const Account = () => {
                 {/* Role */}
                 <motion.div
                   whileHover={{ scale: 1.02 }}
-                  className="flex items-center gap-4 p-5 rounded-xl shadow-md bg-green-900 text-white"
+                  className="flex items-center gap-4 p-5 rounded-xl shadow-md bg-green-900 dark:bg-green-800 text-white"
                 >
                   <Shield className="text-yellow-300 w-7 h-7" />
                   <div>
@@ -104,7 +104,7 @@ const Account = () => {
                 whileHover={{ scale: 1.05, backgroundColor: "#14532d" }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => navigate("/dashboard")}
-                className="w-full bg-green-900 text-white py-3 rounded-xl font-semibold shadow-md transition"
+                className="w-full bg-green-900 dark:bg-green-700 text-white py-3 rounded-xl font-semibold shadow-md transition"
               >
                 {t("account.goDashboard")}
               </motion.button>

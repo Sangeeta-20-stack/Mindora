@@ -55,7 +55,7 @@ const ReflectionBox = () => {
   };
 
   return (
-    <div className="flex h-screen bg-[#fdf6e3]">
+    <div className="flex h-screen bg-[#fdf6e3] dark:bg-gray-900 transition-colors duration-300">
       <aside className="w-64 fixed h-screen bg-green-900">
         <Sidebar />
       </aside>
@@ -66,9 +66,9 @@ const ReflectionBox = () => {
         <div className="p-6 overflow-y-auto">
           {/* Header */}
           <div className="flex justify-between items-center mb-8">
-            <h2 className="text-3xl font-bold text-green-900 flex items-center gap-2">
+            <h2 className="text-3xl font-bold text-green-900 dark:text-gray-100 flex items-center gap-2">
               {t("reflectionBox.title")}
-              <span className="text-green-700 text-lg font-normal">
+              <span className="text-green-700 dark:text-gray-300 text-lg font-normal">
                 ({entries.length} {t("reflectionBox.reflections")})
               </span>
             </h2>
@@ -80,7 +80,7 @@ const ReflectionBox = () => {
                 setEditingEntry(null);
                 setShowForm(true);
               }}
-              className="px-4 py-2 bg-green-900 text-white rounded-lg flex items-center gap-2 shadow hover:bg-green-800 transition"
+              className="px-4 py-2 bg-green-900 hover:bg-green-800 text-white rounded-lg flex items-center gap-2 shadow transition"
             >
               <Plus size={18} /> {t("reflectionBox.newReflection")}
             </motion.button>
@@ -97,18 +97,18 @@ const ReflectionBox = () => {
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ delay: index * 0.1 }}
                   whileHover={{ scale: 1.02 }}
-                  className="bg-green-900 text-white p-6 rounded-2xl shadow-lg"
+                  className="bg-green-900 dark:bg-gray-800 text-white dark:text-gray-200 p-6 rounded-2xl shadow-lg transition-colors duration-300"
                 >
                   <div className="flex justify-between items-center">
                     <h3 className="text-lg font-semibold">
                       {entry.mood || t("reflectionBox.untitled")}
                     </h3>
-                    <span className="text-sm text-green-200">
+                    <span className="text-sm text-green-200 dark:text-gray-400">
                       {entry.date} {entry.time}
                     </span>
                   </div>
 
-                  <p className="text-green-100 mt-3 line-clamp-3">
+                  <p className="text-green-100 dark:text-gray-300 mt-3 line-clamp-3">
                     {entry.content}
                   </p>
 
@@ -117,7 +117,7 @@ const ReflectionBox = () => {
                     {entry.activities?.map((act, i) => (
                       <span
                         key={i}
-                        className="px-3 py-1 bg-green-800 text-green-100 text-sm rounded-full border border-green-700"
+                        className="px-3 py-1 bg-green-800 dark:bg-gray-700 text-green-100 dark:text-gray-200 text-sm rounded-full border border-green-700 dark:border-gray-600"
                       >
                         {act}
                       </span>
@@ -125,7 +125,7 @@ const ReflectionBox = () => {
                     {entry.goals?.map((goal, i) => (
                       <span
                         key={i}
-                        className="px-3 py-1 bg-green-700 text-white text-sm rounded-full border border-green-600"
+                        className="px-3 py-1 bg-green-700 dark:bg-gray-600 text-white text-sm rounded-full border border-green-600 dark:border-gray-500"
                       >
                         🎯 {goal}
                       </span>
@@ -133,13 +133,13 @@ const ReflectionBox = () => {
                   </div>
 
                   {/* Actions */}
-                  <div className="flex gap-4 mt-5 text-green-200">
+                  <div className="flex gap-4 mt-5 text-green-200 dark:text-gray-400">
                     <button
                       onClick={() => {
                         setEditingEntry(entry);
                         setShowForm(true);
                       }}
-                      className="hover:text-white flex items-center gap-1"
+                      className="hover:text-white dark:hover:text-gray-200 flex items-center gap-1"
                     >
                       <Edit3 size={16} /> {t("reflectionBox.edit")}
                     </button>
@@ -160,7 +160,7 @@ const ReflectionBox = () => {
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-green-700 text-center mt-16 text-lg"
+              className="text-green-700 dark:text-gray-400 text-center mt-16 text-lg"
             >
               {t("reflectionBox.empty")}
             </motion.p>
@@ -181,14 +181,14 @@ const ReflectionBox = () => {
               initial={{ scale: 0.9 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.9 }}
-              className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl h-[90vh] overflow-y-auto relative p-6"
+              className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-2xl shadow-2xl w-full max-w-3xl h-[90vh] overflow-y-auto relative p-6 transition-colors duration-300"
             >
               <button
                 onClick={() => {
                   setShowForm(false);
                   setEditingEntry(null);
                 }}
-                className="absolute top-4 right-4 text-gray-500 hover:text-red-500"
+                className="absolute top-4 right-4 text-gray-500 dark:text-gray-400 hover:text-red-500"
               >
                 <X size={24} />
               </button>
